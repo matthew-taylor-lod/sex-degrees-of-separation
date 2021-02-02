@@ -1,0 +1,1142 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Sex Degrees of Separation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style type="text/css">
+        html {
+            height: 2000px;
+        }
+    </style>
+</head>
+<body>
+<style type="text/css">
+    /* Text colour */
+    #sd-calculator.sd-calc,
+    #sd-calculator.sd-calc p,
+    #sd-calculator.sd-calc .sd-box .sd-box__title,
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title,
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__body .gender-table__question {
+        color: #6b6b6a
+    }
+
+    #sd-calculator.sd-calc .sd-box {
+        background: #f1f0eb;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title {
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active.gender--female .gender-table__header .gender-table__title {
+        background: #c1017a;
+        border-color: #c1017a;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__header .gender-table__title {
+        border-color: #c1017a;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title .gender-icon.icon-FemaleIcon {
+        color: #c1017a;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active .gender-table__header .gender-table__title .gender-icon {
+        color: white;
+    }
+
+    /* Age group rows */
+    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__body .age-group-row {
+        background: #c1017a;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__body .age-group-row .age-group-button__icon {
+        color: #c1017a;
+    }
+
+    #sd-calculator.sd-calc .sd-direct .icon-FemaleIcon {
+        color: #c1017a;
+    }
+
+    #sd-calculator.sd-calc .sd-results .sd-results__result .female-symbol {
+        color: #c1017a;
+    }
+
+
+    /* Calculate button */
+    #sd-calculator.sd-calc .sd-button.sd-button--primary.sd-button--calculate {
+        background-color: #db6d00
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--primary.sd-button--calculate:hover {
+        background-color: #af5700
+    }
+
+
+    /* Results total */
+    #sd-calculator.sd-calc .sd-results .total-indirect-partners {
+        color: #669900;
+        border-color: #669900;
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--options {
+        background-color: #db6d00
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--options:hover {
+        background-color: #af5700
+    }
+
+
+    /* CTA buttons */
+    #sd-calculator.sd-calc .sd-button.sd-button--cta-1 {
+        background-color: #02a2a0
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--cta-1:hover {
+        background-color: #028280
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--cta-2 {
+        background-color: #c1017a
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--cta-2:hover {
+        background-color: #9a0162
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--cta-3 {
+        background-color: #c1017a
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--cta-3:hover {
+        background-color: #9a0162
+    }
+
+    #sd-calculator.sd-calc .sd-box p a:link,
+    #sd-calculator.sd-calc .sd-box p a:visited {
+        color: #c1017a
+    }
+</style>
+
+<style type="text/css">
+    @font-face {
+        font-family: 'sdfont';
+        src: url("data:application/font-woff;base64,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");
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    [class^="icon-"],
+    [class*=" icon-"] {
+        font-family: 'sdfont';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-female-icon:before {
+        content: "\e603";
+    }
+
+    .icon-male-icon:before {
+        content: "\e604";
+    }
+
+    .icon-down-arrow:before {
+        content: "\e602";
+    }
+
+    .icon-FemaleIcon:before {
+        content: "\e600";
+    }
+
+    .icon-MaleIcon:before {
+        content: "\e601";
+    }
+
+    #sd-calculator.sd-calc {
+        margin: auto;
+        max-width: 640px;
+        text-align: center;
+        line-height: 1.5;
+        color: #6b6b6a;
+        font-family: sans-serif;
+        box-sizing: border-box;
+    }
+
+    #sd-calculator.sd-calc * {
+        box-sizing: border-box;
+    }
+
+    #sd-calculator.sd-calc .sd-calculator__title {
+        margin-bottom: 0;
+    }
+
+    #sd-calculator.sd-calc .sd-table {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table {
+        float: left;
+        width: 50%;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title {
+        background: transparent;
+        margin: 0;
+        margin-right: 9.3333333333px;
+        padding: 7px;
+        min-height: 56px;
+        color: #6b6b6a;
+        font-size: 17.5px;
+        font-weight: 400;
+        line-height: 2;
+        cursor: pointer;
+        border: 3px solid #02a2a0;
+        border-radius: 8px;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title .gender-icon {
+        display: block;
+        width: 20px;
+        float: right;
+        font-size: 42px;
+        color: #02a2a0;
+        margin-top: -2px;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title .gender-icon.icon-FemaleIcon {
+        color: #c1017a;
+        float: left;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__body {
+        width: 200%;
+        display: none;
+        position: relative;
+        padding-bottom: 25px;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__body .gender-table__question {
+        width: 100%;
+        color: #6b6b6a;
+        border-radius: 4px;
+        line-height: 1.25;
+        padding: 5px;
+        margin-top: 5px;
+        margin-bottom: 3px;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__body .down-arrow {
+        position: absolute;
+        bottom: -14px;
+        left: 50%;
+        margin-left: -25px;
+        opacity: 0;
+        padding: 14px;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row {
+        width: 180px;
+        background: #02a2a0;
+        position: relative;
+        text-align: center;
+        margin: 0 auto 4px;
+        border-radius: 8px;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row:first-of-type {
+        border-top: none;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row .age-group {
+        display: block;
+        width: 100%;
+        font-size: 14px;
+        line-height: 19px;
+        margin-bottom: -10px;
+        color: white;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row .age-group-button {
+        display: block;
+        position: absolute;
+        width: 53px;
+        height: 53px;
+        bottom: 0px;
+        left: 50%;
+        margin-left: -90px;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row .age-group-button .age-group-button__icon {
+        display: block;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        left: 9px;
+        bottom: 9px;
+        background: #fff;
+        color: #02a2a0;
+        font-size: 28px;
+        font-weight: bold;
+        line-height: 35px;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row .age-group-button.age-group-plus {
+        left: 50%;
+        margin-left: 37px;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row .age-group-total {
+        display: block;
+        color: white;
+        font-size: 32px;
+        line-height: 44px;
+        padding-bottom: 0px;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__header .gender-table__title {
+        background: transparent;
+        margin-right: 0;
+        margin-left: 9.3333333333px;
+        border-color: #c1017a;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__body {
+        margin-left: -100%;
+        display: none;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__body .age-group-row {
+        background: #c1017a;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__body .age-group-row .age-group-button__icon {
+        color: #c1017a;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active .gender-table__header .gender-table__title {
+        color: white;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active .gender-table__header .gender-table__title .gender-icon {
+        color: white;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active.gender--male .gender-table__header .gender-table__title {
+        background: #02a2a0;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active.gender--female .gender-table__header .gender-table__title {
+        background: #c1017a;
+        border-color: #c1017a;
+    }
+
+    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active .gender-table__body {
+        display: block;
+    }
+
+    #sd-calculator.sd-calc .sd-button {
+        display: inline-block;
+        width: 350px;
+        max-width: 100%;
+        background: #02a2a0;
+        color: white;
+        padding: 14px;
+        border: none;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        font-size: 17.5px;
+        font-weight: 400;
+        line-height: 1.25;
+        -webkit-text-transform: none;
+        text-transform: none;
+        cursor: pointer;
+        margin: 0;
+        transition: all .3s ease;
+    }
+
+    #sd-calculator.sd-calc .sd-button:hover,
+    #sd-calculator.sd-calc .sd-button:active {
+        background: #028987;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+    }
+
+    #sd-calculator.sd-calc .sd-button:focus {
+        border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+        outline: none;
+    }
+
+    #sd-calculator.sd-calc .sd-button span {
+        font-size: .75em;
+        -webkit-text-transform: none;
+        text-transform: none;
+        font-weight: 400;
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--primary {
+        background: #c1017a;
+        padding: 14px;
+        font-size: 21px;
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--primary:hover,
+    #sd-calculator.sd-calc .sd-button.sd-button--primary:active {
+        background: #a8016a;
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--disabled {
+        pointer-events: none;
+        cursor: default;
+        opacity: .3;
+    }
+
+    #sd-calculator.sd-calc .sd-button.sd-button--calculate {
+        margin-top: 14px;
+    }
+
+    #sd-calculator.sd-calc .sd-direct {
+        line-height: 1;
+        opacity: 0.5;
+    }
+
+    #sd-calculator.sd-calc .sd-direct .sd-half--male {
+        text-align: right;
+    }
+
+    #sd-calculator.sd-calc .sd-direct .sd-half--female {
+        text-align: left;
+    }
+
+    #sd-calculator.sd-calc .sd-direct .gender-icon {
+        font-size: 42px;
+        padding: 0 15px;
+        padding-left: 7px;
+    }
+
+    #sd-calculator.sd-calc .sd-direct .icon-MaleIcon {
+        color: #02a2a0;
+    }
+
+    #sd-calculator.sd-calc .sd-direct .icon-FemaleIcon {
+        color: #c1017a;
+        padding-left: 15px;
+        padding-right: 7px;
+    }
+
+    #sd-calculator.sd-calc .sd-direct .gender-total {
+        font-size: 42px;
+    }
+
+    #sd-calculator.sd-calc .sd-results {
+        display: none;
+        position: relative;
+    }
+
+    #sd-calculator.sd-calc .sd-results .sd-box__title {
+        margin-bottom: 7px;
+    }
+
+    #sd-calculator.sd-calc .sd-results .total-indirect-partners {
+        display: inline-block;
+        margin-bottom: 20px;
+        font-size: 42px;
+        line-height: 1;
+        border-bottom: 3px solid #6b6b6a;
+    }
+
+    #sd-calculator.sd-calc .sd-results .sd-results__result {
+        position: relative;
+    }
+
+    #sd-calculator.sd-calc .sd-results .sd-results__result .sd-spinners {
+        margin-top: -7px;
+    }
+
+    #sd-calculator.sd-calc .sd-results .sd-results__result .sd-spinners .spin {
+        font-size: 42px;
+    }
+
+    #sd-calculator.sd-calc .sd-results .sd-results__result .sd-spinners .male-symbol {
+        color: #02a2a0;
+    }
+
+    #sd-calculator.sd-calc .sd-results .sd-results__result .sd-spinners .female-symbol {
+        color: #c1017a;
+        left: auto;
+        right: 0;
+    }
+
+    #sd-calculator.sd-calc .sd-results .sd-results__text {
+        display: none;
+    }
+
+    #sd-calculator.sd-calc .sd-actions {
+        display: none;
+    }
+
+    #sd-calculator.sd-calc .sd-half {
+        width: 50%;
+        float: left;
+    }
+
+    #sd-calculator.sd-calc .sd-box {
+        background: #f1f0eb;
+        padding: 14px;
+        margin: 5px 0;
+        border: none;
+        border-top-width: 0;
+        border-radius: 8px;
+    }
+
+    #sd-calculator.sd-calc .sd-box.sd-box--disabled {
+        opacity: 0.5;
+    }
+
+    #sd-calculator.sd-calc .sd-box.sd-box--disabled a:link,
+    #sd-calculator.sd-calc .sd-box.sd-box--disabled button {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    #sd-calculator.sd-calc .sd-box h3 {
+        font-size: 21px;
+        margin: 14px 0;
+    }
+
+    #sd-calculator.sd-calc .sd-box h4 {
+        font-size: 17.5px;
+        margin: 0 0 7px;
+        color: #6b6b6a;
+    }
+
+    #sd-calculator.sd-calc .sd-box .sd-box__title {
+        font-size: 21px;
+        margin-top: 0;
+        color: #6b6b6a;
+    }
+
+    #sd-calculator.sd-calc .sd-box p {
+        color: inherit !important;
+    }
+
+    #sd-calculator.sd-calc .sd-box p a:link,
+    #sd-calculator.sd-calc .sd-box p a:visited {
+        color: #c1017a;
+        border: none;
+        text-decoration: underline;
+    }
+
+    #sd-calculator.sd-calc .sd-box p a:hover,
+    #sd-calculator.sd-calc .sd-box p a:active {
+        text-decoration: none;
+    }
+
+    #sd-calculator.sd-calc .spin {
+        display: inline-block !important;
+        -webkit-animation: rotation .5s infinite linear;
+        -moz-animation: rotation .5s infinite linear;
+        -o-animation: rotation .5s infinite linear;
+        animation: rotation .5s infinite linear;
+    }
+
+    @-webkit-keyframes rotation {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(359deg);
+        }
+    }
+
+    @keyframes rotation {
+        from {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+        }
+    }
+
+    #sd-calculator.sd-calc .spin.spin--rev {
+        -webkit-animation: rotation-rev .5s infinite linear;
+        -moz-animation: rotation-rev .5s infinite linear;
+        -o-animation: rotation-rev .5s infinite linear;
+        animation: rotation-rev .5s infinite linear;
+    }
+
+    @-webkit-keyframes rotation-rev {
+        from {
+            -webkit-transform: rotate(359deg);
+        }
+        to {
+            -webkit-transform: rotate(0deg);
+        }
+    }
+
+    @keyframes rotation-rev {
+        from {
+            -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+        }
+        to {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+    }
+
+    #sd-calculator.sd-calc .sd-clearfix:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    #sd-calculator.sd-calc hr {
+        margin: 21px 0;
+    }
+
+    #sd-calculator.sd-calc p {
+        font-size: 14px !important;
+        color: #6b6b6a;
+    }
+
+    @media (max-width: 600px) {
+        #sd-calculator.sd-calc .show-on-mobile {
+            display: block !important;
+        }
+    }
+</style>
+
+<!-- FastClick -->
+<script type="text/javascript">
+    ;(function () {
+        /**
+         * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+         *
+         * @codingstandard ftlabs-jsv2
+         * @copyright The Financial Times Limited [All Rights Reserved]
+         * @license MIT License (see LICENSE.txt)
+         */
+        function FastClick(e,t){var n;if(t=t||{},this.trackingClick=!1,this.trackingClickStart=0,this.targetElement=null,this.touchStartX=0,this.touchStartY=0,this.lastTouchIdentifier=0,this.touchBoundary=t.touchBoundary||10,this.layer=e,this.tapDelay=t.tapDelay||200,this.tapTimeout=t.tapTimeout||700,!FastClick.notNeeded(e)){for(var i=["onMouse","onClick","onTouchStart","onTouchMove","onTouchEnd","onTouchCancel"],o=0,r=i.length;o<r;o++)this[i[o]]=c(this[i[o]],this);deviceIsAndroid&&(e.addEventListener("mouseover",this.onMouse,!0),e.addEventListener("mousedown",this.onMouse,!0),e.addEventListener("mouseup",this.onMouse,!0)),e.addEventListener("click",this.onClick,!0),e.addEventListener("touchstart",this.onTouchStart,!1),e.addEventListener("touchmove",this.onTouchMove,!1),e.addEventListener("touchend",this.onTouchEnd,!1),e.addEventListener("touchcancel",this.onTouchCancel,!1),Event.prototype.stopImmediatePropagation||(e.removeEventListener=function(t,n,i){var o=Node.prototype.removeEventListener;"click"===t?o.call(e,t,n.hijacked||n,i):o.call(e,t,n,i)},e.addEventListener=function(t,n,i){var o=Node.prototype.addEventListener;"click"===t?o.call(e,t,n.hijacked||(n.hijacked=function(e){e.propagationStopped||n(e)}),i):o.call(e,t,n,i)}),"function"==typeof e.onclick&&(n=e.onclick,e.addEventListener("click",function(e){n(e)},!1),e.onclick=null)}function c(e,t){return function(){return e.apply(t,arguments)}}}var deviceIsWindowsPhone=navigator.userAgent.indexOf("Windows Phone")>=0,deviceIsAndroid=navigator.userAgent.indexOf("Android")>0&&!deviceIsWindowsPhone,deviceIsIOS=/iP(ad|hone|od)/.test(navigator.userAgent)&&!deviceIsWindowsPhone,deviceIsIOS4=deviceIsIOS&&/OS 4_\d(_\d)?/.test(navigator.userAgent),deviceIsIOSWithBadTarget=deviceIsIOS&&/OS [6-7]_\d/.test(navigator.userAgent),deviceIsBlackBerry10=navigator.userAgent.indexOf("BB10")>0;FastClick.prototype.needsClick=function(e){switch(e.nodeName.toLowerCase()){case"button":case"select":case"textarea":if(e.disabled)return!0;break;case"input":if(deviceIsIOS&&"file"===e.type||e.disabled)return!0;break;case"label":case"iframe":case"video":return!0}return/\bneedsclick\b/.test(e.className)},FastClick.prototype.needsFocus=function(e){switch(e.nodeName.toLowerCase()){case"textarea":return!0;case"select":return!deviceIsAndroid;case"input":switch(e.type){case"button":case"checkbox":case"file":case"image":case"radio":case"submit":return!1}return!e.disabled&&!e.readOnly;default:return/\bneedsfocus\b/.test(e.className)}},FastClick.prototype.sendClick=function(e,t){var n,i;document.activeElement&&document.activeElement!==e&&document.activeElement.blur(),i=t.changedTouches[0],(n=document.createEvent("MouseEvents")).initMouseEvent(this.determineEventType(e),!0,!0,window,1,i.screenX,i.screenY,i.clientX,i.clientY,!1,!1,!1,!1,0,null),n.forwardedTouchEvent=!0,e.dispatchEvent(n)},FastClick.prototype.determineEventType=function(e){return deviceIsAndroid&&"select"===e.tagName.toLowerCase()?"mousedown":"click"},FastClick.prototype.focus=function(e){var t;deviceIsIOS&&e.setSelectionRange&&0!==e.type.indexOf("date")&&"time"!==e.type&&"month"!==e.type?(t=e.value.length,e.setSelectionRange(t,t)):e.focus()},FastClick.prototype.updateScrollParent=function(e){var t,n;if(!(t=e.fastClickScrollParent)||!t.contains(e)){n=e;do{if(n.scrollHeight>n.offsetHeight){t=n,e.fastClickScrollParent=n;break}n=n.parentElement}while(n)}t&&(t.fastClickLastScrollTop=t.scrollTop)},FastClick.prototype.getTargetElementFromEventTarget=function(e){return e.nodeType===Node.TEXT_NODE?e.parentNode:e},FastClick.prototype.onTouchStart=function(e){var t,n,i;if(e.targetTouches.length>1)return!0;if(t=this.getTargetElementFromEventTarget(e.target),n=e.targetTouches[0],deviceIsIOS){if((i=window.getSelection()).rangeCount&&!i.isCollapsed)return!0;if(!deviceIsIOS4){if(n.identifier&&n.identifier===this.lastTouchIdentifier)return e.preventDefault(),!1;this.lastTouchIdentifier=n.identifier,this.updateScrollParent(t)}}return this.trackingClick=!0,this.trackingClickStart=e.timeStamp,this.targetElement=t,this.touchStartX=n.pageX,this.touchStartY=n.pageY,e.timeStamp-this.lastClickTime<this.tapDelay&&e.preventDefault(),!0},FastClick.prototype.touchHasMoved=function(e){var t=e.changedTouches[0],n=this.touchBoundary;return Math.abs(t.pageX-this.touchStartX)>n||Math.abs(t.pageY-this.touchStartY)>n},FastClick.prototype.onTouchMove=function(e){return!this.trackingClick||((this.targetElement!==this.getTargetElementFromEventTarget(e.target)||this.touchHasMoved(e))&&(this.trackingClick=!1,this.targetElement=null),!0)},FastClick.prototype.findControl=function(e){return void 0!==e.control?e.control:e.htmlFor?document.getElementById(e.htmlFor):e.querySelector("button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea")},FastClick.prototype.onTouchEnd=function(e){var t,n,i,o,r,c=this.targetElement;if(!this.trackingClick)return!0;if(e.timeStamp-this.lastClickTime<this.tapDelay)return this.cancelNextClick=!0,!0;if(e.timeStamp-this.trackingClickStart>this.tapTimeout)return!0;if(this.cancelNextClick=!1,this.lastClickTime=e.timeStamp,n=this.trackingClickStart,this.trackingClick=!1,this.trackingClickStart=0,deviceIsIOSWithBadTarget&&(r=e.changedTouches[0],(c=document.elementFromPoint(r.pageX-window.pageXOffset,r.pageY-window.pageYOffset)||c).fastClickScrollParent=this.targetElement.fastClickScrollParent),"label"===(i=c.tagName.toLowerCase())){if(t=this.findControl(c)){if(this.focus(c),deviceIsAndroid)return!1;c=t}}else if(this.needsFocus(c))return e.timeStamp-n>100||deviceIsIOS&&window.top!==window&&"input"===i?(this.targetElement=null,!1):(this.focus(c),this.sendClick(c,e),deviceIsIOS&&"select"===i||(this.targetElement=null,e.preventDefault()),!1);return!(!deviceIsIOS||deviceIsIOS4||!(o=c.fastClickScrollParent)||o.fastClickLastScrollTop===o.scrollTop)||(this.needsClick(c)||(e.preventDefault(),this.sendClick(c,e)),!1)},FastClick.prototype.onTouchCancel=function(){this.trackingClick=!1,this.targetElement=null},FastClick.prototype.onMouse=function(e){return!this.targetElement||(!!e.forwardedTouchEvent||(!e.cancelable||(!(!this.needsClick(this.targetElement)||this.cancelNextClick)||(e.stopImmediatePropagation?e.stopImmediatePropagation():e.propagationStopped=!0,e.stopPropagation(),e.preventDefault(),!1))))},FastClick.prototype.onClick=function(e){var t;return this.trackingClick?(this.targetElement=null,this.trackingClick=!1,!0):"submit"===e.target.type&&0===e.detail||((t=this.onMouse(e))||(this.targetElement=null),t)},FastClick.prototype.destroy=function(){var e=this.layer;deviceIsAndroid&&(e.removeEventListener("mouseover",this.onMouse,!0),e.removeEventListener("mousedown",this.onMouse,!0),e.removeEventListener("mouseup",this.onMouse,!0)),e.removeEventListener("click",this.onClick,!0),e.removeEventListener("touchstart",this.onTouchStart,!1),e.removeEventListener("touchmove",this.onTouchMove,!1),e.removeEventListener("touchend",this.onTouchEnd,!1),e.removeEventListener("touchcancel",this.onTouchCancel,!1)},FastClick.notNeeded=function(e){var t,n,i;if(void 0===window.ontouchstart)return!0;if(n=+(/Chrome\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]){if(!deviceIsAndroid)return!0;if(t=document.querySelector("meta[name=viewport]")){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(n>31&&document.documentElement.scrollWidth<=window.outerWidth)return!0}}if(deviceIsBlackBerry10&&(i=navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/))[1]>=10&&i[2]>=3&&(t=document.querySelector("meta[name=viewport]"))){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(document.documentElement.scrollWidth<=window.outerWidth)return!0}return"none"===e.style.msTouchAction||"manipulation"===e.style.touchAction||(!!(+(/Firefox\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]>=27&&(t=document.querySelector("meta[name=viewport]"))&&(-1!==t.content.indexOf("user-scalable=no")||document.documentElement.scrollWidth<=window.outerWidth))||("none"===e.style.touchAction||"manipulation"===e.style.touchAction))},FastClick.attach=function(e,t){return new FastClick(e,t)},"function"==typeof define&&"object"==typeof define.amd&&define.amd?define(function(){return FastClick}):"undefined"!=typeof module&&module.exports?(module.exports=FastClick.attach,module.exports.FastClick=FastClick):window.FastClick=FastClick;
+    }());
+</script>
+
+<!-- easing functions -->
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $.easing.jswing=$.easing.swing,$.extend($.easing,{def:"easeOutQuad",swing:function(n,t,e,u,a){return $.easing[$.easing.def](n,t,e,u,a)},easeInQuad:function(n,t,e,u,a){return u*(t/=a)*t+e},easeOutQuad:function(n,t,e,u,a){return-u*(t/=a)*(t-2)+e},easeInOutQuad:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t+e:-u/2*(--t*(t-2)-1)+e},easeInCubic:function(n,t,e,u,a){return u*(t/=a)*t*t+e},easeOutCubic:function(n,t,e,u,a){return u*((t=t/a-1)*t*t+1)+e},easeInOutCubic:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t+e:u/2*((t-=2)*t*t+2)+e},easeInQuart:function(n,t,e,u,a){return u*(t/=a)*t*t*t+e},easeOutQuart:function(n,t,e,u,a){return-u*((t=t/a-1)*t*t*t-1)+e},easeInOutQuart:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t*t+e:-u/2*((t-=2)*t*t*t-2)+e},easeInQuint:function(n,t,e,u,a){return u*(t/=a)*t*t*t*t+e},easeOutQuint:function(n,t,e,u,a){return u*((t=t/a-1)*t*t*t*t+1)+e},easeInOutQuint:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t*t*t+e:u/2*((t-=2)*t*t*t*t+2)+e},easeInSine:function(n,t,e,u,a){return-u*Math.cos(t/a*(Math.PI/2))+u+e},easeOutSine:function(n,t,e,u,a){return u*Math.sin(t/a*(Math.PI/2))+e},easeInOutSine:function(n,t,e,u,a){return-u/2*(Math.cos(Math.PI*t/a)-1)+e},easeInExpo:function(n,t,e,u,a){return 0==t?e:u*Math.pow(2,10*(t/a-1))+e},easeOutExpo:function(n,t,e,u,a){return t==a?e+u:u*(1-Math.pow(2,-10*t/a))+e},easeInOutExpo:function(n,t,e,u,a){return 0==t?e:t==a?e+u:(t/=a/2)<1?u/2*Math.pow(2,10*(t-1))+e:u/2*(2-Math.pow(2,-10*--t))+e},easeInCirc:function(n,t,e,u,a){return-u*(Math.sqrt(1-(t/=a)*t)-1)+e},easeOutCirc:function(n,t,e,u,a){return u*Math.sqrt(1-(t=t/a-1)*t)+e},easeInOutCirc:function(n,t,e,u,a){return(t/=a/2)<1?-u/2*(Math.sqrt(1-t*t)-1)+e:u/2*(Math.sqrt(1-(t-=2)*t)+1)+e},easeInElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(1==(t/=a))return e+u;if(i||(i=.3*a),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return-s*Math.pow(2,10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)+e},easeOutElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(1==(t/=a))return e+u;if(i||(i=.3*a),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return s*Math.pow(2,-10*t)*Math.sin((t*a-r)*(2*Math.PI)/i)+u+e},easeInOutElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(2==(t/=a/2))return e+u;if(i||(i=a*(.3*1.5)),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return t<1?s*Math.pow(2,10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)*-.5+e:s*Math.pow(2,-10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)*.5+u+e},easeInBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),u*(t/=a)*t*((r+1)*t-r)+e},easeOutBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),u*((t=t/a-1)*t*((r+1)*t+r)+1)+e},easeInOutBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),(t/=a/2)<1?u/2*(t*t*((1+(r*=1.525))*t-r))+e:u/2*((t-=2)*t*((1+(r*=1.525))*t+r)+2)+e},easeInBounce:function(n,t,e,u,a){return u-$.easing.easeOutBounce(n,a-t,0,u,a)+e},easeOutBounce:function(n,t,e,u,a){return(t/=a)<1/2.75?u*(7.5625*t*t)+e:t<2/2.75?u*(7.5625*(t-=1.5/2.75)*t+.75)+e:t<2.5/2.75?u*(7.5625*(t-=2.25/2.75)*t+.9375)+e:u*(7.5625*(t-=2.625/2.75)*t+.984375)+e},easeInOutBounce:function(n,t,e,u,a){return t<a/2?.5*$.easing.easeInBounce(n,2*t,0,u,a)+e:.5*$.easing.easeOutBounce(n,2*t-a,0,u,a)+.5*u+e}});
+    });
+    /*
+     *
+     * TERMS OF USE - EASING EQUATIONS
+     *
+     * Open source under the BSD License.
+     *
+     * Copyright 2001 Robert Penner
+     * All rights reserved.
+     *
+     * Redistribution and use in source and binary forms, with or without modification,
+     * are permitted provided that the following conditions are met:
+     *
+     * Redistributions of source code must retain the above copyright notice, this list of
+     * conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright notice, this list
+     * of conditions and the following disclaimer in the documentation and/or other materials
+     * provided with the distribution.
+     *
+     * Neither the name of the author nor the names of contributors may be used to endorse
+     * or promote products derived from this software without specific prior written permission.
+     *
+     * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+     * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+     * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+     * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+     * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+     * GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+     * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+     * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+     * OF THE POSSIBILITY OF SUCH DAMAGE.
+     *
+     */
+</script>
+
+<!-- actual code -->
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(function () {
+            FastClick.attach(document.body);
+        });
+
+        function getClickGender(clicked) {
+            var genderTable = $(clicked).parents('.gender-table');
+            var gender = genderTable.data('gender');
+            return gender;
+        }
+
+        function addToAgeGroup(element) {
+            var totalElement = $(element).siblings('.age-group-total');
+            var totalCount = parseInt(totalElement.text());
+            totalCount = totalCount + 1;
+
+            totalElement.text(totalCount);
+
+        }
+
+        function subtractFromAgeGroup(element) {
+            var totalElement = $(element).siblings('.age-group-total');
+            var totalCount = parseInt(totalElement.text());
+            if (totalCount != 0) totalCount = totalCount - 1;
+
+            totalElement.text(totalCount);
+
+        }
+
+        function updateAgeGroup(element) {
+            if ($(element).hasClass('age-group-plus')) {
+                addToAgeGroup(element);
+            } else {
+                subtractFromAgeGroup(element);
+            }
+        }
+
+        function getGenderTotal() {
+            var genderTotal = parseInt($('.gender-total').text());
+            return genderTotal;
+        }
+
+        function updateGenderTotal(gender) {
+            // find a parent element within the gender to keep it gender specific
+            var genderTable = $('*[data-gender="' + gender + '"]');
+            var newGenderTotal = 0;
+
+            // foreach agegroup total
+            $(genderTable).find('.age-group-total').each(function () {
+
+                // add the total to the gender total
+                newGenderTotal = newGenderTotal += parseInt($(this).text());
+
+            });
+
+            $('#' + gender + '-total').text(newGenderTotal);
+        }
+
+        function updateTotalPartners() {
+            var newtotalPartners = 0;
+
+            // foreach agegroup total
+            $('.gender-total').each(function () {
+
+                // add the total to the gender total
+                newtotalPartners = newtotalPartners += parseInt($(this).text());
+
+            });
+
+            $('.total-partners').text(newtotalPartners);
+        }
+
+
+        function updateTotalIndirectPartners() {
+            var totalIndirect = 0;
+            var totalAverage = $('#sd-calculator').data('total-av');
+
+            // for each row
+            $('.age-group-row').each(function () {
+                // get row total partners
+                var rowTotalPartners = parseInt($(this).find('.age-group-total').text());
+                // if the total is more than 1
+                if (rowTotalPartners > 0) {
+                    // get the average
+                    var rowAv = $(this).find('.age-group').data('av');
+
+                    var rowTotalIndirect = ((rowAv - 1) * (Math.pow(totalAverage, 5))) * rowTotalPartners;
+
+                    // add row total to overall total
+                    totalIndirect = totalIndirect + rowTotalIndirect;
+                }
+
+            });
+
+            // update overall total
+            totalIndirect = parseInt(totalIndirect);
+            $('.total-indirect-partners').text(totalIndirect).digits();
+            $('.total-indirect-partners').data('total-indirect', totalIndirect);
+
+            if (totalIndirect > 0) {
+                enableCalculateButton();
+            } else {
+                disableCalculateButton();
+            }
+
+        }
+
+        function scrollToElement(element, margin) {
+            var offset = element.offset();
+            var topOffset = offset.top;
+            var newOffset = topOffset + margin;
+            $('html, body').animate({scrollTop: newOffset}, 800);
+        }
+
+        function enableCalculateButton() {
+            $('.sd-button--calculate').removeClass('sd-button--disabled');
+        }
+
+        function disableCalculateButton() {
+            $('.sd-button--calculate').addClass('sd-button--disabled');
+        }
+
+        $.fn.digits = function () {
+            return this.each(function () {
+                $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+            })
+        }
+
+
+        /*
+        Count animation
+         */
+
+        function countAnimation(element, total) {
+
+            $({percentage: 0}).stop(true).animate({percentage: total}, {
+                duration: 3000,
+                easing: "easeOutExpo",
+                step: function () {
+                    // percentage with 1 decimal;
+                    var percentageVal = Math.round(this.percentage) / 1;
+                    percentageVal = percentageVal;
+
+                    element.text(percentageVal).digits();
+                }
+            }).promise().done(function () {
+                // hard set the value after animation is done to be
+                // sure the value is correct
+                element.text(total).digits();
+            });
+        }
+
+        $('.gender-table__title').click(function () {
+
+            if ($('.gender-table').hasClass('gender-table--active')) {
+                // nothing to do here
+            } else {
+                var element = $('.sd-table');
+                scrollToElement(element, 50);
+            }
+
+            $('.gender-table.gender-table--active').removeClass('gender-table--active');
+            var gender = getClickGender(this);
+            $('.gender--' + gender).addClass('gender-table--active');
+
+
+            $(".sd-direct").animate({
+                opacity: 1
+            }, 1000, function () {
+                // Animation complete.
+            });
+
+        });
+
+        $('.age-group-button').click(function () {
+            var gender = getClickGender(this);
+            updateAgeGroup(this);
+            updateGenderTotal(gender);
+            updateTotalPartners();
+            updateTotalIndirectPartners();
+            $('.down-arrow').fadeTo("slow", 1);
+        });
+
+        $('.down-arrow').click(function () {
+            var element = $('.sd-direct');
+            scrollToElement(element, -40);
+        });
+
+        $('.sd-button--calculate').click(function () {
+            $(this).slideUp();
+            $('.sd-results').slideDown('fast', function () {
+                var element = $('.sd-results');
+                scrollToElement(element, -80);
+                var totalIndirect = $('.total-indirect-partners').data('total-indirect');
+                countAnimation($('.total-indirect-partners'), totalIndirect);
+            });
+            $('.sd-results__text').delay(3500).slideDown("slow", function () {
+                // animation complete
+            });
+            $('.sd-spinners').delay(3500).slideUp();
+
+        });
+
+        $('.sd-button--options').click(function () {
+            $(this).addClass('sd-button--disabled');
+            $('.sd-actions').slideDown('fast', function () {
+                var element = $('.sd-actions');
+                scrollToElement(element, -20);
+            });
+        });
+
+        $('.gender-table__title').click(function () {
+
+            $('.gender-table-active .gender-table__body').slideDown();
+            $('.sd-direct').slideDown();
+
+        });
+
+    });
+
+    var _gaq = []; // does this need to have google analytics?
+</script>
+
+<div class="sd-calc" data-total-av="8.5" id="sd-calculator">
+
+    <div class="sd-table sd-box sd-clearfix">
+        <h3 class="sd-box__title ">I've had sex with...</h3>
+
+        <div class="gender-table gender--male" data-gender="male">
+            <div class="gender-table__header">
+                <h3 class="gender-table__title"
+                    onclick="_gaq.push(['_trackEvent', 'Sex Degrees Calculator', 'Click Gender Tab', 'Male', , true]);">
+                    <span class="gender-icon icon-MaleIcon"></span>
+                    Men
+                </h3>
+            </div>
+
+            <div class="gender-table__body">
+                <p class="gender-table__question">How many people have you slept with in each age group?</p>
+                <div class="gender-table__rows">
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="4.1">16 - 19</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="7.1">20 - 24</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="11.8">25 - 34</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="13.7">35 - 44</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="12.9">45 - 64</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="8.9">65+</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+                </div>
+                <span class="down-arrow icon-down-arrow"></span>
+            </div>
+        </div>
+        <div class="gender-table gender--female" data-gender="female">
+            <div class="gender-table__header">
+                <h3 class="gender-table__title"
+                    onclick="_gaq.push(['_trackEvent', 'Sex Degrees Calculator', 'Click Gender Tab', 'Female', , true]);">
+                    <span class="gender-icon icon-FemaleIcon"></span>
+                    Women
+                </h3>
+            </div>
+
+            <div class="gender-table__body">
+                <p class="gender-table__question">How many people have you slept with in each age group?</p>
+
+                <div class="gender-table__rows">
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="4.8">16 - 19</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="6.4">20 - 24</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="9.6">25 - 34</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="10.3">35 - 44</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="7.5">45 - 64</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+                    <div class="age-group-row">
+                        <span class="age-group" data-av="4.4">65+</span>
+                        <span class="age-group-button age-group-plus"><span
+                                class="age-group-button__icon">+</span></span>
+                        <span class="age-group-button age-group-minus"><span
+                                class="age-group-button__icon">−</span></span>
+                        <span class="age-group-total">0</span>
+                    </div>
+                </div>
+                <span class="down-arrow icon-down-arrow"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="sd-direct sd-clearfix sd-box">
+        <h3 class="sd-box__title">Direct sexual partners</h3>
+        <div class="sd-half sd-half--male">
+            <span class="gender-total" id="male-total">0</span> <span class="gender-icon icon-MaleIcon"></span>
+        </div>
+        <div class="sd-half sd-half--female">
+            <span class="gender-icon icon-FemaleIcon"></span> <span class="gender-total" id="female-total">0</span>
+        </div>
+        <div>
+            <a class="sd-button sd-button--primary sd-button--calculate sd-button--disabled"
+               href="javascript:void(0)"
+               onclick="_gaq.push(['_trackEvent', 'Sex Degrees Calculator', 'Click', 'Calculate Button', , true]);">Calculate</a>
+        </div>
+    </div>
+
+    <div class="sd-results sd-box">
+        <h3 class="sd-box__title">Indirect sexual partners:</h3>
+        <div class="sd-results__result">
+            <span class="total-indirect-partners" data-total-indirect="0">0</span>
+            <div class="sd-spinners">
+                <span class="spin male-symbol icon-male-icon"></span>
+                <span class="spin spin--rev female-symbol icon-female-icon"></span>
+            </div>
+        </div>
+
+        <div class="sd-results__text">
+            <h3 style="color: #6b6b6a">Shocked?<br>
+                <span style="font-size: 16px">You can see&nbsp;why our doctors bang on about using condoms!</span>
+            </h3>
+            <p>
+                <span style="font-size: 16px">We've calculated how many people your partners are likely to have slept with before you. Then we calculated your&nbsp;partners' partners, and their partners' partners, and so on - for&nbsp;just six degrees. This number illustrates how exposed you can be to STIs, and how important safe sex is.&nbsp;</span>
+            </p>
+            <p>
+                <span style="font-size: 16px">But even when using condoms, you're still at risk from STIs such as warts and herpes, and you may already be carrying a symptomless STI, so it's safest to get tested after each new partner.</span>
+            </p>
+            <p>
+                <span style="font-size: 16px">Note: If you are not sexually active or have only one sexual partner who hasn’t had sex with anyone else, you will avoid sexually transmitted infections.</span>
+            </p>
+            <h4>Get tested from home...</h4>
+            <p>
+                <a class="sd-button sd-button--primary sd-button--order sd-button--cta-1"
+                   href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-checkups?utm_source=Sex%20Degrees%20Page&amp;utm_medium=CTA%20Click&amp;utm_content=Order%20STI%20Test%20Kit&amp;utm_campaign=Sex%20Degrees"
+                   style="color: #fff;text-decoration: none"
+                   target="_blank">Order STI Test Kit &gt;</a></p>
+            <p>
+                <span style="font-size: 14px">If you can't get time off work or you hate the idea of going to a clinic, order a test kit today and get tested from home.</span>
+            </p>
+            <hr>
+            <p style="font-size: 16px !important">If you have STI symptoms please visit
+                <a href="http://www.nhs.uk/service-search/sexual-health-information-and-support/locationsearch/734"
+                   target="_blank">
+                    your nearest GUM clinic
+                </a> or your local doctor for further advice.
+            </p>
+
+            <a class="sd-button sd-button--secondary sd-button--options" href="javascript:void(0)"
+               onclick="_gaq.push(['_trackEvent', 'Sex Degrees Calculator', 'Click', 'More Information Button', , true]);">
+                <span>More information</span>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="sd-actions">
+        <div class="sd-box">
+            <h3 class="sd-box__title">
+                Want to know your risk?
+            </h3>
+            <p style="font-size: 16px !important;">
+                Our doctors can establish your STI risk and suggest the most appropriate tests.
+            </p>
+            <a class="sd-button sd-button--primary sd-button--order sd-button--cta-1"
+               href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-risk-assessment" onclick="_gaq.push(['_trackEvent', 'Sex Degrees Calculator', 'Click', 'CTA1', , false]);"
+               target="_blank">
+                Free Risk Assessment &gt;
+            </a>
+        </div>
+        <div class="sd-box">
+            <h3 class="sd-box__title">
+                Do you have symptoms?
+            </h3>
+            <p style="font-size: 16px !important;">
+                If you have STI symptoms please visit your nearest GUM clinic or
+                your local doctor for further advice.
+            </p>
+            <p style="font-size: 16px !important;">
+                Find your nearest clinic <a
+                    href="http://www.nhs.uk/service-search/sexual-health-information-and-support/locationsearch/734"
+                    target="_blank">here</a>.
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
