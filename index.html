@@ -3,237 +3,17 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Sex Degrees of Separation</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style type="text/css">
         html {
-            height: 2000px;
+            max-width: 640px;
+            margin: auto;
         }
     </style>
 </head>
 <body>
-
-<style type="text/css">
-    @font-face {
-        font-family: 'sdfont';
-        src: url("data:application/font-woff;base64,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");
-        font-weight: normal;
-        font-style: normal;
-    }
-
-    [class*="-icon"] {
-        font-family: 'sdfont';
-        speak: none;
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        text-transform: none;
-        /* Better Font Rendering =========== */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-    .sd-female-icon:before {
-        content: "\e603";
-    }
-
-    .sd-male-icon:before {
-        content: "\e604";
-    }
-
-    .icon-down-arrow:before {
-        content: "\e602";
-    }
-
-    /* gender icons */
-    #sd .sd-gender-icon {
-        display: block;
-        width: 20px;
-        font-size: 42px;
-        margin-top: -4px;
-    }
-
-    #sd .sd-gender-icon {
-        padding: 0 10px;
-    }
-
-    #sd .sd-man-icon {
-        color: #02a2a0;
-        float: right;
-    }
-
-    #sd .sd-woman-icon {
-        color: #c1017a;
-        float: left;
-    }
-
-    #sd .sd-woman-icon:before {
-        content: "\e600";
-    }
-
-    #sd .sd-man-icon {
-
-    }
-
-    #sd .sd-man-icon:before {
-        content: "\e601";
-    }
-
-    #sd {
-        margin: auto;
-        max-width: 640px;
-        text-align: center;
-        line-height: 1.5;
-        color: #6b6b6a;
-        font-family: Arial, Tahoma, Verdana, sans-serif;
-    }
-
-    #sd .sd-box {
-        background: #f1f0eb;
-        padding: 14px;
-        margin: 5px 0;
-        border-radius: 8px;
-    }
-
-    #sd h2 {
-        font-size: 21px;
-        font-weight: bold;
-        margin: 0 0 14px 0;
-        padding: 10px;
-    }
-
-    /* Main Box */
-    #sd .sd-main {
-        display: flex;
-    }
-
-    #sd .sd-gender-column {
-        flex: 50%;
-    }
-
-    #sd .sd-gender-button {
-        margin: 3px;
-        padding: 0;
-        cursor: pointer;
-    }
-
-    #sd .sd-gender-title {
-        margin: 0;
-        border: 3px solid;
-        border-radius: 8px;
-        padding: 10px 0;
-        text-align: center;
-        font-weight: normal;
-    }
-
-    /* Age Row */
-    #sd .sd-age-group-row {
-        width: 180px;
-        background: #02a2a0;
-        position: relative;
-        text-align: center;
-        margin: 0 auto 4px;
-        border-radius: 8px;
-    }
-
-    #sd .sd-age-group-title {
-        display: block;
-        width: 100%;
-        font-size: 14px;
-        line-height: 19px;
-        margin-bottom: -10px;
-        color: white;
-    }
-
-    #sd .sd-age-group-button {
-        display: block;
-        position: absolute;
-        width: 53px;
-        height: 53px;
-        bottom: 0;
-        left: 50%;
-        margin-left: -90px;
-    }
-
-    #sd .sd-age-group-button > span {
-        display: block;
-        position: absolute;
-        left: 9px;
-        bottom: 9px;
-        width: 35px;
-        height: 35px;
-        background: #fff;
-        color: #02a2a0;
-        font-size: 28px;
-        font-weight: bold;
-        line-height: 35px;
-        cursor: pointer;
-        border-radius: 50%;
-    }
-
-    #sd .sd-age-group-plus {
-        left: 50%;
-        margin-left: 37px;
-    }
-
-    #sd .sd-age-group-total {
-        display: block;
-        color: white;
-        font-size: 32px;
-        line-height: 44px;
-        padding-bottom: 0px;
-    }
-
-    /* Direct partners */
-    #sd .sd-direct-partners {
-        display: flex;
-    }
-
-    #sd .sd-direct-partners-gender {
-        flex: 50%;
-        padding: 0 5px;
-        margin-bottom: 10px;
-    }
-
-    #sd .sd-gender-total {
-        margin: 0;
-        font-size: 42px;
-    }
-
-    #sd .sd-direct-partners-male {
-        text-align: right;
-    }
-
-    #sd .sd-direct-partners-female {
-        text-align: left;
-    }
-
-    /* buttons */
-    #sd .sd-button {
-        display: inline-block;
-        width: 350px;
-        max-width: 100%;
-        background: #db6d00;
-        color: white;
-        padding: 14px;
-        border: none;
-        border-bottom: 3px solid rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
-        text-decoration: none;
-        font-size: 21px;
-        font-weight: 400;
-        line-height: 1.25;
-        -webkit-text-transform: none;
-        text-transform: none;
-        cursor: pointer;
-        margin: 0;
-        transition: all .3s ease;
-    }
-
-    #sd .sd-bang-on {
-       font-size: 16px;
-    }
-</style>
 
 <!-- FastClick -->
 <script type="text/javascript">
@@ -295,74 +75,92 @@
             FastClick.attach(document.body);
         });
 
+        /* utils */
+        function scrollToElement(element, margin) {
+            var topOffset = element.offsetTop;
+            var newOffset = topOffset + margin;
+            $('html, body').animate({scrollTop: newOffset}, 800);
+        }
+
         function getClickGender(clicked) {
-            var genderTable = $(clicked).parents('.sd-gender-table');
+            var genderTable = $(clicked).parents('[data-gender]');
             var gender = genderTable.data('gender');
             return gender;
         }
 
-        function addToAgeGroup(element) {
-            var totalElement = $(element).siblings('.sd-age-group-total');
-            var totalCount = parseInt(totalElement.text());
-            totalCount = totalCount + 1;
+        /* event handlers */
+        $('.sd-gender-button').click(function () {
+            if ($('.sd-gender-column').hasClass('sd-gender-active')) {
+                // deactivate everything
+                $('.sd-gender-column').removeClass('sd-gender-active');
+                $('.sd-gender-table-body').removeClass('sd-gender-active');
+            }
+            else {
+                scrollToElement(this, -10);
+            }
 
-            totalElement.text(totalCount);
+            var gender = getClickGender(this);
+            $('.sd-' + gender).addClass('sd-gender-active');
 
-        }
+            $(".sd-direct-partners").animate({
+                opacity: 1
+            }, 1000, function () {
+                // Animation complete.
+            });
 
-        function subtractFromAgeGroup(element) {
-            var totalElement = $(element).siblings('.sd-age-group-total');
-            var totalCount = parseInt(totalElement.text());
-            if (totalCount != 0) totalCount = totalCount - 1;
+        });
 
-            totalElement.text(totalCount);
-
-        }
+        /* table clicking */
+        $('.sd-age-group-button').click(function () {
+            updateAgeGroup(this);
+            updateGenderTotal(getClickGender(this));
+            //updateTotalIndirectPartners();
+            $('.sd-down-arrow').fadeTo("slow", 1);
+        });
 
         function updateAgeGroup(element) {
-            if ($(element).hasClass('age-group-plus')) {
-                addToAgeGroup(element);
-            } else {
-                subtractFromAgeGroup(element);
-            }
-        }
+            var totalElement = $(element).siblings('.sd-age-group-total');
+            var totalCount = parseInt(totalElement.text());
 
-        /* unused?
-        function getGenderTotal() {
-            var genderTotal = parseInt($('.gender-total').text());
-            return genderTotal;
-        }*/
+            if ($(element).hasClass('sd-age-group-plus')) {
+                totalCount = totalCount +1;
+                // enable calculate button
+                $(".sd-calculate").removeClass("sd-disabled");
+            }
+            else if (totalCount > 0) {
+                totalCount = totalCount - 1;
+            }
+            totalElement.text(totalCount);
+        }
 
         function updateGenderTotal(gender) {
             // find a parent element within the gender to keep it gender specific
-            var genderTable = $('*[data-gender="' + gender + '"]');
+            var genderTable = $('.sd-gender-table-body[data-gender="' + gender + '"]');
             var newGenderTotal = 0;
 
-            // foreach agegroup total
             $(genderTable).find('.sd-age-group-total').each(function () {
-
-                // add the total to the gender total
                 newGenderTotal = newGenderTotal += parseInt($(this).text());
 
             });
 
-            $('#' + gender + '-total').text(newGenderTotal);
+            $('#sd-' + gender + '-total').text(newGenderTotal);
         }
 
-        function updateTotalPartners() {
-            var newtotalPartners = 0;
-
-            // foreach agegroup total
-            $('.gender-total').each(function () {
-
-                // add the total to the gender total
-                newtotalPartners = newtotalPartners += parseInt($(this).text());
-
+        $('.sd-calculate').click(function () {
+            $(this).slideUp();
+            $('.sd-results').slideDown('fast', function () {
+                scrollToElement(this, -80);
+                //var totalIndirect = $('.total-indirect-partners').data('total-indirect');
+                //countAnimation($('.total-indirect-partners'), totalIndirect);
             });
+            $('.sd-results-text').delay(3500).slideDown("slow", function () {
+                // animation complete
+            });
+            $('.sd-spinners').delay(3500).slideUp();
 
-            $('.total-partners').text(newtotalPartners);
-        }
+        });
 
+        /* wtf
         function updateTotalIndirectPartners() {
             var totalIndirect = 0;
             var totalAverage = $('#sd-calc').data('total-av');
@@ -394,22 +192,7 @@
                 disableCalculateButton();
             }
 
-        }
-
-        function scrollToElement(element, margin) {
-            var offset = element.offset();
-            var topOffset = offset.top;
-            var newOffset = topOffset + margin;
-            $('html, body').animate({scrollTop: newOffset}, 800);
-        }
-
-        function enableCalculateButton() {
-            $('.sd-button--calculate').removeClass('sd-button--disabled');
-        }
-
-        function disableCalculateButton() {
-            $('.sd-button--calculate').addClass('sd-button--disabled');
-        }
+        } */
 
         $.fn.digits = function () {
             return this.each(function () {
@@ -419,8 +202,8 @@
 
 
         /*
-		Count animation
-		 */
+        Count animation
+         */
         function countAnimation(element, total) {
 
             $({percentage: 0}).stop(true).animate({percentage: total}, {
@@ -440,58 +223,13 @@
             });
         }
 
-        $('.sd-gender-title').click(function () {
-
-            if ($('.sd-gender-column').hasClass('sd-gender-active')) {
-                // nothing to do here
-            }
-            else {
-                var element = $('.sd-table');
-                scrollToElement(element, 50);
-            }
-
-            $('.gender-table.gender-table--active').removeClass('gender-table--active');
-            var gender = getClickGender(this);
-            $('.gender--' + gender).addClass('gender-table--active');
-
-
-            $(".sd-direct").animate({
-                opacity: 1
-            }, 1000, function () {
-                // Animation complete.
-            });
-
-        });
-
-        $('.age-group-button').click(function () {
-            var gender = getClickGender(this);
-            updateAgeGroup(this);
-            updateGenderTotal(gender);
-            updateTotalPartners();
-            updateTotalIndirectPartners();
-            $('.down-arrow').fadeTo("slow", 1);
-        });
-
-        $('.down-arrow').click(function () {
-            var element = $('.sd-direct');
+        $('.sd-down-arrow').click(function () {
+            var element = $('.sd-direct-partners');
             scrollToElement(element, -40);
         });
 
-        $('.sd-button--calculate').click(function () {
-            $(this).slideUp();
-            $('.sd-results').slideDown('fast', function () {
-                var element = $('.sd-results');
-                scrollToElement(element, -80);
-                var totalIndirect = $('.total-indirect-partners').data('total-indirect');
-                countAnimation($('.total-indirect-partners'), totalIndirect);
-            });
-            $('.sd-results__text').delay(3500).slideDown("slow", function () {
-                // animation complete
-            });
-            $('.sd-spinners').delay(3500).slideUp();
 
-        });
-
+        /*
         $('.sd-button--options').click(function () {
             $(this).addClass('sd-button--disabled');
             $('.sd-actions').slideDown('fast', function () {
@@ -500,176 +238,453 @@
             });
         });
 
-        $('.gender-table__title').click(function () {
-
+        $('.sd-gender-button').click(function () {
             $('.gender-table-active .gender-table__body').slideDown();
             $('.sd-direct').slideDown();
-
         });
-
+    */
     });
-
-    var _gaq = []; // does this need to have google analytics?
 </script>
 
-<div data-total-av="8.5" id="sd">
+
+<style type="text/css">
+    #sd {
+        font-size: 16px;
+        text-align: center;
+        line-height: 1.5;
+        color: #6b6b6a;
+        font-family: Arial, Tahoma, Verdana, sans-serif;
+    }
+
+    #sd * {
+        box-sizing: border-box;
+    }
+
+    /* ICONS */
+    @font-face {
+        font-family: 'sdfont';
+        src: url("data:application/font-woff;base64,d09GRgABAAAAAAd4AAsAAAAABywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAABCAAAAGAAAABgDxICcmNtYXAAAAFoAAAAVAAAAFQaVsyLZ2FzcAAAAbwAAAAIAAAACAAAABBnbHlmAAABxAAAA1gAAANYbri6i2hlYWQAAAUcAAAANgAAADYJgp/XaGhlYQAABVQAAAAkAAAAJAoNBhhobXR4AAAFeAAAACQAAAAkF5gBTmxvY2EAAAWcAAAAFAAAABQCjAOAbWF4cAAABbAAAAAgAAAAIAAMAG1uYW1lAAAF0AAAAYYAAAGGmUoJ+3Bvc3QAAAdYAAAAIAAAACAAAwAAAAMDRAGQAAUAAAKZAswAAACPApkCzAAAAesAMwEJAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA5gQDwP/AAEADwABAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAwAAAAMAAAAcAAEAAwAAABwAAwABAAAAHAAEADgAAAAKAAgAAgACAAEAIOYE//3//wAAAAAAIOYA//3//wAB/+MaBAADAAEAAAAAAAAAAAAAAAEAAf//AA8AAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAgAE/84BwQOwAF0AagAAAS4BKwEiBg8BBhYXFjY/ATQ2MzIWFTAUOQEVOAExBw4DBw4BFRwBMRQWFzMRFBYzMjY1ETMRFBYzMjY1ETMyNjUwNDUnAycwNDE0NjMyFhUxFx4BMzoBNz4BLwEnFAYjIiY1NDYzMhYVAXoINB57HjMJRwQPDg4aBDwDAwMEAwscHBkHAQEKCFMVDw8VFxUPDxVTCAoBZAIEAwIEPAMTDAMEAw4PBUdEMSIjMTEjIjECsB0nJx31DhoEBA4OzwIDBAMBAQYmYF9UGQEEAQEBCAsB/vQPFRUPAQz+9A8VFQ8BDAsIAgEGAVEIAQMEAwLPCw4BBBoO9awiMTEiIzExIwACAAX/zAF7A60AOABFAAABIyIGFREUFjMyNj0BNDYzMhYVOAExERQWMzI2NREzERQWMzI2NRE0NjMyFhUxFRQWMzI2NREuASM3FAYjIiY1NDYzMhYVAQ2bLUAWDw8WAwMDAxwTExwPHBMTGwQDAwMWDw8VAUAtBzIiIzExIyIyAvw/Lf7xDxUVD/ADBAQD/YoTHBwTAXH+jxMcHBMCdgMEBAPxDxUVDwEQLT9eIzExIyIxMSIAAAAAAQAA/8QGSwO8AAYAAAEXCQE3CQEFdNf82vzb1wJOAk8DvNf83wMh1/21AksAAAAAAgDUABwDLANkAB8ANAAAATQuAiMiDgIVFB4CFxUjFTMVMzUzNSM1PgM1ITQ+AjMyHgIVFA4CIyIuAjUDLC9SbT4+bVIvJkJaNHR0bHR0NFpCJv4MHzdJKSlJNx8fN0kpKUk3HwI4Pm1SLy9SbT43Y042CT5kU1NkPgk2TmM3KUk3Hx83SSkpSTcfHzdJKQAAAgBxADADjwNQAB0AMgAAARUzBy4BIyIOAhUUHgIzMj4CNTQmJzcVMxEhAyIuAjU0PgIzMh4CFRQOAiMCY3yYJVYvPm1SLy9SbT4+bVIvHBmXZP7UxilJNx8fN0kpKUk3Hx83SSkDUGSZGRwvUm0+Pm1SLy9SbT4vViWWeAEs/UQfN0kpKUk3Hx83SSkpSTcfAAAAAAEAAAAAAAB/2Yq9Xw889QALBAAAAAAA0gytrQAAAADSDK2tAAD/xAZLA7wAAAAIAAIAAAAAAAAAAQAAA8D/wAAABk4AAAAABksAAQAAAAAAAAAAAAAAAAAAAAkEAAAAAAAAAAAAAAACAAAAAcUABAGFAAUGTgAABAAA1AQAAHEAAAAAAAoAFAAeAKYBAgEaAWIBrAABAAAACQBrAAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEABwAAAAEAAAAAAAIABwBgAAEAAAAAAAMABwA2AAEAAAAAAAQABwB1AAEAAAAAAAUACwAVAAEAAAAAAAYABwBLAAEAAAAAAAoAGgCKAAMAAQQJAAEADgAHAAMAAQQJAAIADgBnAAMAAQQJAAMADgA9AAMAAQQJAAQADgB8AAMAAQQJAAUAFgAgAAMAAQQJAAYADgBSAAMAAQQJAAoANACkaWNvbW9vbgBpAGMAbwBtAG8AbwBuVmVyc2lvbiAxLjAAVgBlAHIAcwBpAG8AbgAgADEALgAwaWNvbW9vbgBpAGMAbwBtAG8AbwBuaWNvbW9vbgBpAGMAbwBtAG8AbwBuUmVndWxhcgBSAGUAZwB1AGwAYQByaWNvbW9vbgBpAGMAbwBtAG8AbwBuRm9udCBnZW5lcmF0ZWQgYnkgSWNvTW9vbi4ARgBvAG4AdAAgAGcAZQBuAGUAcgBhAHQAZQBkACAAYgB5ACAASQBjAG8ATQBvAG8AbgAuAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==");
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    [class*="-icon"] {
+        font-family: 'sdfont';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* gender icons */
+    #sd .sd-gender-icon {
+        display: block;
+        font-size: 3.0em;
+        padding: 0 0.2em;
+        margin-top: -0.3em;
+    }
+
+    #sd .sd-man-icon {
+        color: #02a2a0;
+        float: right;
+    }
+
+    #sd .sd-woman-icon {
+        color: #c1017a;
+        float: left;
+    }
+
+    #sd .sd-man-icon:before {
+        content: "\e601";
+    }
+
+    #sd .sd-woman-icon:before {
+        content: "\e600";
+    }
+
+    /* symbols */
+    .sd-male-icon:before {
+        content: "\e604";
+    }
+
+    .sd-female-icon:before {
+        content: "\e603";
+    }
+
+    /* arrow */
+    #sd .sd-down-arrow-icon:before {
+        content: "\e602";
+        cursor: pointer;
+    }
+
+    /* main */
+    #sd .sd-box {
+        background: #f1f0eb;
+        padding: 14px;
+        margin: 5px 0;
+        border-radius: 8px;
+    }
+
+    #sd .sd-no-select {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    #sd .sd-split-container {
+        display: flex;
+    }
+
+    #sd .sd-split-container > div {
+        flex: 0 0 50%;
+    }
+
+    /* Main Box */
+    #sd .sd-gender-table-body {
+        display: none;
+    }
+
+    #sd .sd-gender-button {
+        margin: 0.2em;
+        padding: 0.4em 0;
+        border: 3px solid;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: normal;
+    }
+
+    #sd .sd-male .sd-gender-button {
+        border-color: #02a2a0;
+    }
+
+    #sd .sd-female .sd-gender-button {
+        border-color: #c1017a;
+    }
+
+    #sd .sd-gender-title {
+        font-size: 1.25em;
+    }
+
+    /* active */
+    #sd .sd-gender-table-body.sd-gender-active {
+        display: block;
+    }
+
+    #sd .sd-male.sd-gender-active .sd-gender-button {
+        background: #02a2a0;
+        color: white;
+    }
+    #sd .sd-male.sd-gender-active .sd-man-icon {
+        color: white;
+    }
+
+    #sd .sd-female.sd-gender-active .sd-gender-button {
+        background: #c1017a;
+        color: white;
+    }
+    #sd .sd-female.sd-gender-active .sd-woman-icon {
+        color: white;
+    }
+
+    /* Age Row */
+    #sd .sd-age-group-row {
+        position: relative;
+        max-width: 180px;
+        text-align: center;
+        margin: 0 auto 4px;
+        border-radius: 8px;
+    }
+
+    #sd .sd-male .sd-age-group-row {
+        background: #02a2a0;
+    }
+
+    #sd .sd-female .sd-age-group-row {
+        background: #c1017a;
+    }
+
+    #sd .sd-male .sd-age-group-button > span {
+        color: #02a2a0;
+    }
+
+    #sd .sd-female .sd-age-group-button > span {
+        color: #c1017a;
+    }
+
+    #sd .sd-age-group-title {
+        display: block;
+        width: 100%;
+        font-size: 14px;
+        line-height: 19px;
+        margin-bottom: -10px;
+        color: white;
+    }
+
+    #sd .sd-age-group-button {
+        display: block;
+        position: absolute;
+        width: 53px;
+        height: 53px;
+        bottom: 0;
+        left: 50%;
+        margin-left: -90px;
+    }
+
+    #sd .sd-age-group-button > span {
+        display: block;
+        position: absolute;
+        left: 9px;
+        bottom: 9px;
+        width: 35px;
+        height: 35px;
+        background: #fff;
+        font-size: 28px;
+        font-weight: bold;
+        line-height: 35px;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    #sd .sd-age-group-plus {
+        left: 50%;
+        margin-left: 37px;
+    }
+
+    #sd .sd-age-group-total {
+        display: block;
+        color: white;
+        font-size: 32px;
+        line-height: 44px;
+        padding-bottom: 0px;
+    }
+
+    /* Direct partners */
+    #sd .sd-direct-partners {
+        opacity: 0.5;
+    }
+
+    #sd .sd-direct-partners-gender {
+        padding: 0 5px;
+        margin-bottom: 10px;
+    }
+
+    #sd .sd-gender-total {
+        margin: 0;
+        font-size: 42px;
+    }
+
+    #sd .sd-direct-partners-male {
+        text-align: right;
+    }
+
+    #sd .sd-direct-partners-female {
+        text-align: left;
+    }
+
+    /* results */
+    #sd .sd-results {
+        display: none;
+    }
+
+    #sd .sd-results-text {
+        display: none;
+    }
+
+    #sd .sd-bang-on {
+        font-size: 16px;
+    }
+
+    /* buttons */
+    #sd .sd-button {
+        display: inline-block;
+        width: 350px;
+        max-width: 100%;
+        background: #db6d00;
+        color: white;
+        padding: 14px;
+        border: none;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 21px;
+        font-weight: 400;
+        -webkit-text-transform: none;
+        text-transform: none;
+        cursor: pointer;
+        margin: 0;
+        transition: all .3s ease;
+    }
+
+    .sd-calculate.sd-disabled {
+        opacity: 50%;
+    }
+</style>
+
+<div id="sd" data-total-av="8.5" >
 
     <div class="sd-box">
         <h2>I've had sex with...</h2>
-        <div class="sd-main">
+        <div class="sd-split-container">
             <div class="sd-gender-column sd-male" data-gender="male">
                 <div class="sd-gender-button">
+                    <span class="sd-gender-title">Men</span>
                     <span class="sd-gender-icon sd-man-icon"></span>
-                    <h3 class="sd-gender-title">Men</h3>
-                </div>
-
-                <div class="sd-gender-table-body">
-                    <p>How many people have you slept with in each age group?</p>
-                    <div class="sd-gender-table-rows">
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="4.1">16 - 19</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="7.1">20 - 24</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="11.8">25 - 34</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="13.7">35 - 44</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="12.9">45 - 64</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="8.9">65+</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                    </div>
-                    <span class="down-arrow icon-down-arrow"></span>
                 </div>
             </div>
-
             <div class="sd-gender-column sd-female" data-gender="female">
                 <div class="sd-gender-button">
+                    <span class="sd-gender-title">Women</span>
                     <span class="sd-gender-icon sd-woman-icon"></span>
-                    <h3 class="sd-gender-title">Women</h3>
-                </div>
-
-                <div class="sd-gender-table-body">
-                    <p>How many people have you slept with in each age group?</p>
-                    <div class="sd-gender-table-rows">
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="4.8">16 - 19</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="6.4">20 - 24</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="9.6">25 - 34</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="10.3">35 - 44</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="7.5">45 - 64</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                        <div class="sd-age-group-row">
-                            <span class="sd-age-group-title" data-av="4.4">65+</span>
-                            <span class="sd-age-group-button sd-age-group-plus">
-                                <span>+</span>
-                            </span>
-                            <span class="sd-age-group-button sd-age-group-minus">
-                                <span>−</span>
-                            </span>
-                            <span class="sd-age-group-total">0</span>
-                        </div>
-                    </div>
-                    <span class="down-arrow icon-down-arrow"></span>
                 </div>
             </div>
         </div>
+
+        <div class="sd-gender-table-body sd-male" data-gender="male">
+            <p>How many people have you slept with in each age group?</p>
+            <div class="sd-gender-table-rows">
+                <div class="sd-age-group-row sd-no-select">
+                    <span class="sd-age-group-title" data-av="4.1">16 - 19</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="7.1">20 - 24</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="11.8">25 - 34</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="13.7">35 - 44</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="12.9">45 - 64</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="8.9">65+</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+            </div>
+            <span class="sd-down-arrow-icon"></span>
+        </div>
+
+        <div class="sd-gender-table-body sd-female" data-gender="female">
+            <p>How many people have you slept with in each age group?</p>
+            <div class="sd-gender-table-rows sd-no-select">
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="4.8">16 - 19</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="6.4">20 - 24</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="9.6">25 - 34</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="10.3">35 - 44</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="7.5">45 - 64</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="4.4">65+</span>
+                    <span class="sd-age-group-button sd-age-group-plus">
+                        <span>+</span>
+                    </span>
+                    <span class="sd-age-group-button sd-age-group-minus">
+                        <span>−</span>
+                    </span>
+                    <span class="sd-age-group-total">0</span>
+                </div>
+            </div>
+            <span class="sd-down-arrow-icon"></span>
+        </div>
     </div>
 
-    <div class="sd-box">
+    <div class="sd-box sd-direct-partners">
         <h2>Direct sexual partners</h2>
-        <div class="sd-direct-partners">
+        <div class="sd-split-container">
             <div class="sd-direct-partners-gender sd-direct-partners-male">
                 <span class="sd-gender-icon sd-man-icon"></span>
                 <span id="sd-male-total" class="sd-gender-total">0</span>
@@ -680,11 +695,11 @@
             </div>
         </div>
         <div>
-            <a id="sd-calculate" class="sd-button" href="javascript:void(0)">Calculate</a>
+            <span class="sd-button sd-calculate sd-disabled">Calculate</span>
         </div>
     </div>
 
-    <div class="sd-box">
+    <div class="sd-box sd-results">
         <h2>Indirect sexual partners:</h2>
         <div class="sd-results__result">
             <span class="total-indirect-partners" data-total-indirect="0">0</span>
@@ -694,7 +709,7 @@
             </div>
         </div>
 
-        <div class="sd-results__text">
+        <div class="sd-results-text">
             <h2>
                 Shocked?<br>
                 <span class="sd-bang-on">You can see why our doctors bang on about using condoms!</span>
@@ -721,5 +736,14 @@
         </div>
     </div>
 </div>
+
+
+
+<h1>About Sex Degrees of Separation &#8211; the STI risk calculator</h1>
+<p><a href="https://www.independent.co.uk/life-style/health-and-families/sexual-health-sti-diagnosis-treatment-hiv-terrence-higgins-trust-a9319436.html" target="_blank" rel="noopener noreferrer">Sexually Transmitted Infections (STIs) are on the rise</a>, and many of these infections are symptomless. Here at LloydsPharmacy&#8217;s Online Doctor, we have decided to raise awareness about this worrying truth by illustrating the exponential effect of sexual contact.</p>
+<p>Our Sex Degrees calculator is based on the theory of Six Degrees of Separation; which is the sociological idea that we are all connected to each other by only six connections. Using this principle we take the number of partners you&#8217;ve had and what age they were when you last slept together, we multiply this by the number of partners they are statistically likely to have had, and by the partners of those partners, and the partners of those partners, (and so on) for six stages, or &#8220;degrees&#8221;, to estimate how many indirect partners you could have been exposed to sexually.</p>
+<p><strong>This calculator is not a diagnostic tool</strong> but it highlights how exposed you can be to STIs, and how this risk increases with each new partner. It’s not just your direct partners that you have to worry about, but your partners’ partners, and their partners’ partners, and so on. Obviously if you are not sexually active or have only one sexual partner who hasn&#8217;t had sex with anyone else, you will avoid sexually transmitted infections.</p>
+<p>However, <strong>even if you use condoms you are still exposed to several types of STI;</strong> including genital warts and herpes which can also be transferred through skin-to-skin contact, oral sex, and even sex toys. So the key message is to practice safe sex, but also to <a href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-risk-assessment"><strong>get regularly tested for STIs</strong></a>. If you’re concerned about your sexual health, you can either talk to your local GP, GUM clinic, or you can order a discreet test via <a href="https://onlinedoctor.lloydspharmacy.com/uk/sexual-health" target="_blank" rel="noopener noreferrer">LloydsPharmacy’s Online Doctor service</a>.</p>
+
 </body>
 </html>
