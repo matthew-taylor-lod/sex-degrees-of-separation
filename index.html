@@ -12,113 +12,6 @@
     </style>
 </head>
 <body>
-<style type="text/css">
-    /* Text colour */
-    #sd-calculator.sd-calc,
-    #sd-calculator.sd-calc p,
-    #sd-calculator.sd-calc .sd-box .sd-box__title,
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title,
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__body .gender-table__question {
-        color: #6b6b6a
-    }
-
-    #sd-calculator.sd-calc .sd-box {
-        background: #f1f0eb;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title {
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active.gender--female .gender-table__header .gender-table__title {
-        background: #c1017a;
-        border-color: #c1017a;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__header .gender-table__title {
-        border-color: #c1017a;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title .gender-icon.icon-FemaleIcon {
-        color: #c1017a;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active .gender-table__header .gender-table__title .gender-icon {
-        color: white;
-    }
-
-    /* Age group rows */
-    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__body .age-group-row {
-        background: #c1017a;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__body .age-group-row .age-group-button__icon {
-        color: #c1017a;
-    }
-
-    #sd-calculator.sd-calc .sd-direct .icon-FemaleIcon {
-        color: #c1017a;
-    }
-
-    #sd-calculator.sd-calc .sd-results .sd-results__result .female-symbol {
-        color: #c1017a;
-    }
-
-
-    /* Calculate button */
-    #sd-calculator.sd-calc .sd-button.sd-button--primary.sd-button--calculate {
-        background-color: #db6d00
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--primary.sd-button--calculate:hover {
-        background-color: #af5700
-    }
-
-
-    /* Results total */
-    #sd-calculator.sd-calc .sd-results .total-indirect-partners {
-        color: #669900;
-        border-color: #669900;
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--options {
-        background-color: #db6d00
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--options:hover {
-        background-color: #af5700
-    }
-
-
-    /* CTA buttons */
-    #sd-calculator.sd-calc .sd-button.sd-button--cta-1 {
-        background-color: #02a2a0
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--cta-1:hover {
-        background-color: #028280
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--cta-2 {
-        background-color: #c1017a
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--cta-2:hover {
-        background-color: #9a0162
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--cta-3 {
-        background-color: #c1017a
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--cta-3:hover {
-        background-color: #9a0162
-    }
-
-    #sd-calculator.sd-calc .sd-box p a:link,
-    #sd-calculator.sd-calc .sd-box p a:visited {
-        color: #c1017a
-    }
-</style>
 
 <style type="text/css">
     @font-face {
@@ -128,25 +21,23 @@
         font-style: normal;
     }
 
-    [class^="icon-"],
-    [class*=" icon-"] {
+    [class*="-icon"] {
         font-family: 'sdfont';
         speak: none;
         font-style: normal;
         font-weight: normal;
         font-variant: normal;
         text-transform: none;
-        line-height: 1;
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
-    .icon-female-icon:before {
+    .sd-female-icon:before {
         content: "\e603";
     }
 
-    .icon-male-icon:before {
+    .sd-male-icon:before {
         content: "\e604";
     }
 
@@ -154,102 +45,89 @@
         content: "\e602";
     }
 
-    .icon-FemaleIcon:before {
+    /* gender icons */
+    #sd .sd-gender-icon {
+        display: block;
+        width: 20px;
+        font-size: 42px;
+        margin-top: -4px;
+    }
+
+    #sd .sd-gender-icon {
+        padding: 0 10px;
+    }
+
+    #sd .sd-man-icon {
+        color: #02a2a0;
+        float: right;
+    }
+
+    #sd .sd-woman-icon {
+        color: #c1017a;
+        float: left;
+    }
+
+    #sd .sd-woman-icon:before {
         content: "\e600";
     }
 
-    .icon-MaleIcon:before {
+    #sd .sd-man-icon {
+
+    }
+
+    #sd .sd-man-icon:before {
         content: "\e601";
     }
 
-    #sd-calculator.sd-calc {
+    #sd {
         margin: auto;
         max-width: 640px;
         text-align: center;
         line-height: 1.5;
         color: #6b6b6a;
-        font-family: sans-serif;
-        box-sizing: border-box;
+        font-family: Arial, Tahoma, Verdana, sans-serif;
     }
 
-    #sd-calculator.sd-calc * {
-        box-sizing: border-box;
-    }
-
-    #sd-calculator.sd-calc .sd-calculator__title {
-        margin-bottom: 0;
-    }
-
-    #sd-calculator.sd-calc .sd-table {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table {
-        float: left;
-        width: 50%;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title {
-        background: transparent;
-        margin: 0;
-        margin-right: 9.3333333333px;
-        padding: 7px;
-        min-height: 56px;
-        color: #6b6b6a;
-        font-size: 17.5px;
-        font-weight: 400;
-        line-height: 2;
-        cursor: pointer;
-        border: 3px solid #02a2a0;
+    #sd .sd-box {
+        background: #f1f0eb;
+        padding: 14px;
+        margin: 5px 0;
         border-radius: 8px;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title .gender-icon {
-        display: block;
-        width: 20px;
-        float: right;
-        font-size: 42px;
-        color: #02a2a0;
-        margin-top: -2px;
+    #sd h2 {
+        font-size: 21px;
+        font-weight: bold;
+        margin: 0 0 14px 0;
+        padding: 10px;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__header .gender-table__title .gender-icon.icon-FemaleIcon {
-        color: #c1017a;
-        float: left;
+    /* Main Box */
+    #sd .sd-main {
+        display: flex;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__body {
-        width: 200%;
-        display: none;
-        position: relative;
-        padding-bottom: 25px;
+    #sd .sd-gender-column {
+        flex: 50%;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__body .gender-table__question {
-        width: 100%;
-        color: #6b6b6a;
-        border-radius: 4px;
-        line-height: 1.25;
-        padding: 5px;
-        margin-top: 5px;
-        margin-bottom: 3px;
+    #sd .sd-gender-button {
+        margin: 3px;
+        padding: 0;
+        cursor: pointer;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__body .down-arrow {
-        position: absolute;
-        bottom: -14px;
-        left: 50%;
-        margin-left: -25px;
-        opacity: 0;
-        padding: 14px;
+    #sd .sd-gender-title {
+        margin: 0;
+        border: 3px solid;
+        border-radius: 8px;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: normal;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row {
+    /* Age Row */
+    #sd .sd-age-group-row {
         width: 180px;
         background: #02a2a0;
         position: relative;
@@ -258,11 +136,7 @@
         border-radius: 8px;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row:first-of-type {
-        border-top: none;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row .age-group {
+    #sd .sd-age-group-title {
         display: block;
         width: 100%;
         font-size: 14px;
@@ -271,23 +145,23 @@
         color: white;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row .age-group-button {
+    #sd .sd-age-group-button {
         display: block;
         position: absolute;
         width: 53px;
         height: 53px;
-        bottom: 0px;
+        bottom: 0;
         left: 50%;
         margin-left: -90px;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row .age-group-button .age-group-button__icon {
+    #sd .sd-age-group-button > span {
         display: block;
-        width: 35px;
-        height: 35px;
         position: absolute;
         left: 9px;
         bottom: 9px;
+        width: 35px;
+        height: 35px;
         background: #fff;
         color: #02a2a0;
         font-size: 28px;
@@ -297,12 +171,12 @@
         border-radius: 50%;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row .age-group-button.age-group-plus {
+    #sd .sd-age-group-plus {
         left: 50%;
         margin-left: 37px;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table .gender-table__rows .age-group-row .age-group-total {
+    #sd .sd-age-group-total {
         display: block;
         color: white;
         font-size: 32px;
@@ -310,58 +184,43 @@
         padding-bottom: 0px;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__header .gender-table__title {
-        background: transparent;
-        margin-right: 0;
-        margin-left: 9.3333333333px;
-        border-color: #c1017a;
+    /* Direct partners */
+    #sd .sd-direct-partners {
+        display: flex;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__body {
-        margin-left: -100%;
-        display: none;
+    #sd .sd-direct-partners-gender {
+        flex: 50%;
+        padding: 0 5px;
+        margin-bottom: 10px;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__body .age-group-row {
-        background: #c1017a;
+    #sd .sd-gender-total {
+        margin: 0;
+        font-size: 42px;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table.gender--female .gender-table__body .age-group-row .age-group-button__icon {
-        color: #c1017a;
+    #sd .sd-direct-partners-male {
+        text-align: right;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active .gender-table__header .gender-table__title {
-        color: white;
+    #sd .sd-direct-partners-female {
+        text-align: left;
     }
 
-    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active .gender-table__header .gender-table__title .gender-icon {
-        color: white;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active.gender--male .gender-table__header .gender-table__title {
-        background: #02a2a0;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active.gender--female .gender-table__header .gender-table__title {
-        background: #c1017a;
-        border-color: #c1017a;
-    }
-
-    #sd-calculator.sd-calc .sd-table .gender-table.gender-table--active .gender-table__body {
-        display: block;
-    }
-
-    #sd-calculator.sd-calc .sd-button {
+    /* buttons */
+    #sd .sd-button {
         display: inline-block;
         width: 350px;
         max-width: 100%;
-        background: #02a2a0;
+        background: #db6d00;
         color: white;
         padding: 14px;
         border: none;
         border-bottom: 3px solid rgba(0, 0, 0, 0.2);
         border-radius: 8px;
-        font-size: 17.5px;
+        text-decoration: none;
+        font-size: 21px;
         font-weight: 400;
         line-height: 1.25;
         -webkit-text-transform: none;
@@ -371,257 +230,8 @@
         transition: all .3s ease;
     }
 
-    #sd-calculator.sd-calc .sd-button:hover,
-    #sd-calculator.sd-calc .sd-button:active {
-        background: #028987;
-        border-bottom: 3px solid rgba(0, 0, 0, 0.2);
-        text-decoration: none;
-    }
-
-    #sd-calculator.sd-calc .sd-button:focus {
-        border-bottom: 3px solid rgba(0, 0, 0, 0.2);
-        outline: none;
-    }
-
-    #sd-calculator.sd-calc .sd-button span {
-        font-size: .75em;
-        -webkit-text-transform: none;
-        text-transform: none;
-        font-weight: 400;
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--primary {
-        background: #c1017a;
-        padding: 14px;
-        font-size: 21px;
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--primary:hover,
-    #sd-calculator.sd-calc .sd-button.sd-button--primary:active {
-        background: #a8016a;
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--disabled {
-        pointer-events: none;
-        cursor: default;
-        opacity: .3;
-    }
-
-    #sd-calculator.sd-calc .sd-button.sd-button--calculate {
-        margin-top: 14px;
-    }
-
-    #sd-calculator.sd-calc .sd-direct {
-        line-height: 1;
-        opacity: 0.5;
-    }
-
-    #sd-calculator.sd-calc .sd-direct .sd-half--male {
-        text-align: right;
-    }
-
-    #sd-calculator.sd-calc .sd-direct .sd-half--female {
-        text-align: left;
-    }
-
-    #sd-calculator.sd-calc .sd-direct .gender-icon {
-        font-size: 42px;
-        padding: 0 15px;
-        padding-left: 7px;
-    }
-
-    #sd-calculator.sd-calc .sd-direct .icon-MaleIcon {
-        color: #02a2a0;
-    }
-
-    #sd-calculator.sd-calc .sd-direct .icon-FemaleIcon {
-        color: #c1017a;
-        padding-left: 15px;
-        padding-right: 7px;
-    }
-
-    #sd-calculator.sd-calc .sd-direct .gender-total {
-        font-size: 42px;
-    }
-
-    #sd-calculator.sd-calc .sd-results {
-        display: none;
-        position: relative;
-    }
-
-    #sd-calculator.sd-calc .sd-results .sd-box__title {
-        margin-bottom: 7px;
-    }
-
-    #sd-calculator.sd-calc .sd-results .total-indirect-partners {
-        display: inline-block;
-        margin-bottom: 20px;
-        font-size: 42px;
-        line-height: 1;
-        border-bottom: 3px solid #6b6b6a;
-    }
-
-    #sd-calculator.sd-calc .sd-results .sd-results__result {
-        position: relative;
-    }
-
-    #sd-calculator.sd-calc .sd-results .sd-results__result .sd-spinners {
-        margin-top: -7px;
-    }
-
-    #sd-calculator.sd-calc .sd-results .sd-results__result .sd-spinners .spin {
-        font-size: 42px;
-    }
-
-    #sd-calculator.sd-calc .sd-results .sd-results__result .sd-spinners .male-symbol {
-        color: #02a2a0;
-    }
-
-    #sd-calculator.sd-calc .sd-results .sd-results__result .sd-spinners .female-symbol {
-        color: #c1017a;
-        left: auto;
-        right: 0;
-    }
-
-    #sd-calculator.sd-calc .sd-results .sd-results__text {
-        display: none;
-    }
-
-    #sd-calculator.sd-calc .sd-actions {
-        display: none;
-    }
-
-    #sd-calculator.sd-calc .sd-half {
-        width: 50%;
-        float: left;
-    }
-
-    #sd-calculator.sd-calc .sd-box {
-        background: #f1f0eb;
-        padding: 14px;
-        margin: 5px 0;
-        border: none;
-        border-top-width: 0;
-        border-radius: 8px;
-    }
-
-    #sd-calculator.sd-calc .sd-box.sd-box--disabled {
-        opacity: 0.5;
-    }
-
-    #sd-calculator.sd-calc .sd-box.sd-box--disabled a:link,
-    #sd-calculator.sd-calc .sd-box.sd-box--disabled button {
-        pointer-events: none;
-        cursor: default;
-    }
-
-    #sd-calculator.sd-calc .sd-box h3 {
-        font-size: 21px;
-        margin: 14px 0;
-    }
-
-    #sd-calculator.sd-calc .sd-box h4 {
-        font-size: 17.5px;
-        margin: 0 0 7px;
-        color: #6b6b6a;
-    }
-
-    #sd-calculator.sd-calc .sd-box .sd-box__title {
-        font-size: 21px;
-        margin-top: 0;
-        color: #6b6b6a;
-    }
-
-    #sd-calculator.sd-calc .sd-box p {
-        color: inherit !important;
-    }
-
-    #sd-calculator.sd-calc .sd-box p a:link,
-    #sd-calculator.sd-calc .sd-box p a:visited {
-        color: #c1017a;
-        border: none;
-        text-decoration: underline;
-    }
-
-    #sd-calculator.sd-calc .sd-box p a:hover,
-    #sd-calculator.sd-calc .sd-box p a:active {
-        text-decoration: none;
-    }
-
-    #sd-calculator.sd-calc .spin {
-        display: inline-block !important;
-        -webkit-animation: rotation .5s infinite linear;
-        -moz-animation: rotation .5s infinite linear;
-        -o-animation: rotation .5s infinite linear;
-        animation: rotation .5s infinite linear;
-    }
-
-    @-webkit-keyframes rotation {
-        from {
-            -webkit-transform: rotate(0deg);
-        }
-        to {
-            -webkit-transform: rotate(359deg);
-        }
-    }
-
-    @keyframes rotation {
-        from {
-            -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        to {
-            -webkit-transform: rotate(359deg);
-            transform: rotate(359deg);
-        }
-    }
-
-    #sd-calculator.sd-calc .spin.spin--rev {
-        -webkit-animation: rotation-rev .5s infinite linear;
-        -moz-animation: rotation-rev .5s infinite linear;
-        -o-animation: rotation-rev .5s infinite linear;
-        animation: rotation-rev .5s infinite linear;
-    }
-
-    @-webkit-keyframes rotation-rev {
-        from {
-            -webkit-transform: rotate(359deg);
-        }
-        to {
-            -webkit-transform: rotate(0deg);
-        }
-    }
-
-    @keyframes rotation-rev {
-        from {
-            -webkit-transform: rotate(359deg);
-            transform: rotate(359deg);
-        }
-        to {
-            -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-    }
-
-    #sd-calculator.sd-calc .sd-clearfix:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    #sd-calculator.sd-calc hr {
-        margin: 21px 0;
-    }
-
-    #sd-calculator.sd-calc p {
-        font-size: 14px !important;
-        color: #6b6b6a;
-    }
-
-    @media (max-width: 600px) {
-        #sd-calculator.sd-calc .show-on-mobile {
-            display: block !important;
-        }
+    #sd .sd-bang-on {
+       font-size: 16px;
     }
 </style>
 
@@ -686,13 +296,13 @@
         });
 
         function getClickGender(clicked) {
-            var genderTable = $(clicked).parents('.gender-table');
+            var genderTable = $(clicked).parents('.sd-gender-table');
             var gender = genderTable.data('gender');
             return gender;
         }
 
         function addToAgeGroup(element) {
-            var totalElement = $(element).siblings('.age-group-total');
+            var totalElement = $(element).siblings('.sd-age-group-total');
             var totalCount = parseInt(totalElement.text());
             totalCount = totalCount + 1;
 
@@ -701,7 +311,7 @@
         }
 
         function subtractFromAgeGroup(element) {
-            var totalElement = $(element).siblings('.age-group-total');
+            var totalElement = $(element).siblings('.sd-age-group-total');
             var totalCount = parseInt(totalElement.text());
             if (totalCount != 0) totalCount = totalCount - 1;
 
@@ -717,10 +327,11 @@
             }
         }
 
+        /* unused?
         function getGenderTotal() {
             var genderTotal = parseInt($('.gender-total').text());
             return genderTotal;
-        }
+        }*/
 
         function updateGenderTotal(gender) {
             // find a parent element within the gender to keep it gender specific
@@ -728,7 +339,7 @@
             var newGenderTotal = 0;
 
             // foreach agegroup total
-            $(genderTable).find('.age-group-total').each(function () {
+            $(genderTable).find('.sd-age-group-total').each(function () {
 
                 // add the total to the gender total
                 newGenderTotal = newGenderTotal += parseInt($(this).text());
@@ -752,10 +363,9 @@
             $('.total-partners').text(newtotalPartners);
         }
 
-
         function updateTotalIndirectPartners() {
             var totalIndirect = 0;
-            var totalAverage = $('#sd-calculator').data('total-av');
+            var totalAverage = $('#sd-calc').data('total-av');
 
             // for each row
             $('.age-group-row').each(function () {
@@ -765,7 +375,6 @@
                 if (rowTotalPartners > 0) {
                     // get the average
                     var rowAv = $(this).find('.age-group').data('av');
-
                     var rowTotalIndirect = ((rowAv - 1) * (Math.pow(totalAverage, 5))) * rowTotalPartners;
 
                     // add row total to overall total
@@ -810,9 +419,8 @@
 
 
         /*
-        Count animation
-         */
-
+		Count animation
+		 */
         function countAnimation(element, total) {
 
             $({percentage: 0}).stop(true).animate({percentage: total}, {
@@ -832,11 +440,12 @@
             });
         }
 
-        $('.gender-table__title').click(function () {
+        $('.sd-gender-title').click(function () {
 
-            if ($('.gender-table').hasClass('gender-table--active')) {
+            if ($('.sd-gender-column').hasClass('sd-gender-active')) {
                 // nothing to do here
-            } else {
+            }
+            else {
                 var element = $('.sd-table');
                 scrollToElement(element, 50);
             }
@@ -903,165 +512,180 @@
     var _gaq = []; // does this need to have google analytics?
 </script>
 
-<div class="sd-calc" data-total-av="8.5" id="sd-calculator">
+<div data-total-av="8.5" id="sd">
 
-    <div class="sd-table sd-box sd-clearfix">
-        <h3 class="sd-box__title ">I've had sex with...</h3>
+    <div class="sd-box">
+        <h2>I've had sex with...</h2>
+        <div class="sd-main">
+            <div class="sd-gender-column sd-male" data-gender="male">
+                <div class="sd-gender-button">
+                    <span class="sd-gender-icon sd-man-icon"></span>
+                    <h3 class="sd-gender-title">Men</h3>
+                </div>
 
-        <div class="gender-table gender--male" data-gender="male">
-            <div class="gender-table__header">
-                <h3 class="gender-table__title"
-                    onclick="_gaq.push(['_trackEvent', 'Sex Degrees Calculator', 'Click Gender Tab', 'Male', , true]);">
-                    <span class="gender-icon icon-MaleIcon"></span>
-                    Men
-                </h3>
+                <div class="sd-gender-table-body">
+                    <p>How many people have you slept with in each age group?</p>
+                    <div class="sd-gender-table-rows">
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="4.1">16 - 19</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="7.1">20 - 24</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="11.8">25 - 34</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="13.7">35 - 44</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="12.9">45 - 64</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="8.9">65+</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                    </div>
+                    <span class="down-arrow icon-down-arrow"></span>
+                </div>
             </div>
 
-            <div class="gender-table__body">
-                <p class="gender-table__question">How many people have you slept with in each age group?</p>
-                <div class="gender-table__rows">
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="4.1">16 - 19</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="7.1">20 - 24</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="11.8">25 - 34</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="13.7">35 - 44</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="12.9">45 - 64</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="8.9">65+</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
+            <div class="sd-gender-column sd-female" data-gender="female">
+                <div class="sd-gender-button">
+                    <span class="sd-gender-icon sd-woman-icon"></span>
+                    <h3 class="sd-gender-title">Women</h3>
                 </div>
-                <span class="down-arrow icon-down-arrow"></span>
+
+                <div class="sd-gender-table-body">
+                    <p>How many people have you slept with in each age group?</p>
+                    <div class="sd-gender-table-rows">
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="4.8">16 - 19</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="6.4">20 - 24</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="9.6">25 - 34</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="10.3">35 - 44</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="7.5">45 - 64</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                        <div class="sd-age-group-row">
+                            <span class="sd-age-group-title" data-av="4.4">65+</span>
+                            <span class="sd-age-group-button sd-age-group-plus">
+                                <span>+</span>
+                            </span>
+                            <span class="sd-age-group-button sd-age-group-minus">
+                                <span>−</span>
+                            </span>
+                            <span class="sd-age-group-total">0</span>
+                        </div>
+                    </div>
+                    <span class="down-arrow icon-down-arrow"></span>
+                </div>
             </div>
         </div>
-        <div class="gender-table gender--female" data-gender="female">
-            <div class="gender-table__header">
-                <h3 class="gender-table__title"
-                    onclick="_gaq.push(['_trackEvent', 'Sex Degrees Calculator', 'Click Gender Tab', 'Female', , true]);">
-                    <span class="gender-icon icon-FemaleIcon"></span>
-                    Women
-                </h3>
-            </div>
-
-            <div class="gender-table__body">
-                <p class="gender-table__question">How many people have you slept with in each age group?</p>
-
-                <div class="gender-table__rows">
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="4.8">16 - 19</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="6.4">20 - 24</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="9.6">25 - 34</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="10.3">35 - 44</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="7.5">45 - 64</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-                    <div class="age-group-row">
-                        <span class="age-group" data-av="4.4">65+</span>
-                        <span class="age-group-button age-group-plus"><span
-                                class="age-group-button__icon">+</span></span>
-                        <span class="age-group-button age-group-minus"><span
-                                class="age-group-button__icon">−</span></span>
-                        <span class="age-group-total">0</span>
-                    </div>
-                </div>
-                <span class="down-arrow icon-down-arrow"></span>
-            </div>
-        </div>
-
     </div>
 
-    <div class="sd-direct sd-clearfix sd-box">
-        <h3 class="sd-box__title">Direct sexual partners</h3>
-        <div class="sd-half sd-half--male">
-            <span class="gender-total" id="male-total">0</span> <span class="gender-icon icon-MaleIcon"></span>
-        </div>
-        <div class="sd-half sd-half--female">
-            <span class="gender-icon icon-FemaleIcon"></span> <span class="gender-total" id="female-total">0</span>
+    <div class="sd-box">
+        <h2>Direct sexual partners</h2>
+        <div class="sd-direct-partners">
+            <div class="sd-direct-partners-gender sd-direct-partners-male">
+                <span class="sd-gender-icon sd-man-icon"></span>
+                <span id="sd-male-total" class="sd-gender-total">0</span>
+            </div>
+            <div class="sd-direct-partners-gender sd-direct-partners-female">
+                <span class="sd-gender-icon sd-woman-icon"></span>
+                <span id="sd-female-total" class="sd-gender-total">0</span>
+            </div>
         </div>
         <div>
-            <a class="sd-button sd-button--primary sd-button--calculate sd-button--disabled"
-               href="javascript:void(0)"
-               onclick="_gaq.push(['_trackEvent', 'Sex Degrees Calculator', 'Click', 'Calculate Button', , true]);">Calculate</a>
+            <a id="sd-calculate" class="sd-button" href="javascript:void(0)">Calculate</a>
         </div>
     </div>
 
-    <div class="sd-results sd-box">
-        <h3 class="sd-box__title">Indirect sexual partners:</h3>
+    <div class="sd-box">
+        <h2>Indirect sexual partners:</h2>
         <div class="sd-results__result">
             <span class="total-indirect-partners" data-total-indirect="0">0</span>
             <div class="sd-spinners">
@@ -1071,69 +695,28 @@
         </div>
 
         <div class="sd-results__text">
-            <h3 style="color: #6b6b6a">Shocked?<br>
-                <span style="font-size: 16px">You can see&nbsp;why our doctors bang on about using condoms!</span>
-            </h3>
-            <p>
-                <span style="font-size: 16px">We've calculated how many people your partners are likely to have slept with before you. Then we calculated your&nbsp;partners' partners, and their partners' partners, and so on - for&nbsp;just six degrees. This number illustrates how exposed you can be to STIs, and how important safe sex is.&nbsp;</span>
-            </p>
-            <p>
-                <span style="font-size: 16px">But even when using condoms, you're still at risk from STIs such as warts and herpes, and you may already be carrying a symptomless STI, so it's safest to get tested after each new partner.</span>
-            </p>
-            <p>
-                <span style="font-size: 16px">Note: If you are not sexually active or have only one sexual partner who hasn’t had sex with anyone else, you will avoid sexually transmitted infections.</span>
-            </p>
-            <h4>Get tested from home...</h4>
-            <p>
-                <a class="sd-button sd-button--primary sd-button--order sd-button--cta-1"
-                   href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-checkups?utm_source=Sex%20Degrees%20Page&amp;utm_medium=CTA%20Click&amp;utm_content=Order%20STI%20Test%20Kit&amp;utm_campaign=Sex%20Degrees"
-                   style="color: #fff;text-decoration: none"
-                   target="_blank">Order STI Test Kit &gt;</a></p>
-            <p>
-                <span style="font-size: 14px">If you can't get time off work or you hate the idea of going to a clinic, order a test kit today and get tested from home.</span>
-            </p>
+            <h2>
+                Shocked?<br>
+                <span class="sd-bang-on">You can see why our doctors bang on about using condoms!</span>
+            </h2>
+
+            <p>We've calculated how many people your partners are likely to have slept with before you. Then we calculated your partners' partners, and their partners' partners, and so on - for just six degrees. This number illustrates how exposed you can be to STIs, and how important safe sex is.</p>
+            <p>But even when using condoms, you're still at risk from STIs such as warts and herpes, and you may already be carrying a symptomless STI, so it's safest to get tested after each new partner.</p>
+            <p>Note: If you are not sexually active or have only one sexual partner who hasn’t had sex with anyone else, you will avoid sexually transmitted infections.</p>
+            <h3>Get tested from home...</h3>
+
+            <a class="sd-button sd-button--primary sd-button--order sd-button--cta-1"
+               href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-checkups?utm_source=Sex%20Degrees%20Page&amp;utm_medium=CTA%20Click&amp;utm_content=Order%20STI%20Test%20Kit&amp;utm_campaign=Sex%20Degrees"
+               target="_blank">Order STI Test Kit &gt;</a>
+
+            <p>If you can't get time off work or you hate the idea of going to a clinic, order a test kit today and get tested from home.</p>
             <hr>
-            <p style="font-size: 16px !important">If you have STI symptoms please visit
+            <p>If you have STI symptoms please visit
                 <a href="http://www.nhs.uk/service-search/sexual-health-information-and-support/locationsearch/734"
                    target="_blank">
                     your nearest GUM clinic
-                </a> or your local doctor for further advice.
-            </p>
-
-            <a class="sd-button sd-button--secondary sd-button--options" href="javascript:void(0)"
-               onclick="_gaq.push(['_trackEvent', 'Sex Degrees Calculator', 'Click', 'More Information Button', , true]);">
-                <span>More information</span>
-            </a>
-        </div>
-
-    </div>
-
-    <div class="sd-actions">
-        <div class="sd-box">
-            <h3 class="sd-box__title">
-                Want to know your risk?
-            </h3>
-            <p style="font-size: 16px !important;">
-                Our doctors can establish your STI risk and suggest the most appropriate tests.
-            </p>
-            <a class="sd-button sd-button--primary sd-button--order sd-button--cta-1"
-               href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-risk-assessment" onclick="_gaq.push(['_trackEvent', 'Sex Degrees Calculator', 'Click', 'CTA1', , false]);"
-               target="_blank">
-                Free Risk Assessment &gt;
-            </a>
-        </div>
-        <div class="sd-box">
-            <h3 class="sd-box__title">
-                Do you have symptoms?
-            </h3>
-            <p style="font-size: 16px !important;">
-                If you have STI symptoms please visit your nearest GUM clinic or
-                your local doctor for further advice.
-            </p>
-            <p style="font-size: 16px !important;">
-                Find your nearest clinic <a
-                    href="http://www.nhs.uk/service-search/sexual-health-information-and-support/locationsearch/734"
-                    target="_blank">here</a>.
+                </a>
+                or your local doctor for further advice.
             </p>
         </div>
     </div>
