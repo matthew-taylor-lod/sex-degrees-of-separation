@@ -12,6 +12,7 @@
             margin: auto;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&display=swap">
 </head>
 <body>
 
@@ -223,9 +224,9 @@
             });
         }
 
-        $('.sd-down-arrow').click(function () {
-            var element = $('.sd-direct-partners');
-            scrollToElement(element, -40);
+        $('.sd-down-arrow-icon').click(function () {
+            var element = $('.sd-direct-partners')[0];
+            scrollToElement(element, 0);
         });
 
 
@@ -249,11 +250,11 @@
 
 <style type="text/css">
     #sd {
-        font-size: 16px;
+        font-size: 18px;
         text-align: center;
         line-height: 1.5;
         color: #6b6b6a;
-        font-family: Arial, Tahoma, Verdana, sans-serif;
+        font-family: 'OpenSans', Arial, Tahoma, Verdana, sans-serif;
     }
 
     #sd * {
@@ -270,6 +271,7 @@
 
     [class*="-icon"] {
         font-family: 'sdfont';
+        line-height: 1;
         speak: none;
         font-style: normal;
         font-weight: normal;
@@ -283,9 +285,9 @@
     /* gender icons */
     #sd .sd-gender-icon {
         display: block;
-        font-size: 3.0em;
+        font-size: 2.6em;
         padding: 0 0.2em;
-        margin-top: -0.3em;
+        margin-top: -0.12em;
     }
 
     #sd .sd-man-icon {
@@ -324,7 +326,7 @@
     /* main */
     #sd .sd-box {
         background: #f1f0eb;
-        padding: 14px;
+        padding: 0.4em;
         margin: 5px 0;
         border-radius: 8px;
     }
@@ -347,18 +349,20 @@
     }
 
     /* Main Box */
-    #sd .sd-gender-table-body {
-        display: none;
+    #sd .sd-how-many {
+        font-size: 0.9em;
+        margin: 0.5em;
     }
 
     #sd .sd-gender-button {
         margin: 0.2em;
-        padding: 0.4em 0;
+        padding: 0.6em 0;
         border: 3px solid;
         border-radius: 8px;
         cursor: pointer;
         text-align: center;
         font-weight: normal;
+        transition: all .3s ease;
     }
 
     #sd .sd-male .sd-gender-button {
@@ -382,6 +386,7 @@
         background: #02a2a0;
         color: white;
     }
+
     #sd .sd-male.sd-gender-active .sd-man-icon {
         color: white;
     }
@@ -390,16 +395,26 @@
         background: #c1017a;
         color: white;
     }
+
     #sd .sd-female.sd-gender-active .sd-woman-icon {
         color: white;
     }
 
-    /* Age Row */
+    /* Table */
+    #sd .sd-gender-table-body {
+        display: none;
+    }
+
+    #sd .sd-gender-table-rows {
+        margin-bottom: 0.4em;
+    }
+
     #sd .sd-age-group-row {
         position: relative;
-        max-width: 180px;
+        max-width: 12em;
+        height: 3em;
         text-align: center;
-        margin: 0 auto 4px;
+        margin: 0 auto 0.2em;
         border-radius: 8px;
     }
 
@@ -411,59 +426,51 @@
         background: #c1017a;
     }
 
-    #sd .sd-male .sd-age-group-button > span {
+    #sd .sd-male .sd-age-group-button {
         color: #02a2a0;
     }
 
-    #sd .sd-female .sd-age-group-button > span {
+    #sd .sd-female .sd-age-group-button {
         color: #c1017a;
     }
 
     #sd .sd-age-group-title {
         display: block;
+        position: absolute;
         width: 100%;
-        font-size: 14px;
-        line-height: 19px;
-        margin-bottom: -10px;
         color: white;
+        font-size: 0.9em;
     }
 
     #sd .sd-age-group-button {
-        display: block;
         position: absolute;
-        width: 53px;
-        height: 53px;
-        bottom: 0;
-        left: 50%;
-        margin-left: -90px;
-    }
-
-    #sd .sd-age-group-button > span {
+        margin: 0.3em;
         display: block;
-        position: absolute;
-        left: 9px;
-        bottom: 9px;
-        width: 35px;
-        height: 35px;
         background: #fff;
-        font-size: 28px;
+        width: 1.5em;
+        height: 1.5em;
+        font-size: 1.4em;
         font-weight: bold;
-        line-height: 35px;
         cursor: pointer;
         border-radius: 50%;
     }
 
-    #sd .sd-age-group-plus {
-        left: 50%;
-        margin-left: 37px;
+    #sd .sd-age-group-minus {
+        left: 0;
+    }
+
+    #sd .sd-age-group-plus  {
+        right: 0;
     }
 
     #sd .sd-age-group-total {
+        position: absolute;
         display: block;
+        bottom: 0.1em;
+        width: 100%;
         color: white;
-        font-size: 32px;
-        line-height: 44px;
-        padding-bottom: 0px;
+        font-size: 1.7em;
+        line-height: 1;
     }
 
     /* Direct partners */
@@ -472,13 +479,15 @@
     }
 
     #sd .sd-direct-partners-gender {
-        padding: 0 5px;
-        margin-bottom: 10px;
+        padding: 0 0.5em;
+        margin-bottom: 0.5em;
     }
 
     #sd .sd-gender-total {
         margin: 0;
-        font-size: 42px;
+        padding: 0 0.1em;
+        font-size: 2.5em;
+        line-height: 1;
     }
 
     #sd .sd-direct-partners-male {
@@ -487,6 +496,10 @@
 
     #sd .sd-direct-partners-female {
         text-align: left;
+    }
+
+    #sd .sd-direct-partners .sd-gender-icon {
+        margin: 0 -0.1em;
     }
 
     /* results */
@@ -520,7 +533,7 @@
         text-transform: none;
         cursor: pointer;
         margin: 0;
-        transition: all .3s ease;
+        transition: all 0.3s ease;
     }
 
     .sd-calculate.sd-disabled {
@@ -530,7 +543,7 @@
 
 <div id="sd" data-total-av="8.5" >
 
-    <div class="sd-box">
+    <div class="sd-box sd-main">
         <h2>I've had sex with...</h2>
         <div class="sd-split-container">
             <div class="sd-gender-column sd-male" data-gender="male">
@@ -548,134 +561,86 @@
         </div>
 
         <div class="sd-gender-table-body sd-male" data-gender="male">
-            <p>How many people have you slept with in each age group?</p>
-            <div class="sd-gender-table-rows">
-                <div class="sd-age-group-row sd-no-select">
+            <p class="sd-how-many">How many people have you slept with in each age group?</p>
+            <div class="sd-gender-table-rows sd-no-select">
+                <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="4.1">16 - 19</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="7.1">20 - 24</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="11.8">25 - 34</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="13.7">35 - 44</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="12.9">45 - 64</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="8.9">65+</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
             </div>
             <span class="sd-down-arrow-icon"></span>
         </div>
 
         <div class="sd-gender-table-body sd-female" data-gender="female">
-            <p>How many people have you slept with in each age group?</p>
+            <p class="sd-how-many">How many people have you slept with in each age group?</p>
             <div class="sd-gender-table-rows sd-no-select">
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="4.8">16 - 19</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="6.4">20 - 24</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="9.6">25 - 34</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="10.3">35 - 44</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="7.5">45 - 64</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
                 <div class="sd-age-group-row">
                     <span class="sd-age-group-title" data-av="4.4">65+</span>
-                    <span class="sd-age-group-button sd-age-group-plus">
-                        <span>+</span>
-                    </span>
-                    <span class="sd-age-group-button sd-age-group-minus">
-                        <span>−</span>
-                    </span>
                     <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
                 </div>
             </div>
             <span class="sd-down-arrow-icon"></span>
