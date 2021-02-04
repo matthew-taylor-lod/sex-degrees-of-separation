@@ -15,6 +15,19 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&display=swap">
 </head>
 <body>
+<!-- FastClick -->
+<script type="text/javascript">
+    ;(function () {
+        /**
+         * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+         *
+         * @codingstandard ftlabs-jsv2
+         * @copyright The Financial Times Limited [All Rights Reserved]
+         * @license MIT License (see LICENSE.txt)
+         */
+        function FastClick(e,t){var n;if(t=t||{},this.trackingClick=!1,this.trackingClickStart=0,this.targetElement=null,this.touchStartX=0,this.touchStartY=0,this.lastTouchIdentifier=0,this.touchBoundary=t.touchBoundary||10,this.layer=e,this.tapDelay=t.tapDelay||200,this.tapTimeout=t.tapTimeout||700,!FastClick.notNeeded(e)){for(var i=["onMouse","onClick","onTouchStart","onTouchMove","onTouchEnd","onTouchCancel"],o=0,r=i.length;o<r;o++)this[i[o]]=c(this[i[o]],this);deviceIsAndroid&&(e.addEventListener("mouseover",this.onMouse,!0),e.addEventListener("mousedown",this.onMouse,!0),e.addEventListener("mouseup",this.onMouse,!0)),e.addEventListener("click",this.onClick,!0),e.addEventListener("touchstart",this.onTouchStart,!1),e.addEventListener("touchmove",this.onTouchMove,!1),e.addEventListener("touchend",this.onTouchEnd,!1),e.addEventListener("touchcancel",this.onTouchCancel,!1),Event.prototype.stopImmediatePropagation||(e.removeEventListener=function(t,n,i){var o=Node.prototype.removeEventListener;"click"===t?o.call(e,t,n.hijacked||n,i):o.call(e,t,n,i)},e.addEventListener=function(t,n,i){var o=Node.prototype.addEventListener;"click"===t?o.call(e,t,n.hijacked||(n.hijacked=function(e){e.propagationStopped||n(e)}),i):o.call(e,t,n,i)}),"function"==typeof e.onclick&&(n=e.onclick,e.addEventListener("click",function(e){n(e)},!1),e.onclick=null)}function c(e,t){return function(){return e.apply(t,arguments)}}}var deviceIsWindowsPhone=navigator.userAgent.indexOf("Windows Phone")>=0,deviceIsAndroid=navigator.userAgent.indexOf("Android")>0&&!deviceIsWindowsPhone,deviceIsIOS=/iP(ad|hone|od)/.test(navigator.userAgent)&&!deviceIsWindowsPhone,deviceIsIOS4=deviceIsIOS&&/OS 4_\d(_\d)?/.test(navigator.userAgent),deviceIsIOSWithBadTarget=deviceIsIOS&&/OS [6-7]_\d/.test(navigator.userAgent),deviceIsBlackBerry10=navigator.userAgent.indexOf("BB10")>0;FastClick.prototype.needsClick=function(e){switch(e.nodeName.toLowerCase()){case"button":case"select":case"textarea":if(e.disabled)return!0;break;case"input":if(deviceIsIOS&&"file"===e.type||e.disabled)return!0;break;case"label":case"iframe":case"video":return!0}return/\bneedsclick\b/.test(e.className)},FastClick.prototype.needsFocus=function(e){switch(e.nodeName.toLowerCase()){case"textarea":return!0;case"select":return!deviceIsAndroid;case"input":switch(e.type){case"button":case"checkbox":case"file":case"image":case"radio":case"submit":return!1}return!e.disabled&&!e.readOnly;default:return/\bneedsfocus\b/.test(e.className)}},FastClick.prototype.sendClick=function(e,t){var n,i;document.activeElement&&document.activeElement!==e&&document.activeElement.blur(),i=t.changedTouches[0],(n=document.createEvent("MouseEvents")).initMouseEvent(this.determineEventType(e),!0,!0,window,1,i.screenX,i.screenY,i.clientX,i.clientY,!1,!1,!1,!1,0,null),n.forwardedTouchEvent=!0,e.dispatchEvent(n)},FastClick.prototype.determineEventType=function(e){return deviceIsAndroid&&"select"===e.tagName.toLowerCase()?"mousedown":"click"},FastClick.prototype.focus=function(e){var t;deviceIsIOS&&e.setSelectionRange&&0!==e.type.indexOf("date")&&"time"!==e.type&&"month"!==e.type?(t=e.value.length,e.setSelectionRange(t,t)):e.focus()},FastClick.prototype.updateScrollParent=function(e){var t,n;if(!(t=e.fastClickScrollParent)||!t.contains(e)){n=e;do{if(n.scrollHeight>n.offsetHeight){t=n,e.fastClickScrollParent=n;break}n=n.parentElement}while(n)}t&&(t.fastClickLastScrollTop=t.scrollTop)},FastClick.prototype.getTargetElementFromEventTarget=function(e){return e.nodeType===Node.TEXT_NODE?e.parentNode:e},FastClick.prototype.onTouchStart=function(e){var t,n,i;if(e.targetTouches.length>1)return!0;if(t=this.getTargetElementFromEventTarget(e.target),n=e.targetTouches[0],deviceIsIOS){if((i=window.getSelection()).rangeCount&&!i.isCollapsed)return!0;if(!deviceIsIOS4){if(n.identifier&&n.identifier===this.lastTouchIdentifier)return e.preventDefault(),!1;this.lastTouchIdentifier=n.identifier,this.updateScrollParent(t)}}return this.trackingClick=!0,this.trackingClickStart=e.timeStamp,this.targetElement=t,this.touchStartX=n.pageX,this.touchStartY=n.pageY,e.timeStamp-this.lastClickTime<this.tapDelay&&e.preventDefault(),!0},FastClick.prototype.touchHasMoved=function(e){var t=e.changedTouches[0],n=this.touchBoundary;return Math.abs(t.pageX-this.touchStartX)>n||Math.abs(t.pageY-this.touchStartY)>n},FastClick.prototype.onTouchMove=function(e){return!this.trackingClick||((this.targetElement!==this.getTargetElementFromEventTarget(e.target)||this.touchHasMoved(e))&&(this.trackingClick=!1,this.targetElement=null),!0)},FastClick.prototype.findControl=function(e){return void 0!==e.control?e.control:e.htmlFor?document.getElementById(e.htmlFor):e.querySelector("button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea")},FastClick.prototype.onTouchEnd=function(e){var t,n,i,o,r,c=this.targetElement;if(!this.trackingClick)return!0;if(e.timeStamp-this.lastClickTime<this.tapDelay)return this.cancelNextClick=!0,!0;if(e.timeStamp-this.trackingClickStart>this.tapTimeout)return!0;if(this.cancelNextClick=!1,this.lastClickTime=e.timeStamp,n=this.trackingClickStart,this.trackingClick=!1,this.trackingClickStart=0,deviceIsIOSWithBadTarget&&(r=e.changedTouches[0],(c=document.elementFromPoint(r.pageX-window.pageXOffset,r.pageY-window.pageYOffset)||c).fastClickScrollParent=this.targetElement.fastClickScrollParent),"label"===(i=c.tagName.toLowerCase())){if(t=this.findControl(c)){if(this.focus(c),deviceIsAndroid)return!1;c=t}}else if(this.needsFocus(c))return e.timeStamp-n>100||deviceIsIOS&&window.top!==window&&"input"===i?(this.targetElement=null,!1):(this.focus(c),this.sendClick(c,e),deviceIsIOS&&"select"===i||(this.targetElement=null,e.preventDefault()),!1);return!(!deviceIsIOS||deviceIsIOS4||!(o=c.fastClickScrollParent)||o.fastClickLastScrollTop===o.scrollTop)||(this.needsClick(c)||(e.preventDefault(),this.sendClick(c,e)),!1)},FastClick.prototype.onTouchCancel=function(){this.trackingClick=!1,this.targetElement=null},FastClick.prototype.onMouse=function(e){return!this.targetElement||(!!e.forwardedTouchEvent||(!e.cancelable||(!(!this.needsClick(this.targetElement)||this.cancelNextClick)||(e.stopImmediatePropagation?e.stopImmediatePropagation():e.propagationStopped=!0,e.stopPropagation(),e.preventDefault(),!1))))},FastClick.prototype.onClick=function(e){var t;return this.trackingClick?(this.targetElement=null,this.trackingClick=!1,!0):"submit"===e.target.type&&0===e.detail||((t=this.onMouse(e))||(this.targetElement=null),t)},FastClick.prototype.destroy=function(){var e=this.layer;deviceIsAndroid&&(e.removeEventListener("mouseover",this.onMouse,!0),e.removeEventListener("mousedown",this.onMouse,!0),e.removeEventListener("mouseup",this.onMouse,!0)),e.removeEventListener("click",this.onClick,!0),e.removeEventListener("touchstart",this.onTouchStart,!1),e.removeEventListener("touchmove",this.onTouchMove,!1),e.removeEventListener("touchend",this.onTouchEnd,!1),e.removeEventListener("touchcancel",this.onTouchCancel,!1)},FastClick.notNeeded=function(e){var t,n,i;if(void 0===window.ontouchstart)return!0;if(n=+(/Chrome\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]){if(!deviceIsAndroid)return!0;if(t=document.querySelector("meta[name=viewport]")){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(n>31&&document.documentElement.scrollWidth<=window.outerWidth)return!0}}if(deviceIsBlackBerry10&&(i=navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/))[1]>=10&&i[2]>=3&&(t=document.querySelector("meta[name=viewport]"))){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(document.documentElement.scrollWidth<=window.outerWidth)return!0}return"none"===e.style.msTouchAction||"manipulation"===e.style.touchAction||(!!(+(/Firefox\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]>=27&&(t=document.querySelector("meta[name=viewport]"))&&(-1!==t.content.indexOf("user-scalable=no")||document.documentElement.scrollWidth<=window.outerWidth))||("none"===e.style.touchAction||"manipulation"===e.style.touchAction))},FastClick.attach=function(e,t){return new FastClick(e,t)},"function"==typeof define&&"object"==typeof define.amd&&define.amd?define(function(){return FastClick}):"undefined"!=typeof module&&module.exports?(module.exports=FastClick.attach,module.exports.FastClick=FastClick):window.FastClick=FastClick;
+    }());
+</script>
 
 <!-- FastClick -->
 <script type="text/javascript">
@@ -32,9 +45,9 @@
 
 <!-- easing functions -->
 <script type="text/javascript">
-    jQuery(document).ready(function ($) {
+    function loadEasingFunctions($) {
         $.easing.jswing=$.easing.swing,$.extend($.easing,{def:"easeOutQuad",swing:function(n,t,e,u,a){return $.easing[$.easing.def](n,t,e,u,a)},easeInQuad:function(n,t,e,u,a){return u*(t/=a)*t+e},easeOutQuad:function(n,t,e,u,a){return-u*(t/=a)*(t-2)+e},easeInOutQuad:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t+e:-u/2*(--t*(t-2)-1)+e},easeInCubic:function(n,t,e,u,a){return u*(t/=a)*t*t+e},easeOutCubic:function(n,t,e,u,a){return u*((t=t/a-1)*t*t+1)+e},easeInOutCubic:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t+e:u/2*((t-=2)*t*t+2)+e},easeInQuart:function(n,t,e,u,a){return u*(t/=a)*t*t*t+e},easeOutQuart:function(n,t,e,u,a){return-u*((t=t/a-1)*t*t*t-1)+e},easeInOutQuart:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t*t+e:-u/2*((t-=2)*t*t*t-2)+e},easeInQuint:function(n,t,e,u,a){return u*(t/=a)*t*t*t*t+e},easeOutQuint:function(n,t,e,u,a){return u*((t=t/a-1)*t*t*t*t+1)+e},easeInOutQuint:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t*t*t+e:u/2*((t-=2)*t*t*t*t+2)+e},easeInSine:function(n,t,e,u,a){return-u*Math.cos(t/a*(Math.PI/2))+u+e},easeOutSine:function(n,t,e,u,a){return u*Math.sin(t/a*(Math.PI/2))+e},easeInOutSine:function(n,t,e,u,a){return-u/2*(Math.cos(Math.PI*t/a)-1)+e},easeInExpo:function(n,t,e,u,a){return 0==t?e:u*Math.pow(2,10*(t/a-1))+e},easeOutExpo:function(n,t,e,u,a){return t==a?e+u:u*(1-Math.pow(2,-10*t/a))+e},easeInOutExpo:function(n,t,e,u,a){return 0==t?e:t==a?e+u:(t/=a/2)<1?u/2*Math.pow(2,10*(t-1))+e:u/2*(2-Math.pow(2,-10*--t))+e},easeInCirc:function(n,t,e,u,a){return-u*(Math.sqrt(1-(t/=a)*t)-1)+e},easeOutCirc:function(n,t,e,u,a){return u*Math.sqrt(1-(t=t/a-1)*t)+e},easeInOutCirc:function(n,t,e,u,a){return(t/=a/2)<1?-u/2*(Math.sqrt(1-t*t)-1)+e:u/2*(Math.sqrt(1-(t-=2)*t)+1)+e},easeInElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(1==(t/=a))return e+u;if(i||(i=.3*a),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return-s*Math.pow(2,10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)+e},easeOutElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(1==(t/=a))return e+u;if(i||(i=.3*a),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return s*Math.pow(2,-10*t)*Math.sin((t*a-r)*(2*Math.PI)/i)+u+e},easeInOutElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(2==(t/=a/2))return e+u;if(i||(i=a*(.3*1.5)),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return t<1?s*Math.pow(2,10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)*-.5+e:s*Math.pow(2,-10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)*.5+u+e},easeInBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),u*(t/=a)*t*((r+1)*t-r)+e},easeOutBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),u*((t=t/a-1)*t*((r+1)*t+r)+1)+e},easeInOutBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),(t/=a/2)<1?u/2*(t*t*((1+(r*=1.525))*t-r))+e:u/2*((t-=2)*t*((1+(r*=1.525))*t+r)+2)+e},easeInBounce:function(n,t,e,u,a){return u-$.easing.easeOutBounce(n,a-t,0,u,a)+e},easeOutBounce:function(n,t,e,u,a){return(t/=a)<1/2.75?u*(7.5625*t*t)+e:t<2/2.75?u*(7.5625*(t-=1.5/2.75)*t+.75)+e:t<2.5/2.75?u*(7.5625*(t-=2.25/2.75)*t+.9375)+e:u*(7.5625*(t-=2.625/2.75)*t+.984375)+e},easeInOutBounce:function(n,t,e,u,a){return t<a/2?.5*$.easing.easeInBounce(n,2*t,0,u,a)+e:.5*$.easing.easeOutBounce(n,2*t-a,0,u,a)+.5*u+e}});
-    });
+    }
     /*
      *
      * TERMS OF USE - EASING EQUATIONS
@@ -71,9 +84,10 @@
 
 <!-- actual code -->
 <script type="text/javascript">
-    jQuery(document).ready(function ($) {
+    document.addEventListener("DOMContentLoaded", function() {
         $(function () {
             FastClick.attach(document.body);
+            loadEasingFunctions($);
         });
 
         /* utils */
@@ -99,18 +113,11 @@
                 $('.sd-gender-table-body').removeClass('sd-gender-active');
             }
             else {
-                scrollToElement(this, -10);
+                scrollToElement(this, -65);
             }
 
             var gender = getClickGender(this);
             $('.sd-' + gender).addClass('sd-gender-active');
-
-            $('.sd-direct-partners').animate({
-                opacity: 1
-            }, 1000, function () {
-                // Animation complete.
-            });
-
         });
 
         /* table clicking */
@@ -164,7 +171,6 @@
                     totalIndirect = totalIndirect + rowTotalIndirect;
                 }
             });
-
             // update overall total
             totalIndirect = parseInt(totalIndirect);
             $('#sd-total-indirect').text(totalIndirect).digits();
@@ -185,10 +191,9 @@
             })
         }
 
-
         $('.sd-down-arrow-icon').click(function () {
             var element = $('.sd-direct-partners')[0];
-            scrollToElement(element, 0);
+            scrollToElement(element, -65);
         });
 
         $('.sd-calculate').click(function () {
@@ -205,7 +210,6 @@
             });
             var totalIndirect = $('#sd-total-indirect').data('total-indirect');
             countAnimation($('#sd-total-indirect'), totalIndirect);
-
         });
 
         /*
@@ -249,14 +253,10 @@
     });
 </script>
 
-
 <style type="text/css">
     #sd {
-        font-size: 16px;
         text-align: center;
         line-height: 1;
-        color: #6b6b6a;
-        font-family: 'OpenSans', Arial, Tahoma, Verdana, sans-serif;
     }
 
     #sd * {
@@ -292,12 +292,12 @@
     }
 
     #sd .sd-man-icon {
-        color: #02a2a0;
+        color: #1b9fd0;
         float: right;
     }
 
     #sd .sd-woman-icon {
-        color: #c1017a;
+        color: #d40069;
         float: left;
     }
 
@@ -311,11 +311,11 @@
 
     /* symbols */
     #sd .sd-male-icon {
-        color: #02a2a0;
+        color: #1b9fd0;
     }
 
     #sd .sd-female-icon {
-        color: #c1017a;
+        color: #d40069;
     }
 
     #sd .sd-male-icon:before {
@@ -334,9 +334,9 @@
 
     /* main */
     #sd .sd-box {
-        background: #f1f0eb;
+        max-width: 650px;
+        margin: auto;
         padding: 0.4em;
-        margin: 5px 0;
         border-radius: 8px;
     }
 
@@ -375,11 +375,11 @@
     }
 
     #sd .sd-male .sd-gender-button {
-        border-color: #02a2a0;
+        border-color: #1b9fd0;
     }
 
     #sd .sd-female .sd-gender-button {
-        border-color: #c1017a;
+        border-color: #d40069;
     }
 
     #sd .sd-gender-title {
@@ -392,7 +392,7 @@
     }
 
     #sd .sd-male.sd-gender-active .sd-gender-button {
-        background: #02a2a0;
+        background: #1b9fd0;
         color: white;
     }
 
@@ -401,7 +401,7 @@
     }
 
     #sd .sd-female.sd-gender-active .sd-gender-button {
-        background: #c1017a;
+        background: #d40069;
         color: white;
     }
 
@@ -428,19 +428,19 @@
     }
 
     #sd .sd-male .sd-age-group-row {
-        background: #02a2a0;
+        background: #1b9fd0;
     }
 
     #sd .sd-female .sd-age-group-row {
-        background: #c1017a;
+        background: #d40069;
     }
 
     #sd .sd-male .sd-age-group-button {
-        color: #02a2a0;
+        color: #1b9fd0;
     }
 
     #sd .sd-female .sd-age-group-button {
-        color: #c1017a;
+        color: #d40069;
     }
 
     #sd .sd-age-group-title {
@@ -482,10 +482,6 @@
     }
 
     /* Direct partners */
-    #sd .sd-direct-partners {
-        opacity: 0.5;
-    }
-
     #sd .sd-direct-partners-gender {
         padding: 0 0.5em;
         margin-bottom: 1.5em;
@@ -515,9 +511,10 @@
     }
 
     #sd-total-indirect {
-        color: #669900;
+        color: #97be0d;
         font-size: 2.5em;
         font-weight: bold;
+        margin-bottom: 0.5em;
     }
 
     #sd .sd-results-text {
@@ -526,7 +523,7 @@
     }
 
     #sd .sd-bang-on {
-        font-size: 0.8em;
+        font-size: 0.6em;
     }
 
     /* I'll try spinning - that's a good trick! */
@@ -611,13 +608,15 @@
     }
 
     .sd-calculate.sd-disabled {
-        opacity: 50%;
+        opacity: 35%;
     }
 </style>
 
-<div id="sd" data-total-av="8.5" >
+<div id="sd" class="module module-dark" data-total-av="8.5" >
 
     <div class="sd-box sd-main">
+        <p>Find out how many sexual partners you’ve been exposed to indirectly.<br>
+            First, enter how many people you’ve slept with in each age group:</p>
         <h2>I've had sex with...</h2>
         <div class="sd-split-container">
             <div class="sd-gender-column sd-male" data-gender="male">
@@ -734,7 +733,7 @@
             </div>
         </div>
         <div>
-            <span class="sd-button sd-calculate sd-disabled">Calculate</span>
+            <span class="har-button har-button--primary sd-calculate sd-disabled">Calculate</span>
         </div>
     </div>
 
@@ -752,35 +751,12 @@
                 <span class="sd-bang-on">You can see why our doctors bang on about using condoms!</span>
             </h2>
 
-            <p>We've calculated how many people your partners are likely to have slept with before you. Then we calculated your partners' partners, and their partners' partners, and so on - for just six degrees. This number illustrates how exposed you can be to STIs, and how important safe sex is.</p>
-            <p>But even when using condoms, you're still at risk from STIs such as warts and herpes, and you may already be carrying a symptomless STI, so it's safest to get tested after each new partner.</p>
-            <p>Note: If you are not sexually active or have only one sexual partner who hasn’t had sex with anyone else, you will avoid sexually transmitted infections.</p>
-            <h3>Get tested from home...</h3>
-
-            <a class="sd-button sd-button--primary sd-button--order sd-button--cta-1"
-               href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-checkups?utm_source=Sex%20Degrees%20Page&amp;utm_medium=CTA%20Click&amp;utm_content=Order%20STI%20Test%20Kit&amp;utm_campaign=Sex%20Degrees"
-               target="_blank">Order STI Test Kit &gt;</a>
-
-            <p>If you can't get time off work or you hate the idea of going to a clinic, order a test kit today and get tested from home.</p>
-            <hr>
-            <p>If you have STI symptoms please visit
-                <a href="http://www.nhs.uk/service-search/sexual-health-information-and-support/locationsearch/734"
-                   target="_blank">
-                    your nearest GUM clinic
-                </a>
-                or your local doctor for further advice.
-            </p>
+            <a class="har-button har-button--primary"
+               href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-checkups?utm_source=Sex%20Degrees%20Page&amp;utm_medium=CTA%20Click&amp;utm_content=Order%20STI%20Test%20Kit&amp;utm_campaign=Sex%20Degrees">Order STI Test Kit</a>
         </div>
     </div>
 </div>
-
-
-
-<h1>About Sex Degrees of Separation &#8211; the STI risk calculator</h1>
-<p><a href="https://www.independent.co.uk/life-style/health-and-families/sexual-health-sti-diagnosis-treatment-hiv-terrence-higgins-trust-a9319436.html" target="_blank" rel="noopener noreferrer">Sexually Transmitted Infections (STIs) are on the rise</a>, and many of these infections are symptomless. Here at LloydsPharmacy&#8217;s Online Doctor, we have decided to raise awareness about this worrying truth by illustrating the exponential effect of sexual contact.</p>
-<p>Our Sex Degrees calculator is based on the theory of Six Degrees of Separation; which is the sociological idea that we are all connected to each other by only six connections. Using this principle we take the number of partners you&#8217;ve had and what age they were when you last slept together, we multiply this by the number of partners they are statistically likely to have had, and by the partners of those partners, and the partners of those partners, (and so on) for six stages, or &#8220;degrees&#8221;, to estimate how many indirect partners you could have been exposed to sexually.</p>
-<p><strong>This calculator is not a diagnostic tool</strong> but it highlights how exposed you can be to STIs, and how this risk increases with each new partner. It’s not just your direct partners that you have to worry about, but your partners’ partners, and their partners’ partners, and so on. Obviously if you are not sexually active or have only one sexual partner who hasn&#8217;t had sex with anyone else, you will avoid sexually transmitted infections.</p>
-<p>However, <strong>even if you use condoms you are still exposed to several types of STI;</strong> including genital warts and herpes which can also be transferred through skin-to-skin contact, oral sex, and even sex toys. So the key message is to practice safe sex, but also to <a href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-risk-assessment"><strong>get regularly tested for STIs</strong></a>. If you’re concerned about your sexual health, you can either talk to your local GP, GUM clinic, or you can order a discreet test via <a href="https://onlinedoctor.lloydspharmacy.com/uk/sexual-health" target="_blank" rel="noopener noreferrer">LloydsPharmacy’s Online Doctor service</a>.</p>
+<div class="module-border"></div>
 
 </body>
 </html>
