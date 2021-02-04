@@ -81,7 +81,7 @@
             var newOffset = element.offsetTop + margin;
             $('html, body').animate({scrollTop: newOffset}, {
                 duration: 800,
-                easing: "swing"
+                easing: 'swing'
             });
         }
 
@@ -105,7 +105,7 @@
             var gender = getClickGender(this);
             $('.sd-' + gender).addClass('sd-gender-active');
 
-            $(".sd-direct-partners").animate({
+            $('.sd-direct-partners').animate({
                 opacity: 1
             }, 1000, function () {
                 // Animation complete.
@@ -118,7 +118,7 @@
             updateAgeGroup(this);
             updateGenderTotal(getClickGender(this));
             updateTotalIndirectPartners();
-            $('.sd-down-arrow').fadeTo("slow", 1);
+            $('.sd-down-arrow').fadeTo('slow', 1);
         });
 
         function updateAgeGroup(element) {
@@ -127,8 +127,6 @@
 
             if ($(element).hasClass('sd-age-group-plus')) {
                 totalCount = totalCount +1;
-                // enable calculate button
-                $(".sd-calculate").removeClass("sd-disabled");
             }
             else if (totalCount > 0) {
                 totalCount = totalCount - 1;
@@ -145,7 +143,6 @@
                 newGenderTotal = newGenderTotal += parseInt($(this).text());
 
             });
-
             $('#sd-' + gender + '-total').text(newGenderTotal);
         }
 
@@ -166,13 +163,20 @@
                     // add row total to overall total
                     totalIndirect = totalIndirect + rowTotalIndirect;
                 }
-
             });
 
             // update overall total
             totalIndirect = parseInt(totalIndirect);
             $('#sd-total-indirect').text(totalIndirect).digits();
             $('#sd-total-indirect').data('total-indirect', totalIndirect);
+
+            // active / deactivate button
+            if (totalIndirect > 0) {
+                $('.sd-calculate').removeClass('sd-disabled');
+            }
+            else {
+                $('.sd-calculate').addClass('sd-disabled');
+            }
         }
 
         $.fn.digits = function () {
@@ -188,6 +192,8 @@
         });
 
         $('.sd-calculate').click(function () {
+            if (this.classList.contains('sd-disabled')) return;
+
             $(this).hide();
 
             $('.sd-results').fadeIn('medium');
@@ -195,7 +201,7 @@
             var newOffset = $('.sd-results')[0].offsetTop - 80;
             $('html, body').animate({scrollTop: newOffset}, {
                 duration: 800,
-                easing: "swing"
+                easing: 'swing'
             });
             var totalIndirect = $('#sd-total-indirect').data('total-indirect');
             countAnimation($('#sd-total-indirect'), totalIndirect);
@@ -207,15 +213,12 @@
          */
         function countAnimation(element, total) {
 
-            $({percentage: 0}).animate({percentage: total}, {
+            $({value: 0}).animate({value: 1}, {
                 duration: 5000,
-                easing: "easeInOutQuint",
+                easing: 'easeInOutExpo',
                 step: function () {
-                    // percentage with 1 decimal;
-                    var percentageVal = Math.round(this.percentage) / 1;
-                    percentageVal = percentageVal;
-
-                    element.text(percentageVal).digits();
+                    var scaled = Math.round(this.value * total) / 1;
+                    element.text(scaled).digits();
                 }
             }).promise().done(function () {
                 // hard set the value after animation is done to be
@@ -230,13 +233,17 @@
         }
 
         function flashResults() {
-            $({value: 1}).animate({value: 0}, {
-                duration: 500,
-                easing: "easeInOutQuint",
+            $({value: 0}).animate({value: 1}, {
+                duration: 2000,
                 step: function () {
-                    // percentage with 1 decimal;
-                    $('#sd-total-indirect').style.color = "rbg(" + value + "," +value + "," +value + ")";
+                    $('#sd-total-indirect').css('letter-spacing', (1 - this.value) * 10 + "px");
+                    $('#sd-total-indirect').css('opacity', this.value);
+                    $('.sd-results-text').css('opacity', this.value);
                 }
+            }).promise().done(function () {
+                $('#sd-total-indirect').css('letter-spacing', 0);
+                $('#sd-total-indirect').css('opacity', 1);
+                $('.sd-results-text').css('opacity', 1);
             });
         }
     });
@@ -309,7 +316,6 @@
 
     #sd .sd-female-icon {
         color: #c1017a;
-        float: left;
     }
 
     #sd .sd-male-icon:before {
@@ -516,6 +522,7 @@
 
     #sd .sd-results-text {
         display: none;
+        line-height: 1.5;
     }
 
     #sd .sd-bang-on {
