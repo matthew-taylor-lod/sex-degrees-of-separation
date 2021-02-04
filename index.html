@@ -2,6 +2,9 @@
 <html lang="en"><head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Sex Degrees of Separation</title>
+    <style>
+        html {height: 2000px;}
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head><body>
 
@@ -681,11 +684,12 @@
 
             $(this).hide();
 
-            $('.sd-results').fadeIn('medium');
+            $('#sd-total-indirect').text(0);
+            $('.sd-results').fadeIn('fast');
 
             var newOffset = $('.sd-results')[0].offsetTop - 80;
             $('html, body').animate({scrollTop: newOffset}, {
-                duration: 800,
+                duration: 750,
                 easing: 'swing'
             });
             var totalIndirect = $('#sd-total-indirect').data('total-indirect');
@@ -699,9 +703,9 @@
 
             $({value: 0}).animate({value: 1}, {
                 duration: 5000,
-                easing: 'easeInOutExpo',
+                easing: 'easeInQuad',
                 step: function () {
-                    var scaled = Math.round(this.value * total) / 1;
+                    var scaled = Math.round((this.value * this.value) * total);
                     element.text(scaled).digits();
                 }
             }).promise().done(function () {
