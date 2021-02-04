@@ -1,257 +1,155 @@
 <!doctype html>
-
-<html lang="en">
-<head>
-    <meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Sex Degrees of Separation</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style type="text/css">
-        html {
-            max-width: 640px;
-            margin: auto;
-        }
-    </style>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&display=swap">
-</head>
-<body>
-<!-- FastClick -->
-<script type="text/javascript">
-    ;(function () {
-        /**
-         * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
-         *
-         * @codingstandard ftlabs-jsv2
-         * @copyright The Financial Times Limited [All Rights Reserved]
-         * @license MIT License (see LICENSE.txt)
-         */
-        function FastClick(e,t){var n;if(t=t||{},this.trackingClick=!1,this.trackingClickStart=0,this.targetElement=null,this.touchStartX=0,this.touchStartY=0,this.lastTouchIdentifier=0,this.touchBoundary=t.touchBoundary||10,this.layer=e,this.tapDelay=t.tapDelay||200,this.tapTimeout=t.tapTimeout||700,!FastClick.notNeeded(e)){for(var i=["onMouse","onClick","onTouchStart","onTouchMove","onTouchEnd","onTouchCancel"],o=0,r=i.length;o<r;o++)this[i[o]]=c(this[i[o]],this);deviceIsAndroid&&(e.addEventListener("mouseover",this.onMouse,!0),e.addEventListener("mousedown",this.onMouse,!0),e.addEventListener("mouseup",this.onMouse,!0)),e.addEventListener("click",this.onClick,!0),e.addEventListener("touchstart",this.onTouchStart,!1),e.addEventListener("touchmove",this.onTouchMove,!1),e.addEventListener("touchend",this.onTouchEnd,!1),e.addEventListener("touchcancel",this.onTouchCancel,!1),Event.prototype.stopImmediatePropagation||(e.removeEventListener=function(t,n,i){var o=Node.prototype.removeEventListener;"click"===t?o.call(e,t,n.hijacked||n,i):o.call(e,t,n,i)},e.addEventListener=function(t,n,i){var o=Node.prototype.addEventListener;"click"===t?o.call(e,t,n.hijacked||(n.hijacked=function(e){e.propagationStopped||n(e)}),i):o.call(e,t,n,i)}),"function"==typeof e.onclick&&(n=e.onclick,e.addEventListener("click",function(e){n(e)},!1),e.onclick=null)}function c(e,t){return function(){return e.apply(t,arguments)}}}var deviceIsWindowsPhone=navigator.userAgent.indexOf("Windows Phone")>=0,deviceIsAndroid=navigator.userAgent.indexOf("Android")>0&&!deviceIsWindowsPhone,deviceIsIOS=/iP(ad|hone|od)/.test(navigator.userAgent)&&!deviceIsWindowsPhone,deviceIsIOS4=deviceIsIOS&&/OS 4_\d(_\d)?/.test(navigator.userAgent),deviceIsIOSWithBadTarget=deviceIsIOS&&/OS [6-7]_\d/.test(navigator.userAgent),deviceIsBlackBerry10=navigator.userAgent.indexOf("BB10")>0;FastClick.prototype.needsClick=function(e){switch(e.nodeName.toLowerCase()){case"button":case"select":case"textarea":if(e.disabled)return!0;break;case"input":if(deviceIsIOS&&"file"===e.type||e.disabled)return!0;break;case"label":case"iframe":case"video":return!0}return/\bneedsclick\b/.test(e.className)},FastClick.prototype.needsFocus=function(e){switch(e.nodeName.toLowerCase()){case"textarea":return!0;case"select":return!deviceIsAndroid;case"input":switch(e.type){case"button":case"checkbox":case"file":case"image":case"radio":case"submit":return!1}return!e.disabled&&!e.readOnly;default:return/\bneedsfocus\b/.test(e.className)}},FastClick.prototype.sendClick=function(e,t){var n,i;document.activeElement&&document.activeElement!==e&&document.activeElement.blur(),i=t.changedTouches[0],(n=document.createEvent("MouseEvents")).initMouseEvent(this.determineEventType(e),!0,!0,window,1,i.screenX,i.screenY,i.clientX,i.clientY,!1,!1,!1,!1,0,null),n.forwardedTouchEvent=!0,e.dispatchEvent(n)},FastClick.prototype.determineEventType=function(e){return deviceIsAndroid&&"select"===e.tagName.toLowerCase()?"mousedown":"click"},FastClick.prototype.focus=function(e){var t;deviceIsIOS&&e.setSelectionRange&&0!==e.type.indexOf("date")&&"time"!==e.type&&"month"!==e.type?(t=e.value.length,e.setSelectionRange(t,t)):e.focus()},FastClick.prototype.updateScrollParent=function(e){var t,n;if(!(t=e.fastClickScrollParent)||!t.contains(e)){n=e;do{if(n.scrollHeight>n.offsetHeight){t=n,e.fastClickScrollParent=n;break}n=n.parentElement}while(n)}t&&(t.fastClickLastScrollTop=t.scrollTop)},FastClick.prototype.getTargetElementFromEventTarget=function(e){return e.nodeType===Node.TEXT_NODE?e.parentNode:e},FastClick.prototype.onTouchStart=function(e){var t,n,i;if(e.targetTouches.length>1)return!0;if(t=this.getTargetElementFromEventTarget(e.target),n=e.targetTouches[0],deviceIsIOS){if((i=window.getSelection()).rangeCount&&!i.isCollapsed)return!0;if(!deviceIsIOS4){if(n.identifier&&n.identifier===this.lastTouchIdentifier)return e.preventDefault(),!1;this.lastTouchIdentifier=n.identifier,this.updateScrollParent(t)}}return this.trackingClick=!0,this.trackingClickStart=e.timeStamp,this.targetElement=t,this.touchStartX=n.pageX,this.touchStartY=n.pageY,e.timeStamp-this.lastClickTime<this.tapDelay&&e.preventDefault(),!0},FastClick.prototype.touchHasMoved=function(e){var t=e.changedTouches[0],n=this.touchBoundary;return Math.abs(t.pageX-this.touchStartX)>n||Math.abs(t.pageY-this.touchStartY)>n},FastClick.prototype.onTouchMove=function(e){return!this.trackingClick||((this.targetElement!==this.getTargetElementFromEventTarget(e.target)||this.touchHasMoved(e))&&(this.trackingClick=!1,this.targetElement=null),!0)},FastClick.prototype.findControl=function(e){return void 0!==e.control?e.control:e.htmlFor?document.getElementById(e.htmlFor):e.querySelector("button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea")},FastClick.prototype.onTouchEnd=function(e){var t,n,i,o,r,c=this.targetElement;if(!this.trackingClick)return!0;if(e.timeStamp-this.lastClickTime<this.tapDelay)return this.cancelNextClick=!0,!0;if(e.timeStamp-this.trackingClickStart>this.tapTimeout)return!0;if(this.cancelNextClick=!1,this.lastClickTime=e.timeStamp,n=this.trackingClickStart,this.trackingClick=!1,this.trackingClickStart=0,deviceIsIOSWithBadTarget&&(r=e.changedTouches[0],(c=document.elementFromPoint(r.pageX-window.pageXOffset,r.pageY-window.pageYOffset)||c).fastClickScrollParent=this.targetElement.fastClickScrollParent),"label"===(i=c.tagName.toLowerCase())){if(t=this.findControl(c)){if(this.focus(c),deviceIsAndroid)return!1;c=t}}else if(this.needsFocus(c))return e.timeStamp-n>100||deviceIsIOS&&window.top!==window&&"input"===i?(this.targetElement=null,!1):(this.focus(c),this.sendClick(c,e),deviceIsIOS&&"select"===i||(this.targetElement=null,e.preventDefault()),!1);return!(!deviceIsIOS||deviceIsIOS4||!(o=c.fastClickScrollParent)||o.fastClickLastScrollTop===o.scrollTop)||(this.needsClick(c)||(e.preventDefault(),this.sendClick(c,e)),!1)},FastClick.prototype.onTouchCancel=function(){this.trackingClick=!1,this.targetElement=null},FastClick.prototype.onMouse=function(e){return!this.targetElement||(!!e.forwardedTouchEvent||(!e.cancelable||(!(!this.needsClick(this.targetElement)||this.cancelNextClick)||(e.stopImmediatePropagation?e.stopImmediatePropagation():e.propagationStopped=!0,e.stopPropagation(),e.preventDefault(),!1))))},FastClick.prototype.onClick=function(e){var t;return this.trackingClick?(this.targetElement=null,this.trackingClick=!1,!0):"submit"===e.target.type&&0===e.detail||((t=this.onMouse(e))||(this.targetElement=null),t)},FastClick.prototype.destroy=function(){var e=this.layer;deviceIsAndroid&&(e.removeEventListener("mouseover",this.onMouse,!0),e.removeEventListener("mousedown",this.onMouse,!0),e.removeEventListener("mouseup",this.onMouse,!0)),e.removeEventListener("click",this.onClick,!0),e.removeEventListener("touchstart",this.onTouchStart,!1),e.removeEventListener("touchmove",this.onTouchMove,!1),e.removeEventListener("touchend",this.onTouchEnd,!1),e.removeEventListener("touchcancel",this.onTouchCancel,!1)},FastClick.notNeeded=function(e){var t,n,i;if(void 0===window.ontouchstart)return!0;if(n=+(/Chrome\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]){if(!deviceIsAndroid)return!0;if(t=document.querySelector("meta[name=viewport]")){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(n>31&&document.documentElement.scrollWidth<=window.outerWidth)return!0}}if(deviceIsBlackBerry10&&(i=navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/))[1]>=10&&i[2]>=3&&(t=document.querySelector("meta[name=viewport]"))){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(document.documentElement.scrollWidth<=window.outerWidth)return!0}return"none"===e.style.msTouchAction||"manipulation"===e.style.touchAction||(!!(+(/Firefox\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]>=27&&(t=document.querySelector("meta[name=viewport]"))&&(-1!==t.content.indexOf("user-scalable=no")||document.documentElement.scrollWidth<=window.outerWidth))||("none"===e.style.touchAction||"manipulation"===e.style.touchAction))},FastClick.attach=function(e,t){return new FastClick(e,t)},"function"==typeof define&&"object"==typeof define.amd&&define.amd?define(function(){return FastClick}):"undefined"!=typeof module&&module.exports?(module.exports=FastClick.attach,module.exports.FastClick=FastClick):window.FastClick=FastClick;
-    }());
-</script>
+</head><body>
 
-<!-- FastClick -->
-<script type="text/javascript">
-    ;(function () {
-        /**
-         * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
-         *
-         * @codingstandard ftlabs-jsv2
-         * @copyright The Financial Times Limited [All Rights Reserved]
-         * @license MIT License (see LICENSE.txt)
-         */
-        function FastClick(e,t){var n;if(t=t||{},this.trackingClick=!1,this.trackingClickStart=0,this.targetElement=null,this.touchStartX=0,this.touchStartY=0,this.lastTouchIdentifier=0,this.touchBoundary=t.touchBoundary||10,this.layer=e,this.tapDelay=t.tapDelay||200,this.tapTimeout=t.tapTimeout||700,!FastClick.notNeeded(e)){for(var i=["onMouse","onClick","onTouchStart","onTouchMove","onTouchEnd","onTouchCancel"],o=0,r=i.length;o<r;o++)this[i[o]]=c(this[i[o]],this);deviceIsAndroid&&(e.addEventListener("mouseover",this.onMouse,!0),e.addEventListener("mousedown",this.onMouse,!0),e.addEventListener("mouseup",this.onMouse,!0)),e.addEventListener("click",this.onClick,!0),e.addEventListener("touchstart",this.onTouchStart,!1),e.addEventListener("touchmove",this.onTouchMove,!1),e.addEventListener("touchend",this.onTouchEnd,!1),e.addEventListener("touchcancel",this.onTouchCancel,!1),Event.prototype.stopImmediatePropagation||(e.removeEventListener=function(t,n,i){var o=Node.prototype.removeEventListener;"click"===t?o.call(e,t,n.hijacked||n,i):o.call(e,t,n,i)},e.addEventListener=function(t,n,i){var o=Node.prototype.addEventListener;"click"===t?o.call(e,t,n.hijacked||(n.hijacked=function(e){e.propagationStopped||n(e)}),i):o.call(e,t,n,i)}),"function"==typeof e.onclick&&(n=e.onclick,e.addEventListener("click",function(e){n(e)},!1),e.onclick=null)}function c(e,t){return function(){return e.apply(t,arguments)}}}var deviceIsWindowsPhone=navigator.userAgent.indexOf("Windows Phone")>=0,deviceIsAndroid=navigator.userAgent.indexOf("Android")>0&&!deviceIsWindowsPhone,deviceIsIOS=/iP(ad|hone|od)/.test(navigator.userAgent)&&!deviceIsWindowsPhone,deviceIsIOS4=deviceIsIOS&&/OS 4_\d(_\d)?/.test(navigator.userAgent),deviceIsIOSWithBadTarget=deviceIsIOS&&/OS [6-7]_\d/.test(navigator.userAgent),deviceIsBlackBerry10=navigator.userAgent.indexOf("BB10")>0;FastClick.prototype.needsClick=function(e){switch(e.nodeName.toLowerCase()){case"button":case"select":case"textarea":if(e.disabled)return!0;break;case"input":if(deviceIsIOS&&"file"===e.type||e.disabled)return!0;break;case"label":case"iframe":case"video":return!0}return/\bneedsclick\b/.test(e.className)},FastClick.prototype.needsFocus=function(e){switch(e.nodeName.toLowerCase()){case"textarea":return!0;case"select":return!deviceIsAndroid;case"input":switch(e.type){case"button":case"checkbox":case"file":case"image":case"radio":case"submit":return!1}return!e.disabled&&!e.readOnly;default:return/\bneedsfocus\b/.test(e.className)}},FastClick.prototype.sendClick=function(e,t){var n,i;document.activeElement&&document.activeElement!==e&&document.activeElement.blur(),i=t.changedTouches[0],(n=document.createEvent("MouseEvents")).initMouseEvent(this.determineEventType(e),!0,!0,window,1,i.screenX,i.screenY,i.clientX,i.clientY,!1,!1,!1,!1,0,null),n.forwardedTouchEvent=!0,e.dispatchEvent(n)},FastClick.prototype.determineEventType=function(e){return deviceIsAndroid&&"select"===e.tagName.toLowerCase()?"mousedown":"click"},FastClick.prototype.focus=function(e){var t;deviceIsIOS&&e.setSelectionRange&&0!==e.type.indexOf("date")&&"time"!==e.type&&"month"!==e.type?(t=e.value.length,e.setSelectionRange(t,t)):e.focus()},FastClick.prototype.updateScrollParent=function(e){var t,n;if(!(t=e.fastClickScrollParent)||!t.contains(e)){n=e;do{if(n.scrollHeight>n.offsetHeight){t=n,e.fastClickScrollParent=n;break}n=n.parentElement}while(n)}t&&(t.fastClickLastScrollTop=t.scrollTop)},FastClick.prototype.getTargetElementFromEventTarget=function(e){return e.nodeType===Node.TEXT_NODE?e.parentNode:e},FastClick.prototype.onTouchStart=function(e){var t,n,i;if(e.targetTouches.length>1)return!0;if(t=this.getTargetElementFromEventTarget(e.target),n=e.targetTouches[0],deviceIsIOS){if((i=window.getSelection()).rangeCount&&!i.isCollapsed)return!0;if(!deviceIsIOS4){if(n.identifier&&n.identifier===this.lastTouchIdentifier)return e.preventDefault(),!1;this.lastTouchIdentifier=n.identifier,this.updateScrollParent(t)}}return this.trackingClick=!0,this.trackingClickStart=e.timeStamp,this.targetElement=t,this.touchStartX=n.pageX,this.touchStartY=n.pageY,e.timeStamp-this.lastClickTime<this.tapDelay&&e.preventDefault(),!0},FastClick.prototype.touchHasMoved=function(e){var t=e.changedTouches[0],n=this.touchBoundary;return Math.abs(t.pageX-this.touchStartX)>n||Math.abs(t.pageY-this.touchStartY)>n},FastClick.prototype.onTouchMove=function(e){return!this.trackingClick||((this.targetElement!==this.getTargetElementFromEventTarget(e.target)||this.touchHasMoved(e))&&(this.trackingClick=!1,this.targetElement=null),!0)},FastClick.prototype.findControl=function(e){return void 0!==e.control?e.control:e.htmlFor?document.getElementById(e.htmlFor):e.querySelector("button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea")},FastClick.prototype.onTouchEnd=function(e){var t,n,i,o,r,c=this.targetElement;if(!this.trackingClick)return!0;if(e.timeStamp-this.lastClickTime<this.tapDelay)return this.cancelNextClick=!0,!0;if(e.timeStamp-this.trackingClickStart>this.tapTimeout)return!0;if(this.cancelNextClick=!1,this.lastClickTime=e.timeStamp,n=this.trackingClickStart,this.trackingClick=!1,this.trackingClickStart=0,deviceIsIOSWithBadTarget&&(r=e.changedTouches[0],(c=document.elementFromPoint(r.pageX-window.pageXOffset,r.pageY-window.pageYOffset)||c).fastClickScrollParent=this.targetElement.fastClickScrollParent),"label"===(i=c.tagName.toLowerCase())){if(t=this.findControl(c)){if(this.focus(c),deviceIsAndroid)return!1;c=t}}else if(this.needsFocus(c))return e.timeStamp-n>100||deviceIsIOS&&window.top!==window&&"input"===i?(this.targetElement=null,!1):(this.focus(c),this.sendClick(c,e),deviceIsIOS&&"select"===i||(this.targetElement=null,e.preventDefault()),!1);return!(!deviceIsIOS||deviceIsIOS4||!(o=c.fastClickScrollParent)||o.fastClickLastScrollTop===o.scrollTop)||(this.needsClick(c)||(e.preventDefault(),this.sendClick(c,e)),!1)},FastClick.prototype.onTouchCancel=function(){this.trackingClick=!1,this.targetElement=null},FastClick.prototype.onMouse=function(e){return!this.targetElement||(!!e.forwardedTouchEvent||(!e.cancelable||(!(!this.needsClick(this.targetElement)||this.cancelNextClick)||(e.stopImmediatePropagation?e.stopImmediatePropagation():e.propagationStopped=!0,e.stopPropagation(),e.preventDefault(),!1))))},FastClick.prototype.onClick=function(e){var t;return this.trackingClick?(this.targetElement=null,this.trackingClick=!1,!0):"submit"===e.target.type&&0===e.detail||((t=this.onMouse(e))||(this.targetElement=null),t)},FastClick.prototype.destroy=function(){var e=this.layer;deviceIsAndroid&&(e.removeEventListener("mouseover",this.onMouse,!0),e.removeEventListener("mousedown",this.onMouse,!0),e.removeEventListener("mouseup",this.onMouse,!0)),e.removeEventListener("click",this.onClick,!0),e.removeEventListener("touchstart",this.onTouchStart,!1),e.removeEventListener("touchmove",this.onTouchMove,!1),e.removeEventListener("touchend",this.onTouchEnd,!1),e.removeEventListener("touchcancel",this.onTouchCancel,!1)},FastClick.notNeeded=function(e){var t,n,i;if(void 0===window.ontouchstart)return!0;if(n=+(/Chrome\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]){if(!deviceIsAndroid)return!0;if(t=document.querySelector("meta[name=viewport]")){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(n>31&&document.documentElement.scrollWidth<=window.outerWidth)return!0}}if(deviceIsBlackBerry10&&(i=navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/))[1]>=10&&i[2]>=3&&(t=document.querySelector("meta[name=viewport]"))){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(document.documentElement.scrollWidth<=window.outerWidth)return!0}return"none"===e.style.msTouchAction||"manipulation"===e.style.touchAction||(!!(+(/Firefox\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]>=27&&(t=document.querySelector("meta[name=viewport]"))&&(-1!==t.content.indexOf("user-scalable=no")||document.documentElement.scrollWidth<=window.outerWidth))||("none"===e.style.touchAction||"manipulation"===e.style.touchAction))},FastClick.attach=function(e,t){return new FastClick(e,t)},"function"==typeof define&&"object"==typeof define.amd&&define.amd?define(function(){return FastClick}):"undefined"!=typeof module&&module.exports?(module.exports=FastClick.attach,module.exports.FastClick=FastClick):window.FastClick=FastClick;
-    }());
-</script>
+<div id="sd" class="module module-dark" data-total-av="8.5" >
 
-<!-- easing functions -->
-<script type="text/javascript">
-    function loadEasingFunctions($) {
-        $.easing.jswing=$.easing.swing,$.extend($.easing,{def:"easeOutQuad",swing:function(n,t,e,u,a){return $.easing[$.easing.def](n,t,e,u,a)},easeInQuad:function(n,t,e,u,a){return u*(t/=a)*t+e},easeOutQuad:function(n,t,e,u,a){return-u*(t/=a)*(t-2)+e},easeInOutQuad:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t+e:-u/2*(--t*(t-2)-1)+e},easeInCubic:function(n,t,e,u,a){return u*(t/=a)*t*t+e},easeOutCubic:function(n,t,e,u,a){return u*((t=t/a-1)*t*t+1)+e},easeInOutCubic:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t+e:u/2*((t-=2)*t*t+2)+e},easeInQuart:function(n,t,e,u,a){return u*(t/=a)*t*t*t+e},easeOutQuart:function(n,t,e,u,a){return-u*((t=t/a-1)*t*t*t-1)+e},easeInOutQuart:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t*t+e:-u/2*((t-=2)*t*t*t-2)+e},easeInQuint:function(n,t,e,u,a){return u*(t/=a)*t*t*t*t+e},easeOutQuint:function(n,t,e,u,a){return u*((t=t/a-1)*t*t*t*t+1)+e},easeInOutQuint:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t*t*t+e:u/2*((t-=2)*t*t*t*t+2)+e},easeInSine:function(n,t,e,u,a){return-u*Math.cos(t/a*(Math.PI/2))+u+e},easeOutSine:function(n,t,e,u,a){return u*Math.sin(t/a*(Math.PI/2))+e},easeInOutSine:function(n,t,e,u,a){return-u/2*(Math.cos(Math.PI*t/a)-1)+e},easeInExpo:function(n,t,e,u,a){return 0==t?e:u*Math.pow(2,10*(t/a-1))+e},easeOutExpo:function(n,t,e,u,a){return t==a?e+u:u*(1-Math.pow(2,-10*t/a))+e},easeInOutExpo:function(n,t,e,u,a){return 0==t?e:t==a?e+u:(t/=a/2)<1?u/2*Math.pow(2,10*(t-1))+e:u/2*(2-Math.pow(2,-10*--t))+e},easeInCirc:function(n,t,e,u,a){return-u*(Math.sqrt(1-(t/=a)*t)-1)+e},easeOutCirc:function(n,t,e,u,a){return u*Math.sqrt(1-(t=t/a-1)*t)+e},easeInOutCirc:function(n,t,e,u,a){return(t/=a/2)<1?-u/2*(Math.sqrt(1-t*t)-1)+e:u/2*(Math.sqrt(1-(t-=2)*t)+1)+e},easeInElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(1==(t/=a))return e+u;if(i||(i=.3*a),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return-s*Math.pow(2,10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)+e},easeOutElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(1==(t/=a))return e+u;if(i||(i=.3*a),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return s*Math.pow(2,-10*t)*Math.sin((t*a-r)*(2*Math.PI)/i)+u+e},easeInOutElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(2==(t/=a/2))return e+u;if(i||(i=a*(.3*1.5)),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return t<1?s*Math.pow(2,10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)*-.5+e:s*Math.pow(2,-10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)*.5+u+e},easeInBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),u*(t/=a)*t*((r+1)*t-r)+e},easeOutBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),u*((t=t/a-1)*t*((r+1)*t+r)+1)+e},easeInOutBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),(t/=a/2)<1?u/2*(t*t*((1+(r*=1.525))*t-r))+e:u/2*((t-=2)*t*((1+(r*=1.525))*t+r)+2)+e},easeInBounce:function(n,t,e,u,a){return u-$.easing.easeOutBounce(n,a-t,0,u,a)+e},easeOutBounce:function(n,t,e,u,a){return(t/=a)<1/2.75?u*(7.5625*t*t)+e:t<2/2.75?u*(7.5625*(t-=1.5/2.75)*t+.75)+e:t<2.5/2.75?u*(7.5625*(t-=2.25/2.75)*t+.9375)+e:u*(7.5625*(t-=2.625/2.75)*t+.984375)+e},easeInOutBounce:function(n,t,e,u,a){return t<a/2?.5*$.easing.easeInBounce(n,2*t,0,u,a)+e:.5*$.easing.easeOutBounce(n,2*t-a,0,u,a)+.5*u+e}});
-    }
-    /*
-     *
-     * TERMS OF USE - EASING EQUATIONS
-     *
-     * Open source under the BSD License.
-     *
-     * Copyright 2001 Robert Penner
-     * All rights reserved.
-     *
-     * Redistribution and use in source and binary forms, with or without modification,
-     * are permitted provided that the following conditions are met:
-     *
-     * Redistributions of source code must retain the above copyright notice, this list of
-     * conditions and the following disclaimer.
-     * Redistributions in binary form must reproduce the above copyright notice, this list
-     * of conditions and the following disclaimer in the documentation and/or other materials
-     * provided with the distribution.
-     *
-     * Neither the name of the author nor the names of contributors may be used to endorse
-     * or promote products derived from this software without specific prior written permission.
-     *
-     * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
-     * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-     * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-     * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-     * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
-     * GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
-     * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-     * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
-     * OF THE POSSIBILITY OF SUCH DAMAGE.
-     *
-     */
-</script>
+    <div class="sd-box sd-main">
+        <p>Find out how many sexual partners you’ve been exposed to indirectly.<br>
+            First, enter how many people you’ve slept with in each age group:</p>
+        <h2>I've had sex with...</h2>
+        <div class="sd-split-container">
+            <div class="sd-gender-column sd-male" data-gender="male">
+                <div class="sd-gender-button">
+                    <span class="sd-gender-title">Men</span>
+                    <span class="sd-gender-icon sd-man-icon"></span>
+                </div>
+            </div>
+            <div class="sd-gender-column sd-female" data-gender="female">
+                <div class="sd-gender-button">
+                    <span class="sd-gender-title">Women</span>
+                    <span class="sd-gender-icon sd-woman-icon"></span>
+                </div>
+            </div>
+        </div>
 
-<!-- actual code -->
-<script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-        $(function () {
-            FastClick.attach(document.body);
-            loadEasingFunctions($);
-        });
+        <div class="sd-gender-table-body sd-male" data-gender="male">
+            <p class="sd-how-many">How many people have you slept with in each age group?</p>
+            <div class="sd-gender-table-rows sd-no-select">
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="4.1">16 - 19</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="7.1">20 - 24</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="11.8">25 - 34</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="13.7">35 - 44</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="12.9">45 - 64</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="8.9">65+</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+            </div>
+            <span class="sd-down-arrow-icon"></span>
+        </div>
 
-        /* utils */
-        function scrollToElement(element, margin) {
-            var newOffset = element.offsetTop + margin;
-            $('html, body').animate({scrollTop: newOffset}, {
-                duration: 800,
-                easing: 'swing'
-            });
-        }
+        <div class="sd-gender-table-body sd-female" data-gender="female">
+            <p class="sd-how-many">How many people have you slept with in each age group?</p>
+            <div class="sd-gender-table-rows sd-no-select">
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="4.8">16 - 19</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="6.4">20 - 24</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="9.6">25 - 34</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="10.3">35 - 44</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="7.5">45 - 64</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+                <div class="sd-age-group-row">
+                    <span class="sd-age-group-title" data-av="4.4">65+</span>
+                    <span class="sd-age-group-total">0</span>
+                    <span class="sd-age-group-button sd-age-group-plus">+</span>
+                    <span class="sd-age-group-button sd-age-group-minus">−</span>
+                </div>
+            </div>
+            <span class="sd-down-arrow-icon"></span>
+        </div>
+    </div>
 
-        function getClickGender(clicked) {
-            var genderTable = $(clicked).parents('[data-gender]');
-            var gender = genderTable.data('gender');
-            return gender;
-        }
+    <div class="sd-box sd-direct-partners">
+        <h2>Direct sexual partners</h2>
+        <div class="sd-split-container">
+            <div class="sd-direct-partners-gender sd-direct-partners-male">
+                <span class="sd-gender-icon sd-man-icon"></span>
+                <span id="sd-male-total" class="sd-gender-total">0</span>
+            </div>
+            <div class="sd-direct-partners-gender sd-direct-partners-female">
+                <span class="sd-gender-icon sd-woman-icon"></span>
+                <span id="sd-female-total" class="sd-gender-total">0</span>
+            </div>
+        </div>
+        <div>
+            <span class="har-button har-button--primary sd-calculate sd-disabled">Calculate</span>
+        </div>
+    </div>
 
-        /* event handlers */
-        $('.sd-gender-button').click(function () {
-            if ($('.sd-gender-column').hasClass('sd-gender-active')) {
-                // deactivate everything
-                $('.sd-gender-column').removeClass('sd-gender-active');
-                $('.sd-gender-table-body').removeClass('sd-gender-active');
-            }
-            else {
-                scrollToElement(this, -65);
-            }
+    <div class="sd-box sd-results">
+        <h2>Indirect sexual partners:</h2>
+        <div id="sd-total-indirect" data-total-indirect="0"></div>
+        <div class="sd-spinners">
+            <span class="sd-spin sd-gender-icon sd-male-icon"></span>
+            <span class="sd-spin sd-gender-icon sd-spin-rev sd-female-icon"></span>
+        </div>
 
-            var gender = getClickGender(this);
-            $('.sd-' + gender).addClass('sd-gender-active');
-        });
+        <div class="sd-results-text">
+            <h2>
+                Shocked?<br>
+                <span class="sd-bang-on">You can see why our doctors bang on about using condoms!</span>
+            </h2>
 
-        /* table clicking */
-        $('.sd-age-group-button').click(function () {
-            updateAgeGroup(this);
-            updateGenderTotal(getClickGender(this));
-            updateTotalIndirectPartners();
-            $('.sd-down-arrow').fadeTo('slow', 1);
-        });
-
-        function updateAgeGroup(element) {
-            var totalElement = $(element).siblings('.sd-age-group-total');
-            var totalCount = parseInt(totalElement.text());
-
-            if ($(element).hasClass('sd-age-group-plus')) {
-                totalCount = totalCount +1;
-            }
-            else if (totalCount > 0) {
-                totalCount = totalCount - 1;
-            }
-            totalElement.text(totalCount);
-        }
-
-        function updateGenderTotal(gender) {
-            // find a parent element within the gender to keep it gender specific
-            var genderTable = $('.sd-gender-table-body[data-gender="' + gender + '"]');
-            var newGenderTotal = 0;
-
-            $(genderTable).find('.sd-age-group-total').each(function () {
-                newGenderTotal = newGenderTotal += parseInt($(this).text());
-
-            });
-            $('#sd-' + gender + '-total').text(newGenderTotal);
-        }
-
-        function updateTotalIndirectPartners() {
-            var totalIndirect = 0;
-            var totalAverage = $('#sd').data('total-av');
-
-            // for each row
-            $('.sd-age-group-row').each(function () {
-                // get row total partners
-                var rowTotalPartners = parseInt($(this).find('.sd-age-group-total').text());
-                // if the total is more than 1
-                if (rowTotalPartners > 0) {
-                    // get the average
-                    var rowAv = $(this).find('.sd-age-group-title').data('av');
-                    var rowTotalIndirect = ((rowAv - 1) * (Math.pow(totalAverage, 5))) * rowTotalPartners;
-
-                    // add row total to overall total
-                    totalIndirect = totalIndirect + rowTotalIndirect;
-                }
-            });
-            // update overall total
-            totalIndirect = parseInt(totalIndirect);
-            $('#sd-total-indirect').text(totalIndirect).digits();
-            $('#sd-total-indirect').data('total-indirect', totalIndirect);
-
-            // active / deactivate button
-            if (totalIndirect > 0) {
-                $('.sd-calculate').removeClass('sd-disabled');
-            }
-            else {
-                $('.sd-calculate').addClass('sd-disabled');
-            }
-        }
-
-        $.fn.digits = function () {
-            return this.each(function () {
-                $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-            })
-        }
-
-        $('.sd-down-arrow-icon').click(function () {
-            var element = $('.sd-direct-partners')[0];
-            scrollToElement(element, -65);
-        });
-
-        $('.sd-calculate').click(function () {
-            if (this.classList.contains('sd-disabled')) return;
-
-            $(this).hide();
-
-            $('.sd-results').fadeIn('medium');
-
-            var newOffset = $('.sd-results')[0].offsetTop - 80;
-            $('html, body').animate({scrollTop: newOffset}, {
-                duration: 800,
-                easing: 'swing'
-            });
-            var totalIndirect = $('#sd-total-indirect').data('total-indirect');
-            countAnimation($('#sd-total-indirect'), totalIndirect);
-        });
-
-        /*
-        Count animation
-         */
-        function countAnimation(element, total) {
-
-            $({value: 0}).animate({value: 1}, {
-                duration: 5000,
-                easing: 'easeInOutExpo',
-                step: function () {
-                    var scaled = Math.round(this.value * total) / 1;
-                    element.text(scaled).digits();
-                }
-            }).promise().done(function () {
-                // hard set the value after animation is done to be
-                // sure the value is correct
-                element.text(total).digits();
-
-                $('.sd-spinners').hide();
-                $('.sd-results-text').show();
-
-                flashResults();
-            });
-        }
-
-        function flashResults() {
-            $({value: 0}).animate({value: 1}, {
-                duration: 2000,
-                step: function () {
-                    $('#sd-total-indirect').css('letter-spacing', (1 - this.value) * 10 + "px");
-                    $('#sd-total-indirect').css('opacity', this.value);
-                    $('.sd-results-text').css('opacity', this.value);
-                }
-            }).promise().done(function () {
-                $('#sd-total-indirect').css('letter-spacing', 0);
-                $('#sd-total-indirect').css('opacity', 1);
-                $('.sd-results-text').css('opacity', 1);
-            });
-        }
-    });
-</script>
+            <a class="har-button har-button--primary"
+               href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-checkups?utm_source=Sex%20Degrees%20Page&amp;utm_medium=CTA%20Click&amp;utm_content=Order%20STI%20Test%20Kit&amp;utm_campaign=Sex%20Degrees">Order STI Test Kit</a>
+        </div>
+    </div>
+</div>
+<div class="module-border"></div>
 
 <style type="text/css">
     #sd {
@@ -336,8 +234,7 @@
     #sd .sd-box {
         max-width: 650px;
         margin: auto;
-        padding: 0.4em;
-        border-radius: 8px;
+        margin-bottom: 1em;
     }
 
     #sd .sd-no-select {
@@ -612,151 +509,228 @@
     }
 </style>
 
-<div id="sd" class="module module-dark" data-total-av="8.5" >
+<!-- FastClick -->
+<script type="text/javascript">
+    ;(function () {
+        /**
+         * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+         *
+         * @codingstandard ftlabs-jsv2
+         * @copyright The Financial Times Limited [All Rights Reserved]
+         * @license MIT License (see LICENSE.txt)
+         */
+        function FastClick(e,t){var n;if(t=t||{},this.trackingClick=!1,this.trackingClickStart=0,this.targetElement=null,this.touchStartX=0,this.touchStartY=0,this.lastTouchIdentifier=0,this.touchBoundary=t.touchBoundary||10,this.layer=e,this.tapDelay=t.tapDelay||200,this.tapTimeout=t.tapTimeout||700,!FastClick.notNeeded(e)){for(var i=["onMouse","onClick","onTouchStart","onTouchMove","onTouchEnd","onTouchCancel"],o=0,r=i.length;o<r;o++)this[i[o]]=c(this[i[o]],this);deviceIsAndroid&&(e.addEventListener("mouseover",this.onMouse,!0),e.addEventListener("mousedown",this.onMouse,!0),e.addEventListener("mouseup",this.onMouse,!0)),e.addEventListener("click",this.onClick,!0),e.addEventListener("touchstart",this.onTouchStart,!1),e.addEventListener("touchmove",this.onTouchMove,!1),e.addEventListener("touchend",this.onTouchEnd,!1),e.addEventListener("touchcancel",this.onTouchCancel,!1),Event.prototype.stopImmediatePropagation||(e.removeEventListener=function(t,n,i){var o=Node.prototype.removeEventListener;"click"===t?o.call(e,t,n.hijacked||n,i):o.call(e,t,n,i)},e.addEventListener=function(t,n,i){var o=Node.prototype.addEventListener;"click"===t?o.call(e,t,n.hijacked||(n.hijacked=function(e){e.propagationStopped||n(e)}),i):o.call(e,t,n,i)}),"function"==typeof e.onclick&&(n=e.onclick,e.addEventListener("click",function(e){n(e)},!1),e.onclick=null)}function c(e,t){return function(){return e.apply(t,arguments)}}}var deviceIsWindowsPhone=navigator.userAgent.indexOf("Windows Phone")>=0,deviceIsAndroid=navigator.userAgent.indexOf("Android")>0&&!deviceIsWindowsPhone,deviceIsIOS=/iP(ad|hone|od)/.test(navigator.userAgent)&&!deviceIsWindowsPhone,deviceIsIOS4=deviceIsIOS&&/OS 4_\d(_\d)?/.test(navigator.userAgent),deviceIsIOSWithBadTarget=deviceIsIOS&&/OS [6-7]_\d/.test(navigator.userAgent),deviceIsBlackBerry10=navigator.userAgent.indexOf("BB10")>0;FastClick.prototype.needsClick=function(e){switch(e.nodeName.toLowerCase()){case"button":case"select":case"textarea":if(e.disabled)return!0;break;case"input":if(deviceIsIOS&&"file"===e.type||e.disabled)return!0;break;case"label":case"iframe":case"video":return!0}return/\bneedsclick\b/.test(e.className)},FastClick.prototype.needsFocus=function(e){switch(e.nodeName.toLowerCase()){case"textarea":return!0;case"select":return!deviceIsAndroid;case"input":switch(e.type){case"button":case"checkbox":case"file":case"image":case"radio":case"submit":return!1}return!e.disabled&&!e.readOnly;default:return/\bneedsfocus\b/.test(e.className)}},FastClick.prototype.sendClick=function(e,t){var n,i;document.activeElement&&document.activeElement!==e&&document.activeElement.blur(),i=t.changedTouches[0],(n=document.createEvent("MouseEvents")).initMouseEvent(this.determineEventType(e),!0,!0,window,1,i.screenX,i.screenY,i.clientX,i.clientY,!1,!1,!1,!1,0,null),n.forwardedTouchEvent=!0,e.dispatchEvent(n)},FastClick.prototype.determineEventType=function(e){return deviceIsAndroid&&"select"===e.tagName.toLowerCase()?"mousedown":"click"},FastClick.prototype.focus=function(e){var t;deviceIsIOS&&e.setSelectionRange&&0!==e.type.indexOf("date")&&"time"!==e.type&&"month"!==e.type?(t=e.value.length,e.setSelectionRange(t,t)):e.focus()},FastClick.prototype.updateScrollParent=function(e){var t,n;if(!(t=e.fastClickScrollParent)||!t.contains(e)){n=e;do{if(n.scrollHeight>n.offsetHeight){t=n,e.fastClickScrollParent=n;break}n=n.parentElement}while(n)}t&&(t.fastClickLastScrollTop=t.scrollTop)},FastClick.prototype.getTargetElementFromEventTarget=function(e){return e.nodeType===Node.TEXT_NODE?e.parentNode:e},FastClick.prototype.onTouchStart=function(e){var t,n,i;if(e.targetTouches.length>1)return!0;if(t=this.getTargetElementFromEventTarget(e.target),n=e.targetTouches[0],deviceIsIOS){if((i=window.getSelection()).rangeCount&&!i.isCollapsed)return!0;if(!deviceIsIOS4){if(n.identifier&&n.identifier===this.lastTouchIdentifier)return e.preventDefault(),!1;this.lastTouchIdentifier=n.identifier,this.updateScrollParent(t)}}return this.trackingClick=!0,this.trackingClickStart=e.timeStamp,this.targetElement=t,this.touchStartX=n.pageX,this.touchStartY=n.pageY,e.timeStamp-this.lastClickTime<this.tapDelay&&e.preventDefault(),!0},FastClick.prototype.touchHasMoved=function(e){var t=e.changedTouches[0],n=this.touchBoundary;return Math.abs(t.pageX-this.touchStartX)>n||Math.abs(t.pageY-this.touchStartY)>n},FastClick.prototype.onTouchMove=function(e){return!this.trackingClick||((this.targetElement!==this.getTargetElementFromEventTarget(e.target)||this.touchHasMoved(e))&&(this.trackingClick=!1,this.targetElement=null),!0)},FastClick.prototype.findControl=function(e){return void 0!==e.control?e.control:e.htmlFor?document.getElementById(e.htmlFor):e.querySelector("button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea")},FastClick.prototype.onTouchEnd=function(e){var t,n,i,o,r,c=this.targetElement;if(!this.trackingClick)return!0;if(e.timeStamp-this.lastClickTime<this.tapDelay)return this.cancelNextClick=!0,!0;if(e.timeStamp-this.trackingClickStart>this.tapTimeout)return!0;if(this.cancelNextClick=!1,this.lastClickTime=e.timeStamp,n=this.trackingClickStart,this.trackingClick=!1,this.trackingClickStart=0,deviceIsIOSWithBadTarget&&(r=e.changedTouches[0],(c=document.elementFromPoint(r.pageX-window.pageXOffset,r.pageY-window.pageYOffset)||c).fastClickScrollParent=this.targetElement.fastClickScrollParent),"label"===(i=c.tagName.toLowerCase())){if(t=this.findControl(c)){if(this.focus(c),deviceIsAndroid)return!1;c=t}}else if(this.needsFocus(c))return e.timeStamp-n>100||deviceIsIOS&&window.top!==window&&"input"===i?(this.targetElement=null,!1):(this.focus(c),this.sendClick(c,e),deviceIsIOS&&"select"===i||(this.targetElement=null,e.preventDefault()),!1);return!(!deviceIsIOS||deviceIsIOS4||!(o=c.fastClickScrollParent)||o.fastClickLastScrollTop===o.scrollTop)||(this.needsClick(c)||(e.preventDefault(),this.sendClick(c,e)),!1)},FastClick.prototype.onTouchCancel=function(){this.trackingClick=!1,this.targetElement=null},FastClick.prototype.onMouse=function(e){return!this.targetElement||(!!e.forwardedTouchEvent||(!e.cancelable||(!(!this.needsClick(this.targetElement)||this.cancelNextClick)||(e.stopImmediatePropagation?e.stopImmediatePropagation():e.propagationStopped=!0,e.stopPropagation(),e.preventDefault(),!1))))},FastClick.prototype.onClick=function(e){var t;return this.trackingClick?(this.targetElement=null,this.trackingClick=!1,!0):"submit"===e.target.type&&0===e.detail||((t=this.onMouse(e))||(this.targetElement=null),t)},FastClick.prototype.destroy=function(){var e=this.layer;deviceIsAndroid&&(e.removeEventListener("mouseover",this.onMouse,!0),e.removeEventListener("mousedown",this.onMouse,!0),e.removeEventListener("mouseup",this.onMouse,!0)),e.removeEventListener("click",this.onClick,!0),e.removeEventListener("touchstart",this.onTouchStart,!1),e.removeEventListener("touchmove",this.onTouchMove,!1),e.removeEventListener("touchend",this.onTouchEnd,!1),e.removeEventListener("touchcancel",this.onTouchCancel,!1)},FastClick.notNeeded=function(e){var t,n,i;if(void 0===window.ontouchstart)return!0;if(n=+(/Chrome\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]){if(!deviceIsAndroid)return!0;if(t=document.querySelector("meta[name=viewport]")){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(n>31&&document.documentElement.scrollWidth<=window.outerWidth)return!0}}if(deviceIsBlackBerry10&&(i=navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/))[1]>=10&&i[2]>=3&&(t=document.querySelector("meta[name=viewport]"))){if(-1!==t.content.indexOf("user-scalable=no"))return!0;if(document.documentElement.scrollWidth<=window.outerWidth)return!0}return"none"===e.style.msTouchAction||"manipulation"===e.style.touchAction||(!!(+(/Firefox\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]>=27&&(t=document.querySelector("meta[name=viewport]"))&&(-1!==t.content.indexOf("user-scalable=no")||document.documentElement.scrollWidth<=window.outerWidth))||("none"===e.style.touchAction||"manipulation"===e.style.touchAction))},FastClick.attach=function(e,t){return new FastClick(e,t)},"function"==typeof define&&"object"==typeof define.amd&&define.amd?define(function(){return FastClick}):"undefined"!=typeof module&&module.exports?(module.exports=FastClick.attach,module.exports.FastClick=FastClick):window.FastClick=FastClick;
+    }());
+</script>
 
-    <div class="sd-box sd-main">
-        <p>Find out how many sexual partners you’ve been exposed to indirectly.<br>
-            First, enter how many people you’ve slept with in each age group:</p>
-        <h2>I've had sex with...</h2>
-        <div class="sd-split-container">
-            <div class="sd-gender-column sd-male" data-gender="male">
-                <div class="sd-gender-button">
-                    <span class="sd-gender-title">Men</span>
-                    <span class="sd-gender-icon sd-man-icon"></span>
-                </div>
-            </div>
-            <div class="sd-gender-column sd-female" data-gender="female">
-                <div class="sd-gender-button">
-                    <span class="sd-gender-title">Women</span>
-                    <span class="sd-gender-icon sd-woman-icon"></span>
-                </div>
-            </div>
-        </div>
+<!-- easing functions -->
+<script type="text/javascript">
+    function loadEasingFunctions($) {
+        $.easing.jswing=$.easing.swing,$.extend($.easing,{def:"easeOutQuad",swing:function(n,t,e,u,a){return $.easing[$.easing.def](n,t,e,u,a)},easeInQuad:function(n,t,e,u,a){return u*(t/=a)*t+e},easeOutQuad:function(n,t,e,u,a){return-u*(t/=a)*(t-2)+e},easeInOutQuad:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t+e:-u/2*(--t*(t-2)-1)+e},easeInCubic:function(n,t,e,u,a){return u*(t/=a)*t*t+e},easeOutCubic:function(n,t,e,u,a){return u*((t=t/a-1)*t*t+1)+e},easeInOutCubic:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t+e:u/2*((t-=2)*t*t+2)+e},easeInQuart:function(n,t,e,u,a){return u*(t/=a)*t*t*t+e},easeOutQuart:function(n,t,e,u,a){return-u*((t=t/a-1)*t*t*t-1)+e},easeInOutQuart:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t*t+e:-u/2*((t-=2)*t*t*t-2)+e},easeInQuint:function(n,t,e,u,a){return u*(t/=a)*t*t*t*t+e},easeOutQuint:function(n,t,e,u,a){return u*((t=t/a-1)*t*t*t*t+1)+e},easeInOutQuint:function(n,t,e,u,a){return(t/=a/2)<1?u/2*t*t*t*t*t+e:u/2*((t-=2)*t*t*t*t+2)+e},easeInSine:function(n,t,e,u,a){return-u*Math.cos(t/a*(Math.PI/2))+u+e},easeOutSine:function(n,t,e,u,a){return u*Math.sin(t/a*(Math.PI/2))+e},easeInOutSine:function(n,t,e,u,a){return-u/2*(Math.cos(Math.PI*t/a)-1)+e},easeInExpo:function(n,t,e,u,a){return 0==t?e:u*Math.pow(2,10*(t/a-1))+e},easeOutExpo:function(n,t,e,u,a){return t==a?e+u:u*(1-Math.pow(2,-10*t/a))+e},easeInOutExpo:function(n,t,e,u,a){return 0==t?e:t==a?e+u:(t/=a/2)<1?u/2*Math.pow(2,10*(t-1))+e:u/2*(2-Math.pow(2,-10*--t))+e},easeInCirc:function(n,t,e,u,a){return-u*(Math.sqrt(1-(t/=a)*t)-1)+e},easeOutCirc:function(n,t,e,u,a){return u*Math.sqrt(1-(t=t/a-1)*t)+e},easeInOutCirc:function(n,t,e,u,a){return(t/=a/2)<1?-u/2*(Math.sqrt(1-t*t)-1)+e:u/2*(Math.sqrt(1-(t-=2)*t)+1)+e},easeInElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(1==(t/=a))return e+u;if(i||(i=.3*a),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return-s*Math.pow(2,10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)+e},easeOutElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(1==(t/=a))return e+u;if(i||(i=.3*a),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return s*Math.pow(2,-10*t)*Math.sin((t*a-r)*(2*Math.PI)/i)+u+e},easeInOutElastic:function(n,t,e,u,a){var r=1.70158,i=0,s=u;if(0==t)return e;if(2==(t/=a/2))return e+u;if(i||(i=a*(.3*1.5)),s<Math.abs(u)){s=u;r=i/4}else r=i/(2*Math.PI)*Math.asin(u/s);return t<1?s*Math.pow(2,10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)*-.5+e:s*Math.pow(2,-10*(t-=1))*Math.sin((t*a-r)*(2*Math.PI)/i)*.5+u+e},easeInBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),u*(t/=a)*t*((r+1)*t-r)+e},easeOutBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),u*((t=t/a-1)*t*((r+1)*t+r)+1)+e},easeInOutBack:function(n,t,e,u,a,r){return null==r&&(r=1.70158),(t/=a/2)<1?u/2*(t*t*((1+(r*=1.525))*t-r))+e:u/2*((t-=2)*t*((1+(r*=1.525))*t+r)+2)+e},easeInBounce:function(n,t,e,u,a){return u-$.easing.easeOutBounce(n,a-t,0,u,a)+e},easeOutBounce:function(n,t,e,u,a){return(t/=a)<1/2.75?u*(7.5625*t*t)+e:t<2/2.75?u*(7.5625*(t-=1.5/2.75)*t+.75)+e:t<2.5/2.75?u*(7.5625*(t-=2.25/2.75)*t+.9375)+e:u*(7.5625*(t-=2.625/2.75)*t+.984375)+e},easeInOutBounce:function(n,t,e,u,a){return t<a/2?.5*$.easing.easeInBounce(n,2*t,0,u,a)+e:.5*$.easing.easeOutBounce(n,2*t-a,0,u,a)+.5*u+e}});
+    }
+    /*
+     *
+     * TERMS OF USE - EASING EQUATIONS
+     *
+     * Open source under the BSD License.
+     *
+     * Copyright 2001 Robert Penner
+     * All rights reserved.
+     *
+     * Redistribution and use in source and binary forms, with or without modification,
+     * are permitted provided that the following conditions are met:
+     *
+     * Redistributions of source code must retain the above copyright notice, this list of
+     * conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright notice, this list
+     * of conditions and the following disclaimer in the documentation and/or other materials
+     * provided with the distribution.
+     *
+     * Neither the name of the author nor the names of contributors may be used to endorse
+     * or promote products derived from this software without specific prior written permission.
+     *
+     * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+     * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+     * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+     * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+     * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+     * GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+     * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+     * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+     * OF THE POSSIBILITY OF SUCH DAMAGE.
+     *
+     */
+</script>
 
-        <div class="sd-gender-table-body sd-male" data-gender="male">
-            <p class="sd-how-many">How many people have you slept with in each age group?</p>
-            <div class="sd-gender-table-rows sd-no-select">
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="4.1">16 - 19</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="7.1">20 - 24</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="11.8">25 - 34</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="13.7">35 - 44</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="12.9">45 - 64</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="8.9">65+</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-            </div>
-            <span class="sd-down-arrow-icon"></span>
-        </div>
+<!-- actual code -->
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        $(function () {
+            FastClick.attach(document.body);
+            loadEasingFunctions($);
+        });
 
-        <div class="sd-gender-table-body sd-female" data-gender="female">
-            <p class="sd-how-many">How many people have you slept with in each age group?</p>
-            <div class="sd-gender-table-rows sd-no-select">
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="4.8">16 - 19</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="6.4">20 - 24</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="9.6">25 - 34</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="10.3">35 - 44</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="7.5">45 - 64</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-                <div class="sd-age-group-row">
-                    <span class="sd-age-group-title" data-av="4.4">65+</span>
-                    <span class="sd-age-group-total">0</span>
-                    <span class="sd-age-group-button sd-age-group-plus">+</span>
-                    <span class="sd-age-group-button sd-age-group-minus">−</span>
-                </div>
-            </div>
-            <span class="sd-down-arrow-icon"></span>
-        </div>
-    </div>
+        /* utils */
+        function scrollToElement(element, margin) {
+            var newOffset = element.offsetTop + margin;
+            $('html, body').animate({scrollTop: newOffset}, {
+                duration: 800,
+                easing: 'swing'
+            });
+        }
 
-    <div class="sd-box sd-direct-partners">
-        <h2>Direct sexual partners</h2>
-        <div class="sd-split-container">
-            <div class="sd-direct-partners-gender sd-direct-partners-male">
-                <span class="sd-gender-icon sd-man-icon"></span>
-                <span id="sd-male-total" class="sd-gender-total">0</span>
-            </div>
-            <div class="sd-direct-partners-gender sd-direct-partners-female">
-                <span class="sd-gender-icon sd-woman-icon"></span>
-                <span id="sd-female-total" class="sd-gender-total">0</span>
-            </div>
-        </div>
-        <div>
-            <span class="har-button har-button--primary sd-calculate sd-disabled">Calculate</span>
-        </div>
-    </div>
+        function getClickGender(clicked) {
+            var genderTable = $(clicked).parents('[data-gender]');
+            var gender = genderTable.data('gender');
+            return gender;
+        }
 
-    <div class="sd-box sd-results">
-        <h2>Indirect sexual partners:</h2>
-        <div id="sd-total-indirect" data-total-indirect="0"></div>
-        <div class="sd-spinners">
-            <span class="sd-spin sd-gender-icon sd-male-icon"></span>
-            <span class="sd-spin sd-gender-icon sd-spin-rev sd-female-icon"></span>
-        </div>
+        /* event handlers */
+        $('.sd-gender-button').click(function () {
+            if ($('.sd-gender-column').hasClass('sd-gender-active')) {
+                // deactivate everything
+                $('.sd-gender-column').removeClass('sd-gender-active');
+                $('.sd-gender-table-body').removeClass('sd-gender-active');
+            }
+            else {
+                scrollToElement(this, -65);
+            }
 
-        <div class="sd-results-text">
-            <h2>
-                Shocked?<br>
-                <span class="sd-bang-on">You can see why our doctors bang on about using condoms!</span>
-            </h2>
+            var gender = getClickGender(this);
+            $('.sd-' + gender).addClass('sd-gender-active');
+        });
 
-            <a class="har-button har-button--primary"
-               href="https://onlinedoctor.lloydspharmacy.com/uk/general-health/sexual-health/sti-checkups?utm_source=Sex%20Degrees%20Page&amp;utm_medium=CTA%20Click&amp;utm_content=Order%20STI%20Test%20Kit&amp;utm_campaign=Sex%20Degrees">Order STI Test Kit</a>
-        </div>
-    </div>
-</div>
-<div class="module-border"></div>
+        /* table clicking */
+        $('.sd-age-group-button').click(function () {
+            updateAgeGroup(this);
+            updateGenderTotal(getClickGender(this));
+            updateTotalIndirectPartners();
+            $('.sd-down-arrow').fadeTo('slow', 1);
+        });
 
-</body>
-</html>
+        function updateAgeGroup(element) {
+            var totalElement = $(element).siblings('.sd-age-group-total');
+            var totalCount = parseInt(totalElement.text());
+
+            if ($(element).hasClass('sd-age-group-plus')) {
+                totalCount = totalCount +1;
+            }
+            else if (totalCount > 0) {
+                totalCount = totalCount - 1;
+            }
+            totalElement.text(totalCount);
+        }
+
+        function updateGenderTotal(gender) {
+            // find a parent element within the gender to keep it gender specific
+            var genderTable = $('.sd-gender-table-body[data-gender="' + gender + '"]');
+            var newGenderTotal = 0;
+
+            $(genderTable).find('.sd-age-group-total').each(function () {
+                newGenderTotal = newGenderTotal += parseInt($(this).text());
+
+            });
+            $('#sd-' + gender + '-total').text(newGenderTotal);
+        }
+
+        function updateTotalIndirectPartners() {
+            var totalIndirect = 0;
+            var totalAverage = $('#sd').data('total-av');
+
+            // for each row
+            $('.sd-age-group-row').each(function () {
+                // get row total partners
+                var rowTotalPartners = parseInt($(this).find('.sd-age-group-total').text());
+                // if the total is more than 1
+                if (rowTotalPartners > 0) {
+                    // get the average
+                    var rowAv = $(this).find('.sd-age-group-title').data('av');
+                    var rowTotalIndirect = ((rowAv - 1) * (Math.pow(totalAverage, 5))) * rowTotalPartners;
+
+                    // add row total to overall total
+                    totalIndirect = totalIndirect + rowTotalIndirect;
+                }
+            });
+            // update overall total
+            totalIndirect = parseInt(totalIndirect);
+            $('#sd-total-indirect').text(totalIndirect).digits();
+            $('#sd-total-indirect').data('total-indirect', totalIndirect);
+
+            // active / deactivate button
+            if (totalIndirect > 0) {
+                $('.sd-calculate').removeClass('sd-disabled');
+            }
+            else {
+                $('.sd-calculate').addClass('sd-disabled');
+            }
+        }
+
+        $.fn.digits = function () {
+            return this.each(function () {
+                $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+            })
+        }
+
+        $('.sd-down-arrow-icon').click(function () {
+            var element = $('.sd-direct-partners')[0];
+            scrollToElement(element, -65);
+        });
+
+        $('.sd-calculate').click(function () {
+            if (this.classList.contains('sd-disabled')) return;
+
+            $(this).hide();
+
+            $('.sd-results').fadeIn('medium');
+
+            var newOffset = $('.sd-results')[0].offsetTop - 80;
+            $('html, body').animate({scrollTop: newOffset}, {
+                duration: 800,
+                easing: 'swing'
+            });
+            var totalIndirect = $('#sd-total-indirect').data('total-indirect');
+            countAnimation($('#sd-total-indirect'), totalIndirect);
+        });
+
+        /*
+        Count animation
+         */
+        function countAnimation(element, total) {
+
+            $({value: 0}).animate({value: 1}, {
+                duration: 5000,
+                easing: 'easeInOutExpo',
+                step: function () {
+                    var scaled = Math.round(this.value * total) / 1;
+                    element.text(scaled).digits();
+                }
+            }).promise().done(function () {
+                // hard set the value after animation is done to be
+                // sure the value is correct
+                element.text(total).digits();
+
+                $('.sd-spinners').hide();
+                $('.sd-results-text').show();
+
+                flashResults();
+            });
+        }
+
+        function flashResults() {
+            $({value: 0}).animate({value: 1}, {
+                duration: 2000,
+                step: function () {
+                    $('#sd-total-indirect').css('letter-spacing', (1 - this.value) * 10 + "px");
+                    $('#sd-total-indirect').css('opacity', this.value);
+                    $('.sd-results-text').css('opacity', this.value);
+                }
+            }).promise().done(function () {
+                $('#sd-total-indirect').css('letter-spacing', 0);
+                $('#sd-total-indirect').css('opacity', 1);
+                $('.sd-results-text').css('opacity', 1);
+            });
+        }
+    });
+</script>
+
+</body></html>
