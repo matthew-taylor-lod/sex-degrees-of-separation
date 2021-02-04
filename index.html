@@ -78,9 +78,11 @@
 
         /* utils */
         function scrollToElement(element, margin) {
-            var topOffset = element.offsetTop;
-            var newOffset = topOffset + margin;
-            $('html, body').animate({scrollTop: newOffset}, 800);
+            var newOffset = element.offsetTop + margin;
+            $('html, body').animate({scrollTop: newOffset}, {
+                duration: 800,
+                easing: "swing"
+            });
         }
 
         function getClickGender(clicked) {
@@ -115,7 +117,7 @@
         $('.sd-age-group-button').click(function () {
             updateAgeGroup(this);
             updateGenderTotal(getClickGender(this));
-            //updateTotalIndirectPartners();
+            updateTotalIndirectPartners();
             $('.sd-down-arrow').fadeTo("slow", 1);
         });
 
@@ -147,33 +149,18 @@
             $('#sd-' + gender + '-total').text(newGenderTotal);
         }
 
-        $('.sd-calculate').click(function () {
-            $(this).slideUp();
-            $('.sd-results').slideDown('fast', function () {
-                scrollToElement(this, -80);
-                //var totalIndirect = $('.total-indirect-partners').data('total-indirect');
-                //countAnimation($('.total-indirect-partners'), totalIndirect);
-            });
-            $('.sd-results-text').delay(3500).slideDown("slow", function () {
-                // animation complete
-            });
-            $('.sd-spinners').delay(3500).slideUp();
-
-        });
-
-        /* wtf
         function updateTotalIndirectPartners() {
             var totalIndirect = 0;
-            var totalAverage = $('#sd-calc').data('total-av');
+            var totalAverage = $('#sd').data('total-av');
 
             // for each row
-            $('.age-group-row').each(function () {
+            $('.sd-age-group-row').each(function () {
                 // get row total partners
-                var rowTotalPartners = parseInt($(this).find('.age-group-total').text());
+                var rowTotalPartners = parseInt($(this).find('.sd-age-group-total').text());
                 // if the total is more than 1
                 if (rowTotalPartners > 0) {
                     // get the average
-                    var rowAv = $(this).find('.age-group').data('av');
+                    var rowAv = $(this).find('.sd-age-group-title').data('av');
                     var rowTotalIndirect = ((rowAv - 1) * (Math.pow(totalAverage, 5))) * rowTotalPartners;
 
                     // add row total to overall total
@@ -184,16 +171,9 @@
 
             // update overall total
             totalIndirect = parseInt(totalIndirect);
-            $('.total-indirect-partners').text(totalIndirect).digits();
-            $('.total-indirect-partners').data('total-indirect', totalIndirect);
-
-            if (totalIndirect > 0) {
-                enableCalculateButton();
-            } else {
-                disableCalculateButton();
-            }
-
-        } */
+            $('#sd-total-indirect').text(totalIndirect).digits();
+            $('#sd-total-indirect').data('total-indirect', totalIndirect);
+        }
 
         $.fn.digits = function () {
             return this.each(function () {
@@ -202,14 +182,34 @@
         }
 
 
+        $('.sd-down-arrow-icon').click(function () {
+            var element = $('.sd-direct-partners')[0];
+            scrollToElement(element, 0);
+        });
+
+        $('.sd-calculate').click(function () {
+            $(this).hide();
+
+            $('.sd-results').fadeIn('medium');
+
+            var newOffset = $('.sd-results')[0].offsetTop - 80;
+            $('html, body').animate({scrollTop: newOffset}, {
+                duration: 800,
+                easing: "swing"
+            });
+            var totalIndirect = $('#sd-total-indirect').data('total-indirect');
+            countAnimation($('#sd-total-indirect'), totalIndirect);
+
+        });
+
         /*
         Count animation
          */
         function countAnimation(element, total) {
 
-            $({percentage: 0}).stop(true).animate({percentage: total}, {
-                duration: 3000,
-                easing: "easeOutExpo",
+            $({percentage: 0}).animate({percentage: total}, {
+                duration: 5000,
+                easing: "easeInOutQuint",
                 step: function () {
                     // percentage with 1 decimal;
                     var percentageVal = Math.round(this.percentage) / 1;
@@ -221,38 +221,33 @@
                 // hard set the value after animation is done to be
                 // sure the value is correct
                 element.text(total).digits();
+
+                $('.sd-spinners').hide();
+                $('.sd-results-text').show();
+
+                flashResults();
             });
         }
 
-        $('.sd-down-arrow-icon').click(function () {
-            var element = $('.sd-direct-partners')[0];
-            scrollToElement(element, 0);
-        });
-
-
-        /*
-        $('.sd-button--options').click(function () {
-            $(this).addClass('sd-button--disabled');
-            $('.sd-actions').slideDown('fast', function () {
-                var element = $('.sd-actions');
-                scrollToElement(element, -20);
+        function flashResults() {
+            $({value: 1}).animate({value: 0}, {
+                duration: 500,
+                easing: "easeInOutQuint",
+                step: function () {
+                    // percentage with 1 decimal;
+                    $('#sd-total-indirect').style.color = "rbg(" + value + "," +value + "," +value + ")";
+                }
             });
-        });
-
-        $('.sd-gender-button').click(function () {
-            $('.gender-table-active .gender-table__body').slideDown();
-            $('.sd-direct').slideDown();
-        });
-    */
+        }
     });
 </script>
 
 
 <style type="text/css">
     #sd {
-        font-size: 18px;
+        font-size: 16px;
         text-align: center;
-        line-height: 1.5;
+        line-height: 1;
         color: #6b6b6a;
         font-family: 'OpenSans', Arial, Tahoma, Verdana, sans-serif;
     }
@@ -271,7 +266,6 @@
 
     [class*="-icon"] {
         font-family: 'sdfont';
-        line-height: 1;
         speak: none;
         font-style: normal;
         font-weight: normal;
@@ -285,9 +279,9 @@
     /* gender icons */
     #sd .sd-gender-icon {
         display: block;
-        font-size: 2.6em;
+        font-size: 2.5em;
         padding: 0 0.2em;
-        margin-top: -0.12em;
+        margin-top: -0.23em;
     }
 
     #sd .sd-man-icon {
@@ -309,11 +303,20 @@
     }
 
     /* symbols */
-    .sd-male-icon:before {
+    #sd .sd-male-icon {
+        color: #02a2a0;
+    }
+
+    #sd .sd-female-icon {
+        color: #c1017a;
+        float: left;
+    }
+
+    #sd .sd-male-icon:before {
         content: "\e604";
     }
 
-    .sd-female-icon:before {
+    #sd .sd-female-icon:before {
         content: "\e603";
     }
 
@@ -356,7 +359,7 @@
 
     #sd .sd-gender-button {
         margin: 0.2em;
-        padding: 0.6em 0;
+        padding: 0.8em 0;
         border: 3px solid;
         border-radius: 8px;
         cursor: pointer;
@@ -437,6 +440,7 @@
     #sd .sd-age-group-title {
         display: block;
         position: absolute;
+        top: 0.3em;
         width: 100%;
         color: white;
         font-size: 0.9em;
@@ -444,12 +448,11 @@
 
     #sd .sd-age-group-button {
         position: absolute;
-        margin: 0.3em;
+        margin: 0.25em;
         display: block;
         background: #fff;
-        width: 1.5em;
-        height: 1.5em;
-        font-size: 1.4em;
+        width: 1em;
+        font-size: 2em;
         font-weight: bold;
         cursor: pointer;
         border-radius: 50%;
@@ -470,7 +473,6 @@
         width: 100%;
         color: white;
         font-size: 1.7em;
-        line-height: 1;
     }
 
     /* Direct partners */
@@ -480,14 +482,13 @@
 
     #sd .sd-direct-partners-gender {
         padding: 0 0.5em;
-        margin-bottom: 0.5em;
+        margin-bottom: 1.5em;
     }
 
     #sd .sd-gender-total {
         margin: 0;
         padding: 0 0.1em;
         font-size: 2.5em;
-        line-height: 1;
     }
 
     #sd .sd-direct-partners-male {
@@ -507,12 +508,78 @@
         display: none;
     }
 
+    #sd-total-indirect {
+        color: #669900;
+        font-size: 2.5em;
+        font-weight: bold;
+    }
+
     #sd .sd-results-text {
         display: none;
     }
 
     #sd .sd-bang-on {
-        font-size: 16px;
+        font-size: 0.8em;
+    }
+
+    /* I'll try spinning - that's a good trick! */
+    .sd-spinners {
+        padding: 1em;
+    }
+
+    .sd-spin {
+        display: inline-block !important;
+        -webkit-animation: rotation .5s infinite linear;
+        -moz-animation: rotation .5s infinite linear;
+        -o-animation: rotation .5s infinite linear;
+        animation: rotation .5s infinite linear;
+    }
+
+    @-webkit-keyframes rotation {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(359deg);
+        }
+    }
+
+    @keyframes rotation {
+        from {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+        }
+    }
+
+    .sd-spin-rev {
+        -webkit-animation: rotation-rev .5s infinite linear;
+        -moz-animation: rotation-rev .5s infinite linear;
+        -o-animation: rotation-rev .5s infinite linear;
+        animation: rotation-rev .5s infinite linear;
+    }
+
+    @-webkit-keyframes rotation-rev {
+        from {
+            -webkit-transform: rotate(359deg);
+        }
+        to {
+            -webkit-transform: rotate(0deg);
+        }
+    }
+
+    @keyframes rotation-rev {
+        from {
+            -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+        }
+        to {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
     }
 
     /* buttons */
@@ -666,12 +733,10 @@
 
     <div class="sd-box sd-results">
         <h2>Indirect sexual partners:</h2>
-        <div class="sd-results__result">
-            <span class="total-indirect-partners" data-total-indirect="0">0</span>
-            <div class="sd-spinners">
-                <span class="spin male-symbol icon-male-icon"></span>
-                <span class="spin spin--rev female-symbol icon-female-icon"></span>
-            </div>
+        <div id="sd-total-indirect" data-total-indirect="0"></div>
+        <div class="sd-spinners">
+            <span class="sd-spin sd-gender-icon sd-male-icon"></span>
+            <span class="sd-spin sd-gender-icon sd-spin-rev sd-female-icon"></span>
         </div>
 
         <div class="sd-results-text">
