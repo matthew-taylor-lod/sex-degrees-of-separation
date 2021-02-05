@@ -648,7 +648,7 @@
                 if (rowTotalPartners > 0) {
                     // get the average
                     var rowAv = $(this).find('.sd-age-group-title').data('av');
-                    var rowTotalIndirect = ((rowAv - 1) * (Math.pow(totalAverage, 5))) * rowTotalPartners;
+                    var rowTotalIndirect = ((rowAv - 1) * (Math.pow(totalAverage - 1, 4))) * rowTotalPartners;
 
                     // add row total to overall total
                     totalIndirect = totalIndirect + rowTotalIndirect;
